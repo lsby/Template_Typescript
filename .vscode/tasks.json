@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "clean:dist",
+            "type": "npm",
+            "script": "clean:dist",
+            "problemMatcher": [],
+            "presentation": {
+                "echo": false
+            }
+        },
+        {
+            "label": "watch:ts",
+            "type": "npm",
+            "script": "watch",
+            "problemMatcher": "$tsc-watch",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "watch:all",
+            "dependsOrder": "sequence",
+            "dependsOn": ["watch:ts"],
+            "problemMatcher": []
+        }
+    ]
+}
