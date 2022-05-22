@@ -14,11 +14,11 @@
         "pm2:stop:release": "pm2 delete ecosystem_re.config.js",
         "pm2:setlog": "pm2 set pm2-logrotate:max_size 10M",
         "build": "rm -rf .parcel-cache dist && npm run build:vue && npm run build:react && npm run build:ts",
-        "build:vue": "parcel build ./index_vue.html --public-url ./",
-        "build:react": "parcel build ./index_react.html --public-url ./",
+        "build:vue": "parcel build ./index_vue.html --dist-dir dist/web --public-url ./",
+        "build:react": "parcel build ./index_react.html --dist-dir dist/web --public-url ./",
         "build:ts": "tsc",
-        "watch:vue": "rm -rf .parcel-cache dist && parcel ./index_vue.html",
-        "watch:react": "rm -rf .parcel-cache dist && parcel ./index_react.html",
+        "watch:vue": "rm -rf .parcel-cache dist/web && parcel --dist-dir dist/web ./index_vue.html",
+        "watch:react": "rm -rf .parcel-cache dist/web && parcel --dist-dir dist/web ./index_react.html",
         "watch:ts": "tsc -w",
         "test": "cross-env NODE_ENV=development mocha dist/test/index.test.js --bail --timeout 99999999",
         "coverage": "cross-env NODE_ENV=development nyc --reporter=html --reporter=text-summary npm run test",
@@ -38,6 +38,9 @@
     },
     "lint-staged": {
         "**/*": "prettier --write --ignore-unknown"
+    },
+    "staticFiles": {
+        "staticPath": "src/web/static"
     },
     "dependencies": {
         "@lsby/ts_type_check": "^0.0.10",
@@ -69,6 +72,7 @@
         "nodemon": "^2.0.7",
         "nyc": "^15.1.0",
         "parcel": "^2.5.0",
+        "parcel-reporter-static-files-copy": "^1.3.4",
         "prettier": "2.6.2",
         "readline-sync": "^1.4.10",
         "typescript": "^4.6.3"

@@ -42,15 +42,26 @@
             }
         },
         {
-            "label": "watch:all_vue",
-            "dependsOrder": "sequence",
-            "dependsOn": ["watch:ts", "watch:vue"],
+            "label": "run:dev",
+            "type": "npm",
+            "script": "dev",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "dev:vue",
+            "dependsOn": ["watch:vue", "watch:ts", "run:dev"],
             "problemMatcher": []
         },
         {
-            "label": "watch:all_react",
-            "dependsOrder": "sequence",
-            "dependsOn": ["watch:ts", "watch:react"],
+            "label": "dev:react",
+            "dependsOn": ["watch:react", "watch:ts", "run:dev"],
             "problemMatcher": []
         }
     ]

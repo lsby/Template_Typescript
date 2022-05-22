@@ -37,9 +37,6 @@ async function main() {
 
     var app = express()
 
-    if (process.env['NODE_ENV'] == 'development') {
-        app.all('*', allowOrigin())
-    }
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
     app.use(cookieParser())
@@ -48,8 +45,9 @@ async function main() {
     // app.use(knex_defConf({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME }))
     app.use(session({ 检查时间: 1000 * 60 * 30, 过期时间: 1000 * 60 * 30 }))
 
-    app.get('/', (req, res) => res.end('hello, world!'))
+    app.use('/', express.static(path.resolve(__dirname, '../web')))
 
+    // app.all('*', allowOrigin())
     var 接口们 = fs.readdirSync(path.resolve(__dirname, './interface'))
     for (var name of 接口们) {
         var file = await import(`./interface/${name}/index`)
