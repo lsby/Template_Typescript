@@ -13,10 +13,18 @@ declare global {
     }
 }
 
-export default function (knexConf: Parameters<typeof knex.default>[0]) {
+export default function knexM(knexConf: Parameters<typeof knex.default>[0]) {
     var _knex = knex.default(knexConf)
     return function (req: Request, res: Response, next: NextFunction) {
         req.knex = _knex
         next()
     }
 }
+
+export var knex_defConf = (conf: knex.Knex.MySqlConnectionConfig) =>
+    knexM({
+        client: 'mysql',
+        connection: conf,
+        pool: { min: 0, max: 7 },
+        asyncStackTraces: process.env['NODE_ENV'] == 'development' ? true : false,
+    })

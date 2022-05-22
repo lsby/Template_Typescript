@@ -7,7 +7,7 @@ import 中文路径支持 from './middleware/chinesePath'
 import 接口 from './middleware/interface'
 import session from './middleware/session'
 import allowOrigin from './middleware/allowOrigin'
-import knex from './middleware/knex'
+import { knex_defConf } from './middleware/knex'
 import kysely from './middleware/kysely'
 import { 获得环境变量 } from '../lib/getEnv'
 
@@ -21,24 +21,31 @@ async function main() {
     var DB_NAME = process.env['DB_NAME']
     var APP_PORT = Number(process.env['APP_PORT'])
 
+    if (
+        DB_HOST == null ||
+        DB_PORT == null ||
+        DB_USER == null ||
+        DB_PWD == null ||
+        DB_NAME == null ||
+        APP_PORT == null
+    ) {
+        throw '环境变量错误'
+    }
+    if (isNaN(DB_PORT) || isNaN(APP_PORT)) {
+        throw '环境变量错误'
+    }
+
     var app = express()
 
-    // 跨域
-    // app.all('*', allowOrigin())
-
+    if (process.env['NODE_ENV'] == 'development') {
+        app.all('*', allowOrigin())
+    }
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
     app.use(cookieParser())
     app.use(中文路径支持())
     app.use(kysely({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME }))
-    // app.use(
-    //     knex({
-    //         client: 'mysql',
-    //         connection: { host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME },
-    //         pool: { min: 0, max: 7 },
-    //         asyncStackTraces: NODE_ENV == 'development' ? true : false,
-    //     }),
-    // )
+    // app.use(knex_defConf({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME }))
     app.use(session({ 检查时间: 1000 * 60 * 30, 过期时间: 1000 * 60 * 30 }))
 
     app.get('/', (req, res) => res.end('hello, world!'))
