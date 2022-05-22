@@ -1,7 +1,9 @@
 import React from 'react'
 
-class Clock extends React.Component {
-    constructor(props) {
+class Clock extends React.Component<{}, { date: Date }> {
+    timerID: NodeJS.Timer | null = null
+
+    constructor(props: {}) {
         super(props)
         this.state = { date: new Date() }
     }
@@ -11,6 +13,7 @@ class Clock extends React.Component {
     }
 
     componentWillUnmount() {
+        if (this.timerID == null) return
         clearInterval(this.timerID)
     }
 
