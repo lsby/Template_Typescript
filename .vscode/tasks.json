@@ -2,18 +2,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "clean:dist",
-            "type": "npm",
-            "script": "clean:dist",
-            "problemMatcher": [],
-            "presentation": {
-                "echo": false
-            }
-        },
-        {
             "label": "watch:ts",
             "type": "npm",
-            "script": "watch",
+            "script": "watch:ts",
             "problemMatcher": "$tsc-watch",
             "isBackground": true,
             "presentation": {
@@ -25,9 +16,47 @@
             }
         },
         {
-            "label": "watch:all",
+            "label": "watch:vue",
+            "type": "npm",
+            "script": "watch:vue",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "watch:react",
+            "type": "npm",
+            "script": "watch:react",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "watch:all_vue",
             "dependsOrder": "sequence",
-            "dependsOn": ["watch:ts"],
+            "dependsOn": [
+                "watch:ts",
+                "watch:vue",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "watch:all_react",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "watch:ts",
+                "watch:react",
+            ],
             "problemMatcher": []
         }
     ]
