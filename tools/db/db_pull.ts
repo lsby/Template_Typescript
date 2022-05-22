@@ -4,7 +4,12 @@ import path from 'path'
 import { 获得环境变量 } from '../../lib/getEnv'
 
 export async function main() {
-    var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME } = 获得环境变量()
+    获得环境变量()
+    var DB_HOST = process.env['DB_HOST']
+    var DB_PORT = Number(process.env['DB_PORT'])
+    var DB_USER = process.env['DB_USER']
+    var DB_PWD = process.env['DB_PWD']
+    var DB_NAME = process.env['DB_NAME']
 
     var knex = _knex({
         client: 'mysql',

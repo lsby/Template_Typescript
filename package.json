@@ -13,7 +13,7 @@
         "pm2:start:release": "npm run build && pm2 start ecosystem_re.config.js",
         "pm2:stop:release": "pm2 delete ecosystem_re.config.js",
         "pm2:setlog": "pm2 set pm2-logrotate:max_size 10M",
-        "build": "rm -rf .parcel-cache dist && npm run build:vue && npm run build:react && npm run build:ts",
+        "build": "rm -rf .parcel-cache dist && npm run build:ts && npm run build:vue && npm run build:react",
         "build:vue": "parcel build ./index_vue.html --public-url ./",
         "build:react": "parcel build ./index_react.html --public-url ./",
         "build:ts": "tsc",

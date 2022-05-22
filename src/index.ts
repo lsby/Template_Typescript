@@ -12,7 +12,14 @@ import kysely from './middleware/kysely'
 import { 获得环境变量 } from '../lib/getEnv'
 
 async function main() {
-    var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT, NODE_ENV } = 获得环境变量()
+    获得环境变量()
+
+    var DB_HOST = process.env['DB_HOST']
+    var DB_PORT = Number(process.env['DB_PORT'])
+    var DB_USER = process.env['DB_USER']
+    var DB_PWD = process.env['DB_PWD']
+    var DB_NAME = process.env['DB_NAME']
+    var APP_PORT = Number(process.env['APP_PORT'])
 
     var app = express()
 
