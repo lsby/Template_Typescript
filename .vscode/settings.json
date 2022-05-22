@@ -1,6 +1,27 @@
 {
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.iconTheme": "vscode-icons",
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "explorer.compactFolders": false,
+    "files.autoGuessEncoding": true,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "workbench.startupEditor": "none",
+    "vsicons.dontShowNewVersionMessage": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.inlineSuggest.enabled": true,
+    "timeline.excludeSources": ["timeline.localHistory"],
+    "workbench.layoutControl.enabled": false,
+    "workbench.colorTheme": "Visual Studio Dark",
+
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

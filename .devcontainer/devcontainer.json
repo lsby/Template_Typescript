@@ -1,5 +1,5 @@
 {
-	"name": "Node.js",
+	"name": "Template_Typescript",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {}
@@ -7,7 +7,22 @@
 	"customizations": {
 		"vscode": {
 			"settings": {},
-			"extensions": []
+			"extensions": [
+				"CodeInChinese.EnglishChineseDictionary",
+				"esbenp.prettier-vscode",
+				"GitHub.codespaces",
+				"GitHub.github-vscode-theme",
+				"GitHub.vscode-pull-request-github",
+				"mhutchie.git-graph",
+				"mikestead.dotenv",
+				"ms-azuretools.vscode-docker",
+				"nicoespeon.abracadabra",
+				"nicoespeon.hocus-pocus",
+				"tombonnike.vscode-status-bar-format-toggle",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"vscode-icons-team.vscode-icons",
+				"Vue.volar"
+			]
 		}
 	},
 	"postCreateCommand": "npm i",
