@@ -44,19 +44,13 @@
         {
             "label": "watch:all_vue",
             "dependsOrder": "sequence",
-            "dependsOn": [
-                "watch:ts",
-                "watch:vue",
-            ],
+            "dependsOn": ["watch:ts", "watch:vue"],
             "problemMatcher": []
         },
         {
             "label": "watch:all_react",
             "dependsOrder": "sequence",
-            "dependsOn": [
-                "watch:ts",
-                "watch:react",
-            ],
+            "dependsOn": ["watch:ts", "watch:react"],
             "problemMatcher": []
         }
     ]
