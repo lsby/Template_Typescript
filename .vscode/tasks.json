@@ -42,7 +42,7 @@
             }
         },
         {
-            "label": "run:dev",
+            "label": "dev:service",
             "type": "npm",
             "script": "dev",
             "isBackground": true,
@@ -56,12 +56,12 @@
         },
         {
             "label": "dev:vue",
-            "dependsOn": ["watch:vue", "watch:ts", "run:dev"],
+            "dependsOn": ["watch:vue", "watch:ts", "dev:service"],
             "problemMatcher": []
         },
         {
             "label": "dev:react",
-            "dependsOn": ["watch:react", "watch:ts", "run:dev"],
+            "dependsOn": ["watch:react", "watch:ts", "dev:service"],
             "problemMatcher": []
         }
     ]
