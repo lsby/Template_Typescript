@@ -4,12 +4,7 @@ import Database from '../tools/types/Database'
 import 测试接口 from '../src/interface/测试接口/index'
 import { 获得环境变量 } from '../lib/getEnv'
 
-获得环境变量()
-var DB_HOST = process.env['DB_HOST']
-var DB_PORT = Number(process.env['DB_PORT'])
-var DB_USER = process.env['DB_USER']
-var DB_PWD = process.env['DB_PWD']
-var DB_NAME = process.env['DB_NAME']
+var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()
 
 describe('框架测试', function () {
     var kysely = new Kysely<Database>({

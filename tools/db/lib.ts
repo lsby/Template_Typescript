@@ -42,12 +42,7 @@ export async function 删除所有表(opt: {
 }
 
 export async function 新建表(schema: (knex: _knex.Knex<any, unknown[]>) => _knex.Knex.SchemaBuilder) {
-    获得环境变量()
-    var DB_HOST = process.env['DB_HOST']
-    var DB_PORT = Number(process.env['DB_PORT'])
-    var DB_USER = process.env['DB_USER']
-    var DB_PWD = process.env['DB_PWD']
-    var DB_NAME = process.env['DB_NAME']
+    var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()
 
     var knex = _knex.default({
         client: 'mysql',
@@ -87,12 +82,7 @@ export async function 新建表(schema: (knex: _knex.Knex<any, unknown[]>) => _k
 }
 
 export async function 新建数据库() {
-    获得环境变量()
-    var DB_HOST = process.env['DB_HOST']
-    var DB_PORT = Number(process.env['DB_PORT'])
-    var DB_USER = process.env['DB_USER']
-    var DB_PWD = process.env['DB_PWD']
-    var DB_NAME = process.env['DB_NAME']
+    var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()
 
     var connection = mysql.createConnection({
         host: DB_HOST,

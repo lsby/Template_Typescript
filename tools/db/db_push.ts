@@ -4,12 +4,7 @@ import { 获得环境变量 } from '../../lib/getEnv'
 import { 新建数据库 } from './lib'
 
 async function main() {
-    获得环境变量()
-    var DB_HOST = process.env['DB_HOST']
-    var DB_PORT = Number(process.env['DB_PORT'])
-    var DB_USER = process.env['DB_USER']
-    var DB_PWD = process.env['DB_PWD']
-    var DB_NAME = process.env['DB_NAME']
+    var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()
 
     await 新建数据库()
 
