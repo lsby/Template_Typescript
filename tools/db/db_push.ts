@@ -11,10 +11,9 @@ async function main() {
     var db = new Kysely<any>({
         dialect: new MysqlDialect({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME }),
     })
-
     var migrator = new Migrator({
         db,
-        provider: new FileMigrationProvider(path.resolve(__dirname, '../migrations')),
+        provider: new FileMigrationProvider(path.resolve(__dirname, '../../../tools/migrations')),
     })
 
     var { error, results } = await migrator.migrateToLatest()

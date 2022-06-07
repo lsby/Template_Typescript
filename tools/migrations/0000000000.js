@@ -2,7 +2,7 @@ import { Kysely } from 'kysely'
 import * as _knex from 'knex'
 import { 新建表 } from '../db/lib'
 
-function schema(knex: _knex.Knex<any, unknown[]>): _knex.Knex.SchemaBuilder {
+function schema(knex) {
     var r = knex.schema
         .createTable('学生表', function (table) {
             table.increments()
@@ -19,8 +19,8 @@ function schema(knex: _knex.Knex<any, unknown[]>): _knex.Knex.SchemaBuilder {
     return r
 }
 
-export async function up(db: Kysely<any>): Promise<void> {
+export async function up(db) {
     await 新建表(schema)
 }
 
-export async function down(db: Kysely<any>): Promise<void> {}
+export async function down(db) {}
