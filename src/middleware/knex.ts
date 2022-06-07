@@ -26,5 +26,5 @@ export var knex_defConf = (conf: knex.Knex.MySqlConnectionConfig) =>
         client: 'mysql',
         connection: conf,
         pool: { min: 0, max: 7 },
-        asyncStackTraces: process.env['NODE_ENV'] == 'development' ? true : false,
+        asyncStackTraces: process.env['NODE_ENV'] == 'dev' ? true : false,
     })
