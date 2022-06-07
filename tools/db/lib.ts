@@ -89,7 +89,6 @@ export async function 新建数据库() {
         port: DB_PORT,
         user: DB_USER,
         password: DB_PWD,
-        database: DB_NAME,
     })
 
     connection.connect()

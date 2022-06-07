@@ -1,6 +1,4 @@
-import { Kysely } from 'kysely'
-import * as _knex from 'knex'
-import { 新建表 } from '../db/lib'
+var { 新建表 } = require('../../dist/tools/db/lib.js')
 
 function schema(knex) {
     var r = knex.schema
@@ -19,8 +17,8 @@ function schema(knex) {
     return r
 }
 
-export async function up(db) {
+exports.up = async function up(db) {
     await 新建表(schema)
 }
 
-export async function down(db) {}
+exports.down = async function down(db) {}
