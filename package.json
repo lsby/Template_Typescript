@@ -7,9 +7,9 @@
     "scripts": {
         "dev": "cross-env NODE_ENV=dev nodemon dist/src/index.js",
         "=====pm2=====": "",
-        "pm2:start:dev": "npm run build && cross-env NODE_ENV=dev pm2 start dist/src/index.js --output logs/out.txt --error logs/error.txt --merge-logs --log-date-format=\"YYYY-MM-DD HH:mm Z\" --name dev_ql_service_ts",
-        "pm2:start:re": "npm run build && cross-env NODE_ENV=re pm2 start dist/src/index.js --output logs/out.txt --error logs/error.txt --merge-logs --log-date-format=\"YYYY-MM-DD HH:mm Z\" --name re_ql_service_ts",
-        "pm2:start:prod": "npm run build && cross-env NODE_ENV=prod pm2 start dist/src/index.js --output logs/out.txt --error logs/error.txt --merge-logs --log-date-format=\"YYYY-MM-DD HH:mm Z\" --name prod_ql_service_ts",
+        "pm2:start:dev": "npm run build && cross-env NODE_ENV=dev pm2 start dist/src/index.js -f --output logs/out.txt --error logs/error.txt --merge-logs --log-date-format=\"YYYY-MM-DD HH:mm Z\" --name dev_ql_service_ts",
+        "pm2:start:re": "npm run build && cross-env NODE_ENV=re pm2 start dist/src/index.js -f --output logs/out.txt --error logs/error.txt --merge-logs --log-date-format=\"YYYY-MM-DD HH:mm Z\" --name re_ql_service_ts",
+        "pm2:start:prod": "npm run build && cross-env NODE_ENV=prod pm2 start dist/src/index.js -f --output logs/out.txt --error logs/error.txt --merge-logs --log-date-format=\"YYYY-MM-DD HH:mm Z\" --name prod_ql_service_ts",
         "pm2:stop:dev": "pm2 delete dev_ql_service_ts",
         "pm2:stop:re": "pm2 delete re_ql_service_ts",
         "pm2:stop:prod": "pm2 delete prod_ql_service_ts",
