@@ -69,6 +69,7 @@
     },
     "dependencies": {
         "@lsby/ts_type_check": "^0.0.10",
+        "axios": "^0.27.2",
         "cookie-parser": "^1.4.5",
         "cross-env": "^7.0.3",
         "dotenv": "^16.0.1",
