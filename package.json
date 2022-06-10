@@ -53,6 +53,10 @@
         "docker:run": "docker run --env-file .env/prod.env -p 80:80 ql_service_ts",
         "dockerCompose:run": "docker-compose up",
         "dockerCompose:build": "npm run build && docker-compose up --build",
+        "=====类型检查生成=====": "",
+        "gen_typeCheck:dev": "cross-env NODE_ENV=dev node dist/tools/gen_typeCheck.js",
+        "gen_typeCheck:re": "cross-env NODE_ENV=re node dist/tools/gen_typeCheck.js",
+        "gen_typeCheck:prod": "cross-env NODE_ENV=prod node dist/tools/gen_typeCheck.js",
         "=====其他=====": "",
         "format:all": "prettier --write .",
         "prepare": "husky install"
