@@ -5,5 +5,8 @@ npm run db:push:re
 npm run pm2:stop:re
 npm run build:all
 npm run pm2:start:re
+git add --all
+git commit -m 重启后同步 
+git push 
 echo "操作完成, 按回车关闭."
 read a

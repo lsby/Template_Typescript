@@ -6,9 +6,9 @@ import path from 'path'
 import 中文路径支持 from './middleware/chinesePath'
 import 接口 from './middleware/interface'
 import session from './middleware/session'
-import allowOrigin from './middleware/allowOrigin'
 import { knex_defConf } from './middleware/knex'
 import kysely from './middleware/kysely'
+import cors from 'cors'
 import { 获得环境变量 } from '../lib/getEnv'
 
 async function main() {
@@ -16,6 +16,7 @@ async function main() {
 
     var app = express()
 
+    app.use(cors())
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
     app.use(cookieParser())
@@ -26,7 +27,6 @@ async function main() {
 
     app.use('/', express.static(path.resolve(__dirname, '../web')))
 
-    // app.all('*', allowOrigin())
     var 接口们 = fs.readdirSync(path.resolve(__dirname, './interface'))
     for (var name of 接口们) {
         var file = await import(`./interface/${name}/index`)

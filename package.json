@@ -75,6 +75,7 @@
         "@lsby/ts_type_check": "^0.0.10",
         "axios": "^0.27.2",
         "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
         "cross-env": "^7.0.3",
         "dotenv": "^16.0.1",
         "express": "^4.17.1",
@@ -92,6 +93,7 @@
     "devDependencies": {
         "@parcel/transformer-vue": "^2.5.0",
         "@types/cookie-parser": "^1.4.2",
+        "@types/cors": "^2.8.12",
         "@types/express": "^4.17.11",
         "@types/lodash": "^4.14.182",
         "@types/mocha": "^9.1.0",
