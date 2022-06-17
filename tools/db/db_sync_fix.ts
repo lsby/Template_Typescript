@@ -20,7 +20,7 @@ async function main() {
     }
     var 来源库 = { host: o_DB_HOST, port: o_DB_PORT, user: o_DB_USER, password: o_DB_PWD, database: o_DB_NAME }
 
-    var 目标库env = dotenv.parse(fs.readFileSync(path.resolve(__dirname, '../../../.env/re.env')))
+    var 目标库env = dotenv.parse(fs.readFileSync(path.resolve(__dirname, '../../../.env/fix.env')))
     var t_DB_HOST = 目标库env['DB_HOST']
     var t_DB_PORT = Number(目标库env['DB_PORT'])
     var t_DB_USER = 目标库env['DB_USER']

@@ -11,6 +11,9 @@ export function 获得环境变量() {
     } else if (process.env['NODE_ENV'] == 'prod') {
         console.log('使用 prod 环境')
         dotenv.config({ path: path.resolve(__dirname, '../../.env/prod.env') })
+    } else if (process.env['NODE_ENV'] == 'fix') {
+        console.log('使用 fix 环境')
+        dotenv.config({ path: path.resolve(__dirname, '../../.env/fix.env') })
     } else {
         throw '没有指定运行环境'
     }
