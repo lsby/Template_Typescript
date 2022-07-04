@@ -19,6 +19,21 @@
             "label": "watch:vue",
             "type": "npm",
             "script": "watch:vue",
+            "problemMatcher": [
+                {
+                    "pattern": {
+                        "kind": "file",
+                        "regexp": "(🚨 Build failed.)",
+                        "file": 1,
+                        "message": 1
+                    },
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": "^Server running at .*$",
+                        "endsPattern": "^✨ Built in .*$|.*\\..*:.*:.*$"
+                    }
+                }
+            ],
             "isBackground": true,
             "presentation": {
                 "reveal": "never"
@@ -32,6 +47,21 @@
             "label": "watch:react",
             "type": "npm",
             "script": "watch:react",
+            "problemMatcher": [
+                {
+                    "pattern": {
+                        "kind": "file",
+                        "regexp": "(🚨 Build failed.)",
+                        "file": 1,
+                        "message": 1
+                    },
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": "^Server running at .*$",
+                        "endsPattern": "^✨ Built in .*$|.*\\..*:.*:.*$"
+                    }
+                }
+            ],
             "isBackground": true,
             "presentation": {
                 "reveal": "never"
@@ -40,29 +70,6 @@
                 "kind": "build",
                 "isDefault": true
             }
-        },
-        {
-            "label": "dev:service",
-            "type": "npm",
-            "script": "dev",
-            "isBackground": true,
-            "presentation": {
-                "reveal": "never"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "dev:vue",
-            "dependsOn": ["watch:vue", "watch:ts", "dev:service"],
-            "problemMatcher": []
-        },
-        {
-            "label": "dev:react",
-            "dependsOn": ["watch:react", "watch:ts", "dev:service"],
-            "problemMatcher": []
         }
     ]
 }
