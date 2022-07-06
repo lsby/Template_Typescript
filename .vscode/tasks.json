@@ -16,9 +16,9 @@
             }
         },
         {
-            "label": "watch:vue",
+            "label": "watch:web",
             "type": "npm",
-            "script": "watch:vue",
+            "script": "watch:web",
             "problemMatcher": [
                 {
                     "pattern": {
@@ -44,32 +44,9 @@
             }
         },
         {
-            "label": "watch:react",
-            "type": "npm",
-            "script": "watch:react",
-            "problemMatcher": [
-                {
-                    "pattern": {
-                        "kind": "file",
-                        "regexp": "(🚨 Build failed.)",
-                        "file": 1,
-                        "message": 1
-                    },
-                    "background": {
-                        "activeOnStart": true,
-                        "beginsPattern": "^Server running at .*$",
-                        "endsPattern": "^✨ Built in .*$|.*\\..*:.*:.*$"
-                    }
-                }
-            ],
-            "isBackground": true,
-            "presentation": {
-                "reveal": "never"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "label": "watch:all",
+            "dependsOn": ["watch:web", "watch:ts"],
+            "problemMatcher": []
         }
     ]
 }
