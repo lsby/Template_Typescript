@@ -26,10 +26,13 @@ async function main() {
   app.use(session({ 检查时间: 1000 * 60 * 30, 过期时间: 1000 * 60 * 30 }))
 
   app.use('/', express.static(path.resolve(__dirname, '../web')))
+  app.use('/Static', express.static(path.resolve(__dirname, '../../src/Page/Static')))
+  app.use('/Static_Jquery', express.static(path.resolve(__dirname, '../../node_modules/jquery/dist')))
+  app.use('/Static_Layer', express.static(path.resolve(__dirname, '../../node_modules/layer-src/src')))
 
-  var 接口们 = fs.readdirSync(path.resolve(__dirname, './interface'))
+  var 接口们 = fs.readdirSync(path.resolve(__dirname, './Interface'))
   for (var name of 接口们) {
-    var file = await import(`./interface/${name}/index`)
+    var file = await import(`./Interface/${name}/index`)
     app.use(
       接口({
         路径: '/api/' + name,

@@ -1,6 +1,5 @@
 <template>
-  <div>{{ name }}</div>
-  <iframe src="test.html"></iframe>
+  {{ name }}
 </template>
 
 <script lang="ts">
