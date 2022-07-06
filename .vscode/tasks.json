@@ -1,52 +1,52 @@
 {
-    "version": "2.0.0",
-    "tasks": [
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "watch:ts",
+      "type": "npm",
+      "script": "watch:ts",
+      "problemMatcher": "$tsc-watch",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "never"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "watch:web",
+      "type": "npm",
+      "script": "watch:web",
+      "problemMatcher": [
         {
-            "label": "watch:ts",
-            "type": "npm",
-            "script": "watch:ts",
-            "problemMatcher": "$tsc-watch",
-            "isBackground": true,
-            "presentation": {
-                "reveal": "never"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "watch:web",
-            "type": "npm",
-            "script": "watch:web",
-            "problemMatcher": [
-                {
-                    "pattern": {
-                        "kind": "file",
-                        "regexp": "(🚨 Build failed.)",
-                        "file": 1,
-                        "message": 1
-                    },
-                    "background": {
-                        "activeOnStart": true,
-                        "beginsPattern": "^Server running at .*$",
-                        "endsPattern": "^✨ Built in .*$|.*\\..*:.*:.*$"
-                    }
-                }
-            ],
-            "isBackground": true,
-            "presentation": {
-                "reveal": "never"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "watch:all",
-            "dependsOn": ["watch:web", "watch:ts"],
-            "problemMatcher": []
+          "pattern": {
+            "kind": "file",
+            "regexp": "(🚨 Build failed.)",
+            "file": 1,
+            "message": 1
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^Server running at .*$",
+            "endsPattern": "^✨ Built in .*$|.*\\..*:.*:.*$"
+          }
         }
-    ]
+      ],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "never"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "watch:all",
+      "dependsOn": ["watch:web", "watch:ts"],
+      "problemMatcher": []
+    }
+  ]
 }

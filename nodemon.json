@@ -1,9 +1,9 @@
 {
-    "restartable": "rs",
-    "ignore": ["**/*.typeCheck"],
-    "verbose": false,
-    "watch": ["dist/*"],
-    "ext": "",
-    "nodeArgs": ["--inspect"],
-    "delay": 1
+  "restartable": "rs",
+  "ignore": ["**/*.typeCheck"],
+  "verbose": false,
+  "watch": ["dist/*"],
+  "ext": "",
+  "nodeArgs": ["--inspect"],
+  "delay": 1
 }

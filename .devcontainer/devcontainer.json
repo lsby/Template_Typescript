@@ -1,26 +1,26 @@
 {
-    "name": "Template_Typescript",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "args": {}
-    },
-    "customizations": {
-        "vscode": {
-            "settings": {},
-            "extensions": [
-                "CodeInChinese.EnglishChineseDictionary",
-                "esbenp.prettier-vscode",
-                "mhutchie.git-graph",
-                "mikestead.dotenv",
-                "ms-azuretools.vscode-docker",
-                "nicoespeon.abracadabra",
-                "nicoespeon.hocus-pocus",
-                "tombonnike.vscode-status-bar-format-toggle",
-                "vscode-icons-team.vscode-icons",
-                "Vue.volar"
-            ]
-        }
-    },
-    "postCreateCommand": "npm i",
-    "remoteUser": "node"
+  "name": "Template_Typescript",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "CodeInChinese.EnglishChineseDictionary",
+        "esbenp.prettier-vscode",
+        "mhutchie.git-graph",
+        "mikestead.dotenv",
+        "ms-azuretools.vscode-docker",
+        "nicoespeon.abracadabra",
+        "nicoespeon.hocus-pocus",
+        "tombonnike.vscode-status-bar-format-toggle",
+        "vscode-icons-team.vscode-icons",
+        "Vue.volar"
+      ]
+    }
+  },
+  "postCreateCommand": "npm i",
+  "remoteUser": "node"
 }
