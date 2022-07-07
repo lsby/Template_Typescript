@@ -16,9 +16,6 @@
       Demo,
       LayerTest,
     },
-    setup() {
-      var name = 'Vue'
-      return { name }
-    },
+    setup() {},
   }
 </script>
