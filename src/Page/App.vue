@@ -7,15 +7,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import Demo from './Demo.vue'
   import LayerTest from './LayerTest.vue'
-
-  export default {
-    components: {
-      Demo,
-      LayerTest,
-    },
-    setup() {},
-  }
 </script>

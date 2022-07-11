@@ -1,8 +1,6 @@
 import { Kysely, MysqlDialect } from 'kysely'
 import { 获得环境变量 } from '../lib/getEnv'
 import Database from '../tools/types/Database'
-import * as R from 'ramda'
-import L from 'lodash'
 
 async function main(kysely: Kysely<Database>) {
   console.log('hello, world!')
