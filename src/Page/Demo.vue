@@ -3,7 +3,7 @@
     {{ s.msg }}
   </div>
   <div>
-    <button @click="(_) => f()">按钮</button>
+    <button @click="f()">按钮</button>
   </div>
 </template>
 
