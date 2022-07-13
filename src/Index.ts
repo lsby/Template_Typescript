@@ -32,7 +32,7 @@ async function main() {
 
   var 接口们 = fs.readdirSync(path.resolve(__dirname, './Interface'))
   for (var name of 接口们) {
-    var file = await import(`./Interface/${name}/index`)
+    var file = await import(`./Interface/${name}/Index`)
     app.use(
       接口({
         路径: '/api/' + name,
