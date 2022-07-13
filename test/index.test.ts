@@ -1,7 +1,7 @@
 import 'mocha'
 import { Kysely, MysqlDialect } from 'kysely'
 import Database from '../tools/types/Database'
-import 测试接口 from '../src/Interface/测试接口/index'
+import 测试接口 from '../src/Interface/测试接口/Index'
 import { 获得环境变量 } from '../lib/getEnv'
 
 var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()
