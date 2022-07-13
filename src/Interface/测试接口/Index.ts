@@ -1,6 +1,6 @@
 import { Request } from 'express'
 import { 请求包裹 } from '../../Middleware/Interface'
-import { 请求数据, 返回数据 } from './data'
+import { 请求数据, 返回数据 } from './Data'
 import path from 'path'
 import ts_type_check from '@lsby/ts_type_check'
 
