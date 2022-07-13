@@ -2,9 +2,6 @@ import { Kysely, MysqlDialect } from 'kysely'
 import { 获得环境变量 } from '../lib/getEnv'
 import Database from '../tools/types/Database'
 
-async function main(kysely: Kysely<Database>) {
-  console.log('hello, world!')
-}
 async function _main() {
   var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME } = 获得环境变量()
   var kysely = new Kysely<Database>({
@@ -26,3 +23,7 @@ async function _main() {
   }
 }
 _main()
+
+async function main(kysely: Kysely<Database>) {
+  console.log('hello, world!')
+}
