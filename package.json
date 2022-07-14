@@ -7,6 +7,7 @@
   "scripts": {
     "=====conf=====": "",
     "set_pm2_log": "pm2 install pm2-logrotate",
+    "set_prettier": "npm i -g prettier",
     "=====dev=====": "",
     "dev:cmd": "cross-env NODE_ENV=dev node dist/src/Cmd.js",
     "dev:service": "cross-env NODE_ENV=dev nodemon dist/src/Index.js",
