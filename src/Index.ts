@@ -9,7 +9,7 @@ import session from './Middleware/Session'
 // import { knex_defConf } from './Middleware/Knex'
 import kysely from './Middleware/Kysely'
 import cors from 'cors'
-import { 获得环境变量 } from '../lib/getEnv'
+import { 获得环境变量 } from './Lib/GetEnv'
 
 async function main() {
   var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()

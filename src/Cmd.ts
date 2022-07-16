@@ -1,5 +1,5 @@
 import { Kysely, MysqlDialect } from 'kysely'
-import { 获得环境变量 } from '../lib/getEnv'
+import { 获得环境变量 } from './Lib/GetEnv'
 import Database from '../tools/types/Database'
 
 async function _main() {

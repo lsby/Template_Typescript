@@ -1,7 +1,7 @@
 import _knex from 'knex'
 import fs from 'fs'
 import path from 'path'
-import { 获得环境变量 } from '../../lib/getEnv'
+import { 获得环境变量 } from '../../src/Lib/GetEnv'
 
 export async function main() {
   var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()

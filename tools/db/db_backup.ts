@@ -1,6 +1,6 @@
 import mysqldump from 'mysqldump'
 import path from 'path'
-import { 获得环境变量 } from '../../lib/getEnv'
+import { 获得环境变量 } from '../../src/Lib/GetEnv'
 
 async function main() {
   var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME } = 获得环境变量()

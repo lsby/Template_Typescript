@@ -1,14 +1,19 @@
-type Counter = ['Counter', number]
+import { 打包, 解包 } from '../Lib/Type_ISO'
+
+export type Counter = { 外部类型: 'Counter' }
+type _Counter = number
+declare module '../Lib/Type_ISO' {
+  interface 打包 {
+    (a: _Counter): Counter
+  }
+  interface 解包 {
+    (a: Counter): _Counter
+  }
+}
 
 export function mkCounter(n: number): Counter {
-  return ['Counter', n]
-}
-export function warpCounter(c: number): Counter {
-  return mkCounter(c)
-}
-export function unwarpCounter(c: Counter): number {
-  return c[1]
+  return 打包(n)
 }
 export function increaseCounter(c: Counter): Counter {
-  return warpCounter(unwarpCounter(c) + 1)
+  return 打包(解包(c) + 1)
 }

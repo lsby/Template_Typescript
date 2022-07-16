@@ -1,5 +1,5 @@
 import readlineSync from 'readline-sync'
-import { 获得环境变量 } from '../../lib/getEnv'
+import { 获得环境变量 } from '../../src/Lib/GetEnv'
 import { 删除所有表 } from './lib'
 
 async function main() {

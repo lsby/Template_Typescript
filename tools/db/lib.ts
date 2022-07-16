@@ -1,6 +1,6 @@
 import * as _knex from 'knex'
 import mysql from 'mysql'
-import { 获得环境变量 } from '../../lib/getEnv'
+import { 获得环境变量 } from '../../src/Lib/GetEnv'
 
 export async function 删除所有表(opt: {
   DB_HOST: string

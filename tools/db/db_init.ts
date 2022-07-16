@@ -1,6 +1,6 @@
 import _knex from 'knex'
 import { Kysely, MysqlDialect } from 'kysely'
-import { 获得环境变量 } from '../../lib/getEnv'
+import { 获得环境变量 } from '../../src/Lib/GetEnv'
 import DataBase from '../types/Database'
 
 async function main() {

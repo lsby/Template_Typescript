@@ -1,4 +1,4 @@
-import { 获得环境变量 } from '../lib/getEnv'
+import { 获得环境变量 } from '../src/Lib/GetEnv'
 import fs from 'fs'
 import path from 'path'
 import axios from 'axios'

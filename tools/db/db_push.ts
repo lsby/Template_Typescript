@@ -1,6 +1,6 @@
 import { FileMigrationProvider, Kysely, Migrator, MysqlDialect } from 'kysely'
 import path from 'path'
-import { 获得环境变量 } from '../../lib/getEnv'
+import { 获得环境变量 } from '../../src/Lib/GetEnv'
 import { 新建数据库 } from './lib'
 
 async function main() {
