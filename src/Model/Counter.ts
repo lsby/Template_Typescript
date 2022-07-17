@@ -1,6 +1,6 @@
 import { 打包, 解包 } from '../Lib/Type_ISO'
 
-export type Counter = { 外部类型: 'Counter' }
+export type Counter = { __TYPE__: 'Counter' }
 type _Counter = number
 declare module '../Lib/Type_ISO' {
   interface 打包 {
