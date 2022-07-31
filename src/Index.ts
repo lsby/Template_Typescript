@@ -5,11 +5,18 @@ import os from 'os'
 import path from 'path'
 import 中文路径支持 from './Middleware/ChinesePath'
 import 接口 from './Middleware/Interface'
-import session from './Middleware/Session'
+import session from 'express-session'
+import sessionFileStore from 'session-file-store'
 // import { knex_defConf } from './Middleware/Knex'
 import kysely from './Middleware/Kysely'
 import cors from 'cors'
 import { 获得环境变量 } from './Lib/GetEnv'
+
+declare module 'express-session' {
+  interface SessionData {
+    // 在这里扩展 session 对象
+  }
+}
 
 async function main() {
   var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()
@@ -23,7 +30,14 @@ async function main() {
   app.use(中文路径支持())
   app.use(kysely({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME }))
   // app.use(knex_defConf({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME }))
-  app.use(session({ 检查时间: 1000 * 60 * 30, 过期时间: 1000 * 60 * 30 }))
+  app.use(
+    session({
+      secret: '在这里填写一个密码',
+      saveUninitialized: false,
+      resave: false,
+      store: new (sessionFileStore(session))(),
+    }),
+  )
 
   app.use('/', express.static(path.resolve(__dirname, '../web')))
   app.use('/Static', express.static(path.resolve(__dirname, '../../src/Page/Static')))

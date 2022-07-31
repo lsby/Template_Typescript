@@ -1,13 +1,5 @@
 <template>
-  <div>
-    <Demo></Demo>
-  </div>
-  <div>
-    <LayerTest></LayerTest>
-  </div>
+  <router-view></router-view>
 </template>
 
-<script lang="ts" setup>
-  import Demo from './Demo.vue'
-  import LayerTest from './LayerTest.vue'
-</script>
+<script lang="ts" setup></script>
