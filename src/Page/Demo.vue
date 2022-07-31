@@ -24,6 +24,6 @@
   }
 
   function toLayerTest() {
-    router.replace({ path: '/LayerTest' })
+    router.push({ path: '/LayerTest' })
   }
 </script>
