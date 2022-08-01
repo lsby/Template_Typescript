@@ -6,7 +6,7 @@ import axios from 'axios'
 async function main() {
   var { APP_PORT } = 获得环境变量()
 
-  var names = fs.readdirSync(path.resolve(__dirname, '../src/interface/'))
+  var names = fs.readdirSync(path.resolve(__dirname, '../src/Interface/'))
   console.log(`找到${names.length}个接口`)
 
   for (var i = 0; i < names.length; i++) {
