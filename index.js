@@ -15,6 +15,7 @@ app.use(
       { path: '/', component: Demo },
       { path: '/Demo', component: Demo },
       { path: '/LayerTest', component: LayerTest },
+      { path: '/:catchAll(.*)', component: NotFound },
     ],
   }),
 )
