@@ -4,6 +4,7 @@ import Database from '../tools/types/Database'
 import { Effect, liftEffect, runEffect } from './Model/Effect'
 import { map } from './Class/Functor'
 import { Just, Nothing } from './Model/Maybe'
+import { addNode, Flow, runFlow } from './Model/Flow'
 
 async function _main() {
   var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME } = 获得环境变量()
@@ -28,12 +29,8 @@ async function _main() {
 _main()
 
 async function main(kysely: Kysely<Database>) {
-  var x1 = liftEffect(1)
-  var y2 = map((a) => a + 1, x1)
-  var z1 = Nothing()
-  var z2 = map((a: unknown) => (a as any) + 1, z1)
-  var z3 = Just(1)
-  var z4 = map((a) => a + 1, z3)
+  var f1 = Flow(() => 1)
+  var f2 = addNode(f1, (a) => a + 1)
 
-  console.log(z4)
+  console.log(runFlow(f2))
 }
