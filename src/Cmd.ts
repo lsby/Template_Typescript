@@ -29,8 +29,8 @@ async function _main() {
 _main()
 
 async function main(kysely: Kysely<Database>) {
-  var f1 = Flow(() => 1)
+  var f1 = Flow((a: number) => a + 1)
   var f2 = addNode(f1, (a) => a + 1)
 
-  console.log(runFlow(f2))
+  console.log(runFlow(f2, 1))
 }
