@@ -5,6 +5,7 @@ import { Effect, liftEffect, runEffect } from './Model/Effect'
 import { map } from './Class/Functor'
 import { Just, Nothing } from './Model/Maybe'
 import { addNode, Flow, runFlow } from './Model/Flow'
+import { Array, bind, toJsArray } from './Model/Array'
 
 async function _main() {
   var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME } = 获得环境变量()
@@ -32,5 +33,7 @@ async function main(kysely: Kysely<Database>) {
   var f1 = Flow((a: number) => a + 1)
   var f2 = addNode(f1, (a) => a + 1)
 
-  console.log(runFlow(f2, 1))
+  var x = bind(Array([1, 2, 3]), (a) => bind(Array([2, 3, 4]), (b) => Array([a + b])))
+
+  console.log(toJsArray(x))
 }
