@@ -1,17 +1,15 @@
-// 类型定义
-const 构造子: unique symbol = Symbol('构造子')
-const 参数: unique symbol = Symbol('参数')
-export type Flow<A, B> = { [构造子]: 'Flow'; [参数]: [(a: A) => B, any] }
+import { 转换2 } from '../Class/转换2'
 
-// 构造子
-export function Flow<A, B>(a: (a: A) => B): Flow<A, B> {
-  return { [构造子]: 'Flow', [参数]: [a, null] }
-}
-
-// 函数
-export function addNode<A, B, C>(a: Flow<A, B>, f: (a: B) => C): Flow<A, C> {
-  return Flow((x) => f(a[参数][0](x)))
-}
-export function runFlow<A, B>(a: Flow<A, B>, x: A): B {
-  return a[参数][0](x)
+export class Flow<A, B> implements 转换2<A, B> {
+  constructor(private f: (a: A) => B) {}
+  转换2(a: A): B {
+    return this.run(a)
+  }
+  addNode<C>(f: (a: B) => C): Flow<A, C> {
+    var r = (a: A) => f(this.f(a))
+    return new Flow(r)
+  }
+  run(a: A): B {
+    return this.f(a)
+  }
 }
