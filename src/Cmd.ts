@@ -5,8 +5,10 @@ import { Effect, liftEffect, runEffect } from './Model/Effect'
 import { map } from './Class/Functor'
 import { Just, Nothing } from './Model/Maybe'
 import { addNode, Flow, runFlow } from './Model/Flow'
+import * as F2 from './Model/Flow2'
 import { Array, bind, toJsArray } from './Model/Array'
 import { Recursion, runRecursion } from './Model/Recursion'
+import * as R2 from './Model/Recursion2'
 
 async function _main() {
   var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME } = 获得环境变量()
@@ -42,5 +44,13 @@ async function main(kysely: Kysely<Database>) {
     (s, a) => s + a,
   )
 
-  console.log(runRecursion(x2, 1, 0))
+  var c1 = F2.Flow((a: number) => a)
+  var c2 = R2.Recursion(
+    (a) => a <= 100,
+    (a: number) => a + 1,
+    c1,
+    (s: any, a: any) => s + a,
+  )
+
+  console.log(R2.runRecursion(c2, 1, 0))
 }
