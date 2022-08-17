@@ -1,12 +1,13 @@
 import { 参数, 构造子, 类型 } from '@lsby/ts_struct/src/Base/Symbol'
 import * as Vue模板 from '../../Class/Vue模板'
+var Page = require('./Page.vue').default
 
 // 类型定义
 export type DemoPage1<A> = { [类型]: 'DemoPage1'; [构造子]: 'DemoPage1'; [参数]: { 模板: any; props: A } }
 
 // 构造子
-export function DemoPage1<A extends Record<'name', string>>(模板: any, props: A): DemoPage1<A> {
-  return { [类型]: 'DemoPage1' as 'DemoPage1', [构造子]: 'DemoPage1' as 'DemoPage1', [参数]: { 模板, props } }
+export function DemoPage1<A extends Record<'name', string>>(props: A): DemoPage1<A> {
+  return { [类型]: 'DemoPage1' as 'DemoPage1', [构造子]: 'DemoPage1' as 'DemoPage1', [参数]: { 模板: Page, props } }
 }
 
 // 扩充推导定义
