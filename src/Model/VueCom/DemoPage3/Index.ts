@@ -1,4 +1,4 @@
-import { Check } from '@lsby/ts_struct/src/Base/Check'
+import { Check } from '@lsby/ts_pattern/src/Base/Check'
 import * as Vue模板 from '../../../Class/Vue模板'
 import { IsVue模板 } from '../../../Class/Vue模板'
 import { Vue响应值 } from '../../Vue响应值'
@@ -23,7 +23,7 @@ export function DemoPage3(按钮组件: Vue组件, 列表: Vue响应值<string[]
 }
 
 // 扩充推导定义
-declare module '@lsby/ts_struct/src/Base/K1' {
+declare module '@lsby/ts_pattern/src/Base/K1' {
   interface 一阶类型<A1> {
     DemoPage3: DemoPage3<A1>
   }

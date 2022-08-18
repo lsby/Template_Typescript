@@ -20,7 +20,7 @@ export function DemoPage1(name: Vue响应值<string>, onTestEvent: () => void) {
 }
 
 // 扩充推导定义
-declare module '@lsby/ts_struct/src/Base/K1' {
+declare module '@lsby/ts_pattern/src/Base/K1' {
   interface 一阶类型<A1> {
     DemoPage1: DemoPage1<A1>
   }

@@ -1,4 +1,4 @@
-import { Check } from '@lsby/ts_struct/src/Base/Check'
+import { Check } from '@lsby/ts_pattern/src/Base/Check'
 import { error, 联合转元组 } from '@lsby/ts_type_fun'
 
 export interface Vue模板<A> {}
