@@ -39,7 +39,7 @@ export function 取参数<A>(a: DemoPage1<A>): Record<string, any> {
 // Vue模板
 declare module '../../Class/Vue模板' {
   interface Vue模板<A> {
-    Flow的实现: typeof 类型 extends keyof A ? (A[typeof 类型] extends 'DemoPage1' ? true : false) : false
+    DemoPage1的实现: typeof 类型 extends keyof A ? (A[typeof 类型] extends 'DemoPage1' ? true : false) : false
   }
 }
 Vue模板.增加实现_取模板(function <A>(a: DemoPage1<A>): any {
