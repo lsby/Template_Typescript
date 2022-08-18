@@ -1,7 +1,11 @@
-import { 参数, 构造子, 类型 } from '@lsby/ts_struct/src/Base/Symbol'
 import * as Vue模板 from '../../Class/Vue模板'
 import { Vue响应值 } from '../../Model/Vue响应值'
 var Page = require('./Page.vue').default
+
+// 符号定义
+const 类型: unique symbol = Symbol('类型')
+const 构造子: unique symbol = Symbol('构造子')
+const 参数: unique symbol = Symbol('参数')
 
 // 类型定义
 export type DemoPage1<A> = { [类型]: 'DemoPage1'; [构造子]: 'DemoPage1'; [参数]: { 模板: any; props: A } }

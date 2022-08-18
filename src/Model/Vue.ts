@@ -1,8 +1,12 @@
 import { Check } from '@lsby/ts_struct/src/Base/Check'
-import { 参数, 构造子, 类型 } from '@lsby/ts_struct/src/Base/Symbol'
 import { Effect } from '@lsby/ts_struct/src/Type/Effect'
 import { createApp } from 'vue'
 import { IsVue模板, 取参数, 取模板 } from '../Class/Vue模板'
+
+// 符号定义
+const 类型: unique symbol = Symbol('类型')
+const 构造子: unique symbol = Symbol('构造子')
+const 参数: unique symbol = Symbol('参数')
 
 // 类型定义
 export type Vue = { [类型]: 'Vue'; [构造子]: 'Vue'; [参数]: { 模板: any } }
