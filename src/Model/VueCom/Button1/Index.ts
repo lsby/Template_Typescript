@@ -1,7 +1,7 @@
 import { Check } from '@lsby/ts_struct/src/Base/Check'
 import * as Vue模板 from '../../../Class/Vue模板'
 import { IsVue模板 } from '../../../Class/Vue模板'
-import { Vue响应值 } from '../../../Model/Vue响应值'
+import { Vue响应值 } from '../../Vue响应值'
 var Page = require('./Page.vue').default
 
 // 符号定义

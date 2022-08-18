@@ -1,8 +1,8 @@
 import { Check } from '@lsby/ts_struct/src/Base/Check'
 import * as Vue模板 from '../../../Class/Vue模板'
 import { IsVue模板 } from '../../../Class/Vue模板'
-import { Vue响应值 } from '../../../Model/Vue响应值'
-import { Vue组件 } from '../../../Model/Vue组件'
+import { Vue响应值 } from '../../Vue响应值'
+import { Vue组件 } from '../../Vue组件'
 var Page = require('./Page.vue').default
 
 // 符号定义
@@ -14,15 +14,7 @@ const 参数: unique symbol = Symbol('参数')
 export type DemoPage3<A> = { [类型]: 'DemoPage3'; [构造子]: 'DemoPage3'; [参数]: { 模板: any; props: A } }
 
 // 构造子
-export function DemoPage3(
-  按钮组件: Vue组件,
-  列表: Vue响应值<string[]>,
-  on添加列表: (a: string) => void,
-): DemoPage3<{
-  按钮组件: Vue组件
-  列表: Vue响应值<string[]>
-  on添加列表: (a: string) => void
-}> {
+export function DemoPage3(按钮组件: Vue组件, 列表: Vue响应值<string[]>, on添加列表: (a: string) => void) {
   return {
     [类型]: 'DemoPage3' as 'DemoPage3',
     [构造子]: 'DemoPage3' as 'DemoPage3',

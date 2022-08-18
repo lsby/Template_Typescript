@@ -1,5 +1,5 @@
 import * as Vue模板 from '../../../Class/Vue模板'
-import { Vue响应值 } from '../../../Model/Vue响应值'
+import { Vue响应值 } from '../../Vue响应值'
 var Page = require('./Page.vue').default
 
 // 符号定义
@@ -11,13 +11,12 @@ const 参数: unique symbol = Symbol('参数')
 export type DemoPage2<A> = { [类型]: 'DemoPage2'; [构造子]: 'DemoPage2'; [参数]: { 模板: any; props: A } }
 
 // 构造子
-export function DemoPage2<
-  A extends {
-    列表: Vue响应值<string[]>
-    on添加列表: (a: string) => void
-  },
->(props: A): DemoPage2<A> {
-  return { [类型]: 'DemoPage2' as 'DemoPage2', [构造子]: 'DemoPage2' as 'DemoPage2', [参数]: { 模板: Page, props } }
+export function DemoPage2(列表: Vue响应值<string[]>, on添加列表: (a: string) => void) {
+  return {
+    [类型]: 'DemoPage2' as 'DemoPage2',
+    [构造子]: 'DemoPage2' as 'DemoPage2',
+    [参数]: { 模板: Page, props: { 列表, on添加列表 } },
+  }
 }
 
 // 扩充推导定义

@@ -11,13 +11,12 @@ const 参数: unique symbol = Symbol('参数')
 export type DemoPage1<A> = { [类型]: 'DemoPage1'; [构造子]: 'DemoPage1'; [参数]: { 模板: any; props: A } }
 
 // 构造子
-export function DemoPage1<
-  A extends {
-    name: Vue响应值<string>
-    onTestEvent: () => void
-  },
->(props: A): DemoPage1<A> {
-  return { [类型]: 'DemoPage1' as 'DemoPage1', [构造子]: 'DemoPage1' as 'DemoPage1', [参数]: { 模板: Page, props } }
+export function DemoPage1(name: Vue响应值<string>, onTestEvent: () => void) {
+  return {
+    [类型]: 'DemoPage1' as 'DemoPage1',
+    [构造子]: 'DemoPage1' as 'DemoPage1',
+    [参数]: { 模板: Page, props: { name, onTestEvent } },
+  }
 }
 
 // 扩充推导定义
