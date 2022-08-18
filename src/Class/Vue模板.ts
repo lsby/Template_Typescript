@@ -4,7 +4,7 @@ import { error, 联合转元组 } from '@lsby/ts_type_fun'
 export interface Vue模板<A> {}
 
 type _IsVue模板<A, keys> = keys extends []
-  ? error<['Vue模板:', '类型', A, '没有实现', 'Vue模板']>
+  ? error<['Vue模板:', '类型', A, '没有实现类型类', 'Vue模板']>
   : keys extends [infer a, ...infer as]
   ? a extends keyof Vue模板<A>
     ? Vue模板<A>[a] extends true
