@@ -1,5 +1,5 @@
-import * as Vue模板 from '../../Class/Vue模板'
-import { Vue响应值 } from '../../Model/Vue响应值'
+import * as Vue模板 from '../../../Class/Vue模板'
+import { Vue响应值 } from '../../Vue响应值'
 var Page = require('./Page.vue').default
 
 // 符号定义
@@ -37,7 +37,7 @@ export function 取参数<A>(a: DemoPage1<A>): Record<string, any> {
 
 // 实现类型类
 // Vue模板
-declare module '../../Class/Vue模板' {
+declare module '../../../Class/Vue模板' {
   interface Vue模板<A> {
     DemoPage1的实现: typeof 类型 extends keyof A ? (A[typeof 类型] extends 'DemoPage1' ? true : false) : false
   }

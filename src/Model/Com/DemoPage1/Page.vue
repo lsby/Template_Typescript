@@ -5,7 +5,7 @@
 
 <script lang="ts" setup>
   import { runEffect } from '@lsby/ts_struct/src/Type/Effect'
-  import { Vue响应值, 取响应值 } from '../../Model/Vue响应值'
+  import { Vue响应值, 取响应值 } from '../../../Model/Vue响应值'
 
   const prop = defineProps<{
     name: Vue响应值<string>

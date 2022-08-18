@@ -1,7 +1,7 @@
 import { Effect, runEffect } from '@lsby/ts_struct/src/Type/Effect'
 import { Vue, 渲染Vue模板 } from '../Model/Vue'
 import { Vue响应值, 修改响应值, 取响应值 } from '../Model/Vue响应值'
-import { DemoPage2 } from '../Page/DemoPage2/Index'
+import { DemoPage2 } from '../Model/Com/DemoPage2/Index'
 
 export function main(): Effect<null> {
   var 数据 = {
