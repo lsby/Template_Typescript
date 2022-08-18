@@ -1,13 +1,13 @@
 <template>
-  <div>Hello {{ props.name.value }}!</div>
+  <div>Hello {{ 取响应值(props.name) }}!</div>
   <button @click="emit('testEvent')">按钮</button>
 </template>
 
 <script lang="ts" setup>
-  import { Ref } from 'vue'
+  import { Vue响应值, 取响应值 } from '../../Model/Vue响应值'
 
   const props = defineProps<{
-    name: Ref<string>
+    name: Vue响应值<string>
   }>()
   const emit = defineEmits<{
     (e: 'testEvent'): void

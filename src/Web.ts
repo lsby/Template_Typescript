@@ -1,13 +1,14 @@
 import { Effect, runEffect } from '@lsby/ts_struct/src/Type/Effect'
-import { ref } from 'vue'
 import { Vue, 渲染Vue对象 } from './Model/Vue'
+import { Vue响应值, 修改值 } from './Model/Vue响应值'
 import { DemoPage1 } from './Page/DemoPage1/Index'
 
 function main(): Effect<null> {
   var 数据 = {
-    name: ref('aaa'),
+    name: Vue响应值('aaa'),
     onTestEvent: () => {
-      数据.name.value = 'bbb'
+      var eff = 修改值(数据.name, 'bbb')
+      runEffect(eff)
     },
   }
   var 模板 = DemoPage1(数据)

@@ -1,6 +1,6 @@
 import { 参数, 构造子, 类型 } from '@lsby/ts_struct/src/Base/Symbol'
-import { Ref } from 'vue'
 import * as Vue模板 from '../../Class/Vue模板'
+import { Vue响应值 } from '../../Model/Vue响应值'
 var Page = require('./Page.vue').default
 
 // 类型定义
@@ -9,7 +9,7 @@ export type DemoPage1<A> = { [类型]: 'DemoPage1'; [构造子]: 'DemoPage1'; [�
 // 构造子
 export function DemoPage1<
   A extends {
-    name: Ref<string>
+    name: Vue响应值<string>
     onTestEvent: () => void
   },
 >(props: A): DemoPage1<A> {
