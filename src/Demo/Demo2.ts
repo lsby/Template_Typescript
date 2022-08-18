@@ -4,7 +4,7 @@ import { Vue响应值, 修改响应值, 取响应值 } from '../Model/Vue响应�
 import { DemoPage2 } from '../Model/VueCom/DemoPage2/Index'
 
 export function main(): Effect<null> {
-  var 列表 = Vue响应值(['a', 'b', 'c'] as string[])
+  var 列表 = Vue响应值(['a', 'b', 'c'])
   var on添加列表 = (a: string) => {
     var 值 = runEffect(取响应值(列表))
     var eff = 修改响应值(列表, [...值, a])
