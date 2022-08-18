@@ -15,7 +15,7 @@
 
   var v = ref('')
 
-  const props = defineProps<{
+  const prop = defineProps<{
     列表: Vue响应值<string[]>
   }>()
   const emit = defineEmits<{
