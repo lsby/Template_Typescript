@@ -17,7 +17,7 @@ export function Vue<A extends _Check, _Check = Check<[IsVue模板<A>], A>>(模�
 }
 
 // 函数
-export function 渲染Vue模板(a: Vue, 挂载点id: string = 'app'): Effect<null> {
+export function 渲染Vue模板(a: Vue, 挂载点id: string): Effect<null> {
   return Effect(() => {
     var 模板 = 取模板(a[参数].模板)
     var 模板参数 = 取参数(a[参数].模板)
