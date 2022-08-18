@@ -1,11 +1,11 @@
 <template>
-  <div>Hello {{ runEffect(取响应值(props.name)) }}!</div>
+  <div>Hello {{ runEffect(取值(props.name)) }}!</div>
   <button @click="emit('testEvent')">按钮</button>
 </template>
 
 <script lang="ts" setup>
   import { runEffect } from '@lsby/ts_struct/src/Type/Effect'
-  import { Vue响应值, 取响应值 } from '../../Model/Vue响应值'
+  import { Vue响应值, 取值 } from '../../Model/Vue响应值'
 
   const props = defineProps<{
     name: Vue响应值<string>

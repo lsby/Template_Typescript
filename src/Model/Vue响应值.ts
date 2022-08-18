@@ -17,7 +17,7 @@ export function 修改值<A>(a: Vue响应值<A>, 新值: A): Effect<null> {
     return null
   })
 }
-export function 取响应值<A>(a: Vue响应值<A>): Effect<A> {
+export function 取值<A>(a: Vue响应值<A>): Effect<A> {
   return Effect(() => {
     return a[参数].数据.value
   })
