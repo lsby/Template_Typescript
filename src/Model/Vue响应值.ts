@@ -13,7 +13,7 @@ export function Vue响应值<A>(数据: A) {
 // 扩充推导定义
 declare module '@lsby/ts_struct/src/Base/K1' {
   interface 一阶类型<A1> {
-    DemoPage1: Vue响应值<A1>
+    Vue响应值: Vue响应值<A1>
   }
 }
 
