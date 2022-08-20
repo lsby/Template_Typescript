@@ -64,6 +64,9 @@ function main(): Effect<null> {
     case 'prod':
       log(D, '使用环境', 'prod')
       return 附加环境(EnvApp(path.resolve(__dirname, '../../.env/prod.env'), app))
+    case 'fix':
+      log(D, '使用环境', 'fix')
+      return 附加环境(EnvApp(path.resolve(__dirname, '../../.env/fix.env'), app))
     default:
       throw new Error(`环境变量 ${process.env['NODE_ENV']} 未定义`)
   }
