@@ -4,6 +4,8 @@
  * - 依赖的中间件数组
  * - 访问路径
  * - 实现, 形式是 (req: Request, res: Response) => Promise<null>
+ * 实现中必须调用res.send来返回数据
+ * 实现最后需要手动return null
  */
 
 import { Request, Response } from 'express'
