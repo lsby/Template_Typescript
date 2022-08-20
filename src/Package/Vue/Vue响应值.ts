@@ -1,3 +1,7 @@
+/**
+ * 描述一个Vue使用的响应式值
+ * 可以用任何值初始化
+ */
 import { Effect } from '@lsby/ts_pattern'
 import { ref, Ref } from 'vue'
 

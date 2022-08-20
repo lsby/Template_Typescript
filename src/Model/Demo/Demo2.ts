@@ -1,5 +1,5 @@
 import { Effect, runEffect } from '@lsby/ts_pattern'
-import { Vue, 渲染Vue模板 } from '../../Package/Vue/Vue'
+import { Vue, 渲染Vue } from '../../Package/Vue/Vue'
 import { Vue响应值, 修改响应值, 取响应值 } from '../../Package/Vue/Vue响应值'
 import { DemoPage2 } from '../VueCom/DemoPage2/Index'
 
@@ -14,5 +14,5 @@ export function main(): Effect<null> {
   var 模板 = DemoPage2(列表, on添加列表)
   var vue = Vue(模板)
 
-  return 渲染Vue模板(vue, 'app')
+  return 渲染Vue(vue, 'app')
 }

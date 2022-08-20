@@ -1,7 +1,12 @@
+/**
+ * 描述一个Vue组件
+ * 需要传入一个Vue模板来创建
+ * 可以通过函数'取Vue组件'取得一个Vue组件, 可以直接作为标签用于Vue文件中.
+ */
 import { Check } from '@lsby/ts_pattern'
 import { Effect } from '@lsby/ts_pattern'
 import { h, VNode } from 'vue'
-import { IsVue模板, 取参数, 取模板 } from './Vue模板_类型类'
+import { IsVue模板, 取参数, 取模板 } from './Vue模板'
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
