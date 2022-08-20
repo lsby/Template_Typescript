@@ -28,10 +28,7 @@ export type Express = {
 }
 
 // 构造子
-export function Express<A extends _Check, _Check = Check<[IsExpress接口<A>], A>>(
-  静态路径们: 静态路径[],
-  监听端口: number,
-) {
+export function Express(静态路径们: 静态路径[], 监听端口: number) {
   return {
     [类型]: 'Express' as 'Express',
     [构造子]: 'Express' as 'Express',
