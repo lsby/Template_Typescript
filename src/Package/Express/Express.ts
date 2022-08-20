@@ -14,6 +14,8 @@ import { IsExpress接口, 获得接口描述 } from './Express接口_类型类'
 import { 获得中间件实现 } from './中间件'
 import * as 静态路径F from './静态路径'
 import { 静态路径 } from './静态路径'
+import { NextFunction, Request, Response } from 'express'
+import url from 'url'
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
@@ -48,6 +50,14 @@ export function 启动服务(a: Express): Effect<null> {
   return Effect(() => {
     var app = express()
 
+    // 中文路径转换
+    app.use(function (req: Request, res: Response, next: NextFunction) {
+      var url对象 = url.parse(req.url)
+      if (url对象.pathname == null || url对象.path == null) return next()
+      req.url = req.originalUrl = url对象.path.replace(url对象.pathname, decodeURIComponent(url对象.pathname))
+      next()
+    })
+
     for (var 静态路径 of a[参数].静态路径们) {
       var 静态配置数据 = 静态路径F.解包(静态路径)
       app.use(静态配置数据.访问路径, express.static(静态配置数据.文件夹路径))
@@ -55,16 +65,23 @@ export function 启动服务(a: Express): Effect<null> {
 
     for (var 接口 of a[参数].接口们) {
       var 描述 = 获得接口描述(接口)
-      app.use(function (req, res, next) {
-        if (req.path != 描述.访问路径) return next()
-        var 中间件列表 = 描述.使用的中间件们
-        for (var 中间件 of 中间件列表) {
-          var 中间件实现 = 获得中间件实现(中间件)
-          中间件实现(req, res, next)
-        }
-        描述.接口实现(req, res)
-      })
+      app.use(
+        ((描述) =>
+          async function (req, res, next) {
+            if (req.path != 描述.访问路径) return next()
+            var 中间件列表 = 描述.使用的中间件们
+            for (var 中间件 of 中间件列表) {
+              var 中间件实现 = 获得中间件实现(中间件)
+              await new Promise((resP, rejP) => 中间件实现(req, res, resP))
+            }
+            await 描述.接口实现(req, res)
+          })(描述),
+      )
     }
+
+    app.use(function (req, res) {
+      res.send('页面不存在')
+    })
 
     var 监听端口 = a[参数].监听端口
     app.listen(监听端口, () => {

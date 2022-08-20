@@ -3,7 +3,6 @@ import express from 'express'
 import session from 'express-session'
 import path from 'path'
 import sessionFileStore from 'session-file-store'
-import 中文路径支持 from './Middleware/ChinesePath'
 // import { knex_defConf } from './Middleware/Knex'
 import { runEffect, Effect } from '@lsby/ts_pattern'
 import cors from 'cors'
@@ -31,7 +30,6 @@ async function main(): Promise<Effect<null>> {
     中间件(express.json()),
     中间件(express.urlencoded({ extended: true })),
     中间件(cookieParser()),
-    中间件(中文路径支持()),
     中间件(kysely({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME })),
     // 中间件(knex_defConf({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME })),
     中间件(
