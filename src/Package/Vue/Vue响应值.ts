@@ -1,4 +1,4 @@
-import { Effect } from '@lsby/ts_pattern/src/Type/Effect'
+import { Effect } from '@lsby/ts_pattern'
 import { ref, Ref } from 'vue'
 
 // 符号定义
@@ -15,7 +15,7 @@ export function Vue响应值<A>(数据: A) {
 }
 
 // 扩充推导定义
-declare module '@lsby/ts_pattern/src/Base/K1' {
+declare module '@lsby/ts_pattern' {
   interface 一阶类型<A1> {
     Vue响应值: Vue响应值<A1>
   }

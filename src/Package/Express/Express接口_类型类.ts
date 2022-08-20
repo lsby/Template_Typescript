@@ -6,7 +6,7 @@
  * - 接口实现: (req: Request, res: Response) => Promise<null>
  */
 
-import { Check } from '@lsby/ts_pattern/src/Base/Check'
+import { Check } from '@lsby/ts_pattern'
 import { error, 联合转元组 } from '@lsby/ts_type_fun'
 import { Request, Response } from 'express'
 import { 中间件 } from './中间件'

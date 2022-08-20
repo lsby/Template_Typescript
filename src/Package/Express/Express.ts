@@ -6,8 +6,8 @@
  * - 监听端口
  */
 
-import { Check } from '@lsby/ts_pattern/src/Base/Check'
-import { Effect } from '@lsby/ts_pattern/src/Type/Effect'
+import { Check } from '@lsby/ts_pattern'
+import { Effect } from '@lsby/ts_pattern'
 import express from 'express'
 import os from 'os'
 import { IsExpress接口, 获得接口描述 } from './Express接口_类型类'

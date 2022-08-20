@@ -1,4 +1,4 @@
-import { Effect, runEffect } from '@lsby/ts_pattern/src/Type/Effect'
+import { Effect, runEffect } from '@lsby/ts_pattern'
 import { Button1 } from '../VueCom/Button1/Index'
 import { Button2 } from '../VueCom/Button2/Index'
 import { Vue, 渲染Vue模板 } from '../../Package/Vue/Vue'

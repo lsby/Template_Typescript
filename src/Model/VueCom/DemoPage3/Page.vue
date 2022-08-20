@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { runEffect } from '@lsby/ts_pattern/src/Type/Effect'
+  import { runEffect } from '@lsby/ts_pattern'
   import { ref } from 'vue'
   import { Vue响应值, 取响应值 } from '../../../Package/Vue/Vue响应值'
   import { 取Vue组件 } from '../../../Package/Vue/Vue组件'

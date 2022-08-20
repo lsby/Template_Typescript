@@ -1,7 +1,6 @@
-import { Check } from '@lsby/ts_pattern/src/Base/Check'
+import { Vue响应值 } from '../../../Package/Vue/Vue响应值'
 import * as Vue模板 from '../../../Package/Vue/Vue模板_类型类'
 import { IsVue模板 } from '../../../Package/Vue/Vue模板_类型类'
-import { Vue响应值 } from '../../../Package/Vue/Vue响应值'
 import { Vue组件 } from '../../../Package/Vue/Vue组件'
 var Page = require('./Page.vue').default
 
@@ -23,7 +22,7 @@ export function DemoPage3(按钮组件: Vue组件, 列表: Vue响应值<string[]
 }
 
 // 扩充推导定义
-declare module '@lsby/ts_pattern/src/Base/K1' {
+declare module '@lsby/ts_pattern' {
   interface 一阶类型<A1> {
     DemoPage3: DemoPage3<A1>
   }

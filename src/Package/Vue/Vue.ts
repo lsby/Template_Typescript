@@ -1,5 +1,5 @@
-import { Check } from '@lsby/ts_pattern/src/Base/Check'
-import { Effect } from '@lsby/ts_pattern/src/Type/Effect'
+import { Check } from '@lsby/ts_pattern'
+import { Effect } from '@lsby/ts_pattern'
 import { createApp } from 'vue'
 import { IsVue模板, 取参数, 取模板 } from './Vue模板_类型类'
 

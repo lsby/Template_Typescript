@@ -1,4 +1,4 @@
-import { Check } from '@lsby/ts_pattern/src/Base/Check'
+import { Check } from '@lsby/ts_pattern'
 import * as Vue模板 from '../../../Package/Vue/Vue模板_类型类'
 import { IsVue模板 } from '../../../Package/Vue/Vue模板_类型类'
 import { Vue响应值 } from '../../../Package/Vue/Vue响应值'
@@ -22,7 +22,7 @@ export function Button1<B extends _Check, _Check = Check<[IsVue模板<B>], B>>()
 }
 
 // 扩充推导定义
-declare module '@lsby/ts_pattern/src/Base/K1' {
+declare module '@lsby/ts_pattern' {
   interface 一阶类型<A1> {
     Button1: Button1<A1>
   }
