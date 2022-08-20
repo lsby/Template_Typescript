@@ -16,6 +16,7 @@ import * as 静态路径F from './静态路径'
 import { 静态路径 } from './静态路径'
 import { NextFunction, Request, Response } from 'express'
 import url from 'url'
+import { Debug, log } from '../Debug/Debug'
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
@@ -30,24 +31,44 @@ export type Express = {
 }
 
 // 构造子
-export function Express(静态路径们: 静态路径[], 监听端口: number) {
+export function Express(): Express {
   return {
     [类型]: 'Express' as 'Express',
     [构造子]: 'Express' as 'Express',
-    [参数]: { 接口们: [] as any[], 静态路径们, 监听端口 },
+    [参数]: { 接口们: [] as any[], 静态路径们: [] as 静态路径[], 监听端口: NaN },
   }
 }
 
 // 函数
-export function 挂载接口<A extends _Check, _Check = Check<[IsExpress接口<A>], A>>(a: Express, 接口: A): Express {
+export function 挂载接口<A extends _Check, _Check = Check<[IsExpress接口<A>], A>>(接口: A, a: Express): Express {
   return {
     [类型]: 'Express' as 'Express',
     [构造子]: 'Express' as 'Express',
     [参数]: { 接口们: [...a[参数].接口们, 接口], 静态路径们: a[参数].静态路径们, 监听端口: a[参数].监听端口 },
   }
 }
-export function 启动服务(a: Express): Effect<null> {
+export function 添加静态路径(静态路径: 静态路径, a: Express): Express {
+  return {
+    [类型]: 'Express' as 'Express',
+    [构造子]: 'Express' as 'Express',
+    [参数]: { 接口们: a[参数].接口们, 静态路径们: [...a[参数].静态路径们, 静态路径], 监听端口: a[参数].监听端口 },
+  }
+}
+export function 设置监听端口(监听端口: number, a: Express): Express {
+  return {
+    [类型]: 'Express' as 'Express',
+    [构造子]: 'Express' as 'Express',
+    [参数]: { 接口们: a[参数].接口们, 静态路径们: a[参数].静态路径们, 监听端口: 监听端口 },
+  }
+}
+export function 启动Express服务(a: Express): Effect<null> {
   return Effect(() => {
+    var D = Debug('Express')
+
+    if (isNaN(a[参数].监听端口)) {
+      throw new Error('监听端口为NaN')
+    }
+
     var app = express()
 
     // 中文路径转换
@@ -85,14 +106,13 @@ export function 启动服务(a: Express): Effect<null> {
 
     var 监听端口 = a[参数].监听端口
     app.listen(监听端口, () => {
-      console.log(`==============`)
-      console.log(`start:`)
-      console.log(
-        `${Object.values(os.networkInterfaces())
+      log(
+        D,
+        '已启动: %O',
+        Object.values(os.networkInterfaces())
           .flat()
           .map((a) => a?.address)
-          .map((a) => `\thttp://${a}:${监听端口}`)
-          .join('\n')}`,
+          .map((a) => `http://${a}:${监听端口}`),
       )
     })
     return null

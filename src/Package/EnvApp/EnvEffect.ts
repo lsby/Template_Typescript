@@ -1,28 +1,35 @@
 /**
- * 描述一个接收环境变量的副作用
- * 需要输入:
- * - 一个函数, 这个函数的参数是环境变量, 返回值是一个副作用.
+ * 描述一种抽象, 这种抽象可以提供一个需要传入环境变量的副作用.
+ * 需要传入环境变量的副作用 的 形式是: (env: Record<string, string | undefined>) => Effect<null>
  */
 
-import { Effect } from '@lsby/ts_pattern'
+import { Check, Effect } from '@lsby/ts_pattern'
+import { error, 联合转元组 } from '@lsby/ts_type_fun'
 
-// 符号定义
-const 类型: unique symbol = Symbol('类型')
-const 构造子: unique symbol = Symbol('构造子')
-const 参数: unique symbol = Symbol('参数')
+export interface EnvEffect<A> {}
 
-// 类型定义
-export type EnvEffect = {
-  [类型]: 'EnvEffect'
-  [构造子]: 'EnvEffect'
-  [参数]: { 副作用: (env: Record<string, string>) => Effect<null> }
+type _IsEnvEffect<A, keys> = keys extends []
+  ? error<['EnvEffect:', '类型', A, '没有实现类型类', 'EnvEffect']>
+  : keys extends [infer a, ...infer as]
+  ? a extends keyof EnvEffect<A>
+    ? EnvEffect<A>[a] extends true
+      ? true
+      : _IsEnvEffect<A, as>
+    : error<['EnvEffect:', '类型', A, '键判定失败']>
+  : error<['EnvEffect:', '类型', A, '解构失败']>
+export type IsEnvEffect<A> = _IsEnvEffect<A, 联合转元组<keyof EnvEffect<A>>>
+
+var 实现们: any[] = []
+export var NEXT: any = Symbol('NEXT')
+export function 增加实现(f: (...args: any[]) => any) {
+  实现们.push(f)
 }
-
-// 构造子
-export function EnvEffect(副作用: (env: Record<string, string>) => Effect<null>) {
-  return {
-    [类型]: 'EnvEffect' as 'EnvEffect',
-    [构造子]: 'EnvEffect' as 'EnvEffect',
-    [参数]: { 副作用 },
+export function 获得环境副作用<A extends _Check, _Check = Check<[IsEnvEffect<A>], A>>(
+  a: A,
+): (env: Record<string, string | undefined>) => Effect<null> {
+  for (var 实现 of 实现们) {
+    var r = 实现(...arguments)
+    if (r != NEXT) return r
   }
+  throw new Error('没有找到实现')
 }

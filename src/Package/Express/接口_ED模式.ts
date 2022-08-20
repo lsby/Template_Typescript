@@ -14,6 +14,7 @@ import { Request, Response } from 'express'
 import { 中间件 } from './中间件'
 import * as 接口类型类 from './Express接口_类型类'
 import * as uuid from 'uuid'
+import { Debug, error, log } from '../Debug/Debug'
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
@@ -56,6 +57,7 @@ declare module './Express接口_类型类' {
   使用的中间件们: 中间件[]
   接口实现: (req: Request, res: Response) => Promise<null>
 } {
+  var D = Debug('Express:接口_ED模式')
   if (a[类型] != '接口_ED模式') return 接口类型类.NEXT
   return {
     访问路径: a[参数].访问路径,
@@ -64,15 +66,15 @@ declare module './Express接口_类型类' {
       var 调用id = uuid.v4()
       var 调用时间 = new Date().getTime()
       try {
-        console.log({
-          行为: '接口ED模式: 调用开始',
+        log(D, '%o', {
+          行为: '调用开始',
           调用id,
           路径: req.path,
           参数: 参数,
         })
         var c = await a[参数].接口实现(req, req.body)
-        console.log({
-          行为: '接口ED模式: 调用结束',
+        log(D, '%o', {
+          行为: '调用结束',
           调用id,
           路径: req.path,
           结果: '成功',
@@ -83,7 +85,7 @@ declare module './Express接口_类型类' {
         res.send({ err: null, data: c })
       } catch (e) {
         var err = e
-        console.error({
+        error(D, '%o', {
           行为: '接口调用结束',
           调用id,
           路径: req.path,
