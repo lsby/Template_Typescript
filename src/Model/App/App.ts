@@ -1,5 +1,6 @@
 /**
  * 程序入口, 实现EnvEffect.
+ * 做了环境变量的检查和转换.
  */
 
 import { Effect } from '@lsby/ts_pattern'
