@@ -21,8 +21,8 @@ export function 获得环境变量() {
   type isNumber = ['DB_PORT', 'APP_PORT']
   var isNumber: isNumber = ['DB_PORT', 'APP_PORT']
 
-  type isString = ['NODE_ENV', 'DB_HOST', 'DB_USER', 'DB_PWD', 'DB_NAME']
-  var isString: isString = ['NODE_ENV', 'DB_HOST', 'DB_USER', 'DB_PWD', 'DB_NAME']
+  type isString = ['NODE_ENV', 'DB_HOST', 'DB_USER', 'DB_PWD', 'DB_NAME', 'SESSION_SECRET']
+  var isString: isString = ['NODE_ENV', 'DB_HOST', 'DB_USER', 'DB_PWD', 'DB_NAME', 'SESSION_SECRET']
 
   type r_Number<arr> = arr extends []
     ? []

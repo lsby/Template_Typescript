@@ -1,8 +1,8 @@
 import { Check } from '@lsby/ts_pattern/src/Base/Check'
-import * as Vue模板 from '../../../Class/Vue模板'
-import { IsVue模板 } from '../../../Class/Vue模板'
-import { Vue响应值 } from '../../Vue响应值'
-import { Vue组件 } from '../../Vue组件'
+import * as Vue模板 from '../../../Package/Vue/Vue模板_类型类'
+import { IsVue模板 } from '../../../Package/Vue/Vue模板_类型类'
+import { Vue响应值 } from '../../../Package/Vue/Vue响应值'
+import { Vue组件 } from '../../../Package/Vue/Vue组件'
 var Page = require('./Page.vue').default
 
 // 符号定义
@@ -39,7 +39,7 @@ export function 取参数<A>(a: DemoPage3<A>): Record<string, any> {
 
 // 实现类型类
 // Vue模板
-declare module '../../../Class/Vue模板' {
+declare module '../../../Package/Vue/Vue模板_类型类' {
   interface Vue模板<A> {
     DemoPage3的实现: typeof 类型 extends keyof A ? (A[typeof 类型] extends 'DemoPage3' ? true : false) : false
   }

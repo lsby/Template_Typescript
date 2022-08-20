@@ -1,10 +1,10 @@
 import { Effect, runEffect } from '@lsby/ts_pattern/src/Type/Effect'
-import { Button1 } from '../Model/VueCom/Button1/Index'
-import { Button2 } from '../Model/VueCom/Button2/Index'
-import { Vue, 渲染Vue模板 } from '../Model/Vue'
-import { Vue响应值, 修改响应值, 取响应值 } from '../Model/Vue响应值'
-import { Vue组件 } from '../Model/Vue组件'
-import { DemoPage3 } from '../Model/VueCom/DemoPage3/Index'
+import { Button1 } from '../VueCom/Button1/Index'
+import { Button2 } from '../VueCom/Button2/Index'
+import { Vue, 渲染Vue模板 } from '../../Package/Vue/Vue'
+import { Vue响应值, 修改响应值, 取响应值 } from '../../Package/Vue/Vue响应值'
+import { Vue组件 } from '../../Package/Vue/Vue组件'
+import { DemoPage3 } from '../VueCom/DemoPage3/Index'
 
 export function main(): Effect<null> {
   var 按钮1 = Vue组件(Button1())

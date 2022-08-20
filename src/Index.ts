@@ -1,16 +1,21 @@
 import cookieParser from 'cookie-parser'
 import express from 'express'
-import fs from 'fs'
-import os from 'os'
-import path from 'path'
-import 中文路径支持 from './Middleware/ChinesePath'
-import 接口 from './Middleware/Interface'
 import session from 'express-session'
+import path from 'path'
 import sessionFileStore from 'session-file-store'
+import 中文路径支持 from './Middleware/ChinesePath'
 // import { knex_defConf } from './Middleware/Knex'
-import kysely from './Middleware/Kysely'
+import { Effect, runEffect } from '@lsby/ts_pattern/src/Type/Effect'
 import cors from 'cors'
+import * as 测试接口_ED模式 from './Interface/测试接口_ED模式/Index'
+import * as 测试接口_底层模式 from './Interface/测试接口_底层模式/Index'
 import { 获得环境变量 } from './Lib/GetEnv'
+import kysely from './Middleware/Kysely'
+import { Express, 启动服务, 挂载接口 } from './Package/Express/Express'
+import { 中间件 } from './Package/Express/中间件'
+import { 接口_ED模式 } from './Package/Express/接口_ED模式'
+import { 接口_底层模式 } from './Package/Express/接口_底层模式'
+import { 静态路径 } from './Package/Express/静态路径'
 
 declare module 'express-session' {
   interface SessionData {
@@ -18,54 +23,31 @@ declare module 'express-session' {
   }
 }
 
-async function main() {
-  var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()
+async function main(): Promise<Effect<null>> {
+  var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT, SESSION_SECRET } = 获得环境变量()
 
-  var app = express()
-
-  app.use(cors())
-  app.use(express.json())
-  app.use(express.urlencoded({ extended: true }))
-  app.use(cookieParser())
-  app.use(中文路径支持())
-  app.use(kysely({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME }))
-  // app.use(knex_defConf({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME }))
-  app.use(
-    session({
-      secret: '在这里填写一个密码',
-      saveUninitialized: false,
-      resave: false,
-      store: new (sessionFileStore(session))(),
-    }),
-  )
-
-  app.use('/', express.static(path.resolve(__dirname, '../web')))
-  app.use('/Static', express.static(path.resolve(__dirname, '../../src/Page/Static')))
-  app.use('/Static_Jquery', express.static(path.resolve(__dirname, '../../node_modules/jquery/dist')))
-  app.use('/Static_Layer', express.static(path.resolve(__dirname, '../../node_modules/layer-src/src')))
-
-  var 接口们 = fs.readdirSync(path.resolve(__dirname, './Interface'))
-  for (var name of 接口们) {
-    var file = await import(`./Interface/${name}/Index`)
-    app.use(
-      接口({
-        路径: '/api/' + name,
-        实现: file.default,
+  var 常用中间件 = [
+    中间件(cors()),
+    中间件(express.json()),
+    中间件(express.urlencoded({ extended: true })),
+    中间件(cookieParser()),
+    中间件(中文路径支持()),
+    中间件(kysely({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME })),
+    // 中间件(knex_defConf({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME })),
+    中间件(
+      session({
+        secret: SESSION_SECRET,
+        saveUninitialized: false,
+        resave: false,
+        store: new (sessionFileStore(session))(),
       }),
-    )
-  }
+    ),
+  ]
 
-  app.listen(APP_PORT, () => {
-    console.log(`==============`)
-    console.log(`start:`)
-    console.log(
-      `${Object.values(os.networkInterfaces())
-        .flat()
-        .map((a) => a?.address)
-        .map((a) => `\thttp://${a}:${APP_PORT}`)
-        .join('\n')}`,
-    )
-  })
+  var express实例 = Express([静态路径('/', path.resolve(__dirname, '../web'))], APP_PORT)
+  express实例 = 挂载接口(express实例, 接口_底层模式(常用中间件, '/api/测试接口_底层模式', 测试接口_底层模式.default))
+  express实例 = 挂载接口(express实例, 接口_ED模式(常用中间件, '/api/测试接口_ED模式', 测试接口_ED模式.default))
+
+  return 启动服务(express实例)
 }
-
-main()
+main().then((eff) => runEffect(eff))

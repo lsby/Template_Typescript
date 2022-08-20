@@ -1,4 +1,6 @@
-// 描述一种抽象, 这种抽象可以提供Vue模板和其对应参数.
+/**
+ * 描述一种抽象, 这种抽象可以提供Vue模板和其对应参数.
+ */
 
 import { Check } from '@lsby/ts_pattern/src/Base/Check'
 import { error, 联合转元组 } from '@lsby/ts_type_fun'

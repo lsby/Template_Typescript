@@ -1,7 +1,7 @@
 import { Check } from '@lsby/ts_pattern/src/Base/Check'
 import { Effect } from '@lsby/ts_pattern/src/Type/Effect'
 import { h, VNode } from 'vue'
-import { IsVue模板, 取参数, 取模板 } from '../Class/Vue模板'
+import { IsVue模板, 取参数, 取模板 } from './Vue模板_类型类'
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')

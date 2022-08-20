@@ -1,7 +1,7 @@
 import { Effect, runEffect } from '@lsby/ts_pattern/src/Type/Effect'
-import * as Demo1 from './Demo/Demo1'
-import * as Demo2 from './Demo/Demo2'
-import * as Demo3 from './Demo/Demo3'
+import * as Demo1 from './Model/Demo/Demo1'
+import * as Demo2 from './Model/Demo/Demo2'
+import * as Demo3 from './Model/Demo/Demo3'
 
 function main(): Effect<null> {
   // return Demo1.main()
