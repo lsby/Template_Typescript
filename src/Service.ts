@@ -27,6 +27,7 @@ declare module 'express-session' {
 function main(): Effect<null> {
   var D = Debug('App:Service')
   log(D, '==============')
+
   var app = App(({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT, SESSION_SECRET }) => {
     var 常用中间件 = [
       中间件(cors()),
@@ -52,6 +53,19 @@ function main(): Effect<null> {
     express实例 = 设置监听端口(APP_PORT, express实例)
     return 启动Express服务(express实例)
   })
-  return 附加环境(EnvApp(path.resolve(__dirname, '../../.env/dev.env'), app))
+
+  switch (process.env['NODE_ENV']) {
+    case 'dev':
+      log(D, '使用环境', 'dev')
+      return 附加环境(EnvApp(path.resolve(__dirname, '../../.env/dev.env'), app))
+    case 're':
+      log(D, '使用环境', 're')
+      return 附加环境(EnvApp(path.resolve(__dirname, '../../.env/re.env'), app))
+    case 'prod':
+      log(D, '使用环境', 'prod')
+      return 附加环境(EnvApp(path.resolve(__dirname, '../../.env/prod.env'), app))
+    default:
+      throw new Error(`环境变量 ${process.env['NODE_ENV']} 未定义`)
+  }
 }
 runEffect(main())
