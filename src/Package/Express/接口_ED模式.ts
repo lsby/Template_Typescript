@@ -1,7 +1,7 @@
 /**
  * 描述一个Express接口
  * 通过传入以下数据来创建:
- * - 依赖的中间件数组
+ * - 这个接口依赖的中间件的数组
  * - 访问路径
  * - 实现, 形式是 (req: Request, 参数: Record<string, any>) => Promise<Record<string, any>>
  * 实现中的'参数'字段是req.body
