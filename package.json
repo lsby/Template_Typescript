@@ -4,6 +4,9 @@
   "description": "",
   "author": "",
   "main": "dist/src/Index.js",
+  "targets": {
+    "main": false
+  },
   "license": "GPL-3.0-or-later",
   "scripts": {
     "=====dev=====": "",
@@ -12,7 +15,7 @@
     "=====build=====": "",
     "build:all": "rm -rf dist && npm run build:all:lazy",
     "build:all:lazy": "npm run build:web && npm run build:ts",
-    "build:web": "parcel build ./index.html --no-cache --dist-dir dist/web --public-url ./",
+    "build:web": "parcel build ./index.html --no-cache --dist-dir dist/web --public-url ./ --no-optimize",
     "build:ts": "tsc",
     "=====watch=====": "",
     "watch:web": "rm -rf .parcel-cache dist/web && parcel --dist-dir dist/web ./index.html",
@@ -79,6 +82,7 @@
     "open-cli": "^7.0.1",
     "parcel": "^2.6.2",
     "parcel-reporter-static-files-copy": "^1.3.4",
+    "process": "^0.11.10",
     "typescript": "^4.7.3"
   }
 }
