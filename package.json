@@ -15,7 +15,7 @@
     "=====build=====": "",
     "build:all": "rm -rf dist && npm run build:all:lazy",
     "build:all:lazy": "npm run build:web && npm run build:ts",
-    "build:web": "parcel build ./index.html --no-cache --dist-dir dist/web --public-url ./ --no-optimize",
+    "build:web": "parcel build ./index.html --no-cache --dist-dir dist/web --public-url ./",
     "build:ts": "tsc",
     "=====watch=====": "",
     "watch:web": "rm -rf .parcel-cache dist/web && parcel --dist-dir dist/web ./index.html",
