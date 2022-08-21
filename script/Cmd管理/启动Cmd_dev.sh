@@ -1,5 +1,5 @@
-source ../Lib/获取项目名称.sh
 cur_dir=$(pwd)
+source $cur_dir/../Lib/获取项目名称.sh
 
 pm2 del "dev_cmd_$ProName"
 cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true pm2 start $cur_dir/../../dist/src/Cmd.js --output $cur_dir/../../logs/out.txt --error $cur_dir/../../logs/error.txt --merge-logs --log-date-format="YYYY-MM-DD HH:mm:ss Z" --name "dev_cmd_$ProName"
