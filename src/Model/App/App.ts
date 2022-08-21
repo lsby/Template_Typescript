@@ -47,7 +47,7 @@ export function App(实现: (env: 环境变量类型) => Promise<null>) {
 
 // 函数
 export function 运行(a: App): Effect<null> {
-  var D = Debug('App')
+  var D = Debug('Package:App')
   var 环境变量路径 = ''
   switch (process.env['NODE_ENV']) {
     case 'dev':

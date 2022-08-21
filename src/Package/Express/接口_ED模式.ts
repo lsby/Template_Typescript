@@ -57,7 +57,7 @@ declare module './Express接口' {
   使用的中间件们: 中间件[]
   接口实现: (req: Request, res: Response) => Promise<null>
 } {
-  var D = Debug('Express:接口_ED模式')
+  var D = Debug('Package:Express:接口_ED模式')
   if (a[类型] != '接口_ED模式') return 接口类型类.NEXT
   return {
     访问路径: a[参数].访问路径,

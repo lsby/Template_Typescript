@@ -1,4 +1,4 @@
-var { 新建表 } = require('../../dist/tools/db/lib.js')
+var { 执行knex_schema } = require('../db/lib')
 
 function schema(knex) {
   var r = knex.schema
@@ -18,7 +18,7 @@ function schema(knex) {
 }
 
 exports.up = async function up(db) {
-  await 新建表(schema)
+  await 执行knex_schema(schema)
 }
 
 exports.down = async function down(db) {}

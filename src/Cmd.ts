@@ -4,10 +4,10 @@ import Database from '../tools/types/Database'
 import { App, 运行 } from './Model/App/App'
 import { Debug, error, log } from './Package/Debug/Debug'
 
-var app = App(async ({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }) => {
-  var D = Debug('App:Cmd')
-  log(D, '==============')
+var D = Debug('App:Cmd')
+log(D, '==============')
 
+var app = App(async ({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }) => {
   var kysely
   try {
     kysely = new Kysely<Database>({

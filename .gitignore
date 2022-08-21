@@ -103,7 +103,8 @@ dist
 .parcel-cache
 
 # dump
-/dump
+/dump/*
+!.gitkeep
 
 # sessions
 /sessions/*

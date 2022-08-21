@@ -1,19 +1,18 @@
-import { FileMigrationProvider, Kysely, Migrator, MysqlDialect } from 'kysely'
-import path from 'path'
-import { 获得环境变量 } from '../../src/Lib/GetEnv'
-import { 新建数据库 } from './lib'
+var { 获得环境变量, 新建数据库 } = require('./lib')
+var path = require('path')
+var { FileMigrationProvider, Kysely, Migrator, MysqlDialect } = require('kysely')
 
 async function main() {
-  var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()
+  var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME } = 获得环境变量()
 
   await 新建数据库()
 
-  var db = new Kysely<any>({
+  var db = new Kysely({
     dialect: new MysqlDialect({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME }),
   })
   var migrator = new Migrator({
     db,
-    provider: new FileMigrationProvider(path.resolve(__dirname, '../../../tools/migrations')),
+    provider: new FileMigrationProvider(path.resolve(__dirname, '../../tools/migrations')),
   })
 
   var { error, results } = await migrator.migrateToLatest()

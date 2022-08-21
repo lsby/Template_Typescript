@@ -17,6 +17,9 @@ import { 接口_ED模式 } from './Package/Express/接口_ED模式'
 import { 接口_底层模式 } from './Package/Express/接口_底层模式'
 import { 静态路径 } from './Package/Express/静态路径'
 
+var D = Debug('App:Service')
+log(D, '==============')
+
 declare module 'express-session' {
   interface SessionData {
     // 在这里扩展 session 对象
@@ -24,9 +27,6 @@ declare module 'express-session' {
 }
 
 var app = App(async ({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT, SESSION_SECRET }) => {
-  var D = Debug('App:Service')
-  log(D, '==============')
-
   var 常用中间件 = [
     中间件(cors()),
     中间件(express.json()),
@@ -39,7 +39,7 @@ var app = App(async ({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT, SES
         secret: SESSION_SECRET,
         saveUninitialized: false,
         resave: false,
-        store: new (sessionFileStore(session))(),
+        store: new (sessionFileStore(session))({ path: path.resolve(__dirname, '../../sessions') }),
       }),
     ),
   ]

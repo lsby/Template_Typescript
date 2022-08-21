@@ -63,7 +63,7 @@ export function 设置监听端口(监听端口: number, a: Express): Express {
 }
 export function 启动Express服务(a: Express): Effect<null> {
   return Effect(() => {
-    var D = Debug('Express')
+    var D = Debug('Package:Express')
 
     if (isNaN(a[参数].监听端口)) {
       throw new Error('监听端口为NaN')

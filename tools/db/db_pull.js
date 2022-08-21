@@ -1,10 +1,10 @@
-import _knex from 'knex'
-import fs from 'fs'
-import path from 'path'
-import { 获得环境变量 } from '../../src/Lib/GetEnv'
+var { 获得环境变量 } = require('./lib')
+var path = require('path')
+var fs = require('fs')
+var _knex = require('knex')
 
-export async function main() {
-  var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT } = 获得环境变量()
+async function main() {
+  var { DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME } = 获得环境变量()
 
   var knex = _knex({
     client: 'mysql',
@@ -12,21 +12,7 @@ export async function main() {
   })
 
   try {
-    var 描述 = await knex
-      .select<
-        {
-          TABLE_NAME: string
-          COLUMN_NAME: string
-          COLUMN_DEFAULT: null | 'CURRENT_TIMESTAMP'
-          IS_NULLABLE: 'NO' | 'YES'
-          DATA_TYPE: 'timestamp' | 'int' | 'varchar' | 'enum' | 'double' | 'tinyint' | 'decimal'
-          COLUMN_TYPE: string
-          EXTRA: 'DEFAULT_GENERATED' | 'auto_increment' | ''
-          COLUMN_COMMENT: string
-        }[]
-      >()
-      .from('information_schema.columns')
-      .where({ table_schema: DB_NAME })
+    var 描述 = await knex.select().from('information_schema.columns').where({ table_schema: DB_NAME })
 
     var 整理 = 描述
       .map((a) => a.TABLE_NAME)
@@ -54,8 +40,7 @@ export async function main() {
             } else if (b.DATA_TYPE == 'decimal') {
               结果 = 'number'
             } else if (b.DATA_TYPE == 'enum') {
-              结果 = (b.COLUMN_TYPE as string)
-                .replace(/enum\((.*)\)/, '$1')
+              结果 = b.COLUMN_TYPE.replace(/enum\((.*)\)/, '$1')
                 .split(',')
                 .join(' | ')
             } else {
@@ -85,7 +70,7 @@ export async function main() {
       .map((a) => a.join('\n'))
       .join('\n')
 
-    fs.writeFileSync(path.resolve(__dirname, '../../../tools/types/Database.ts'), ts描述)
+    fs.writeFileSync(path.resolve(__dirname, '../../tools/types/Database.ts'), ts描述)
   } catch (e) {
     throw e
   } finally {
