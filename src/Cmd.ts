@@ -1,14 +1,13 @@
-import { Effect, runEffect } from '@lsby/ts_pattern'
+import { runEffect } from '@lsby/ts_pattern'
 import { Kysely, MysqlDialect } from 'kysely'
 import Database from '../tools/types/Database'
 import { App, 运行 } from './Model/App/App'
-import { Aff, runAff_ } from './Package/Aff/Aff'
 import * as Aff_F from './Package/Aff/Aff'
+import { Aff, runAff_ } from './Package/Aff/Aff'
 import { Debug, error } from './Package/Debug/Debug'
 
 function _main(): Aff<null, null> {
   var D = Debug('App:Cmd')
-
   var app = App(({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }) => {
     return Aff(async () => {
       var kysely
