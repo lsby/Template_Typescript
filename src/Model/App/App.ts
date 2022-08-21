@@ -1,14 +1,14 @@
 /**
  * 程序入口
  * 需要输入:
- * - 实现: (env) => Aff<null, null>
+ * - 实现: (env) => Promise<null>
  * 其中, '实现'的env已经做了检查和转换.
  * 不需要传入环境变量名称, 这个模块会自动根据环境变量使用对应的环境文件.
  */
 
-import { runEffect } from '@lsby/ts_pattern'
+import { Effect } from '@lsby/ts_pattern'
 import path from 'path'
-import { Aff, runAff_ } from '../../Package/Aff/Aff'
+import { Aff } from '../../Package/Aff/Aff'
 import { Debug, log } from '../../Package/Debug/Debug'
 import { EnvApp, 附加环境 } from '../../Package/EnvApp/EnvApp'
 
@@ -33,11 +33,11 @@ type 环境变量类型 = {
 export type App = {
   [类型]: 'App'
   [构造子]: 'App'
-  [参数]: { 实现: (env: 环境变量类型) => Aff<null, null> }
+  [参数]: { 实现: (env: 环境变量类型) => Promise<null> }
 }
 
 // 构造子
-export function App(实现: (env: 环境变量类型) => Aff<null, null>) {
+export function App(实现: (env: 环境变量类型) => Promise<null>) {
   return {
     [类型]: 'App' as 'App',
     [构造子]: 'App' as 'App',
@@ -46,7 +46,7 @@ export function App(实现: (env: 环境变量类型) => Aff<null, null>) {
 }
 
 // 函数
-export function 运行(a: App): Aff<null, null> {
+export function 运行(a: App): Effect<null> {
   var D = Debug('App')
   var 环境变量路径 = ''
   switch (process.env['NODE_ENV']) {
@@ -70,8 +70,9 @@ export function 运行(a: App): Aff<null, null> {
       throw new Error(`环境变量 ${process.env['NODE_ENV']} 未定义`)
   }
 
-  var app = EnvApp(环境变量路径, (env) => {
-    return Aff(async () => {
+  var app = EnvApp(
+    环境变量路径,
+    Aff(async (env: Record<string, string | undefined>) => {
       type isNumber = ['DB_PORT', 'APP_PORT']
       var isNumber: isNumber = ['DB_PORT', 'APP_PORT']
 
@@ -109,8 +110,8 @@ export function 运行(a: App): Aff<null, null> {
 
       var data = { ...data_Number, ...data_String }
 
-      runEffect(runAff_(null, a[参数].实现(data as unknown as r)))
-    })
-  })
+      return await a[参数].实现(data as unknown as r)
+    }),
+  )
   return 附加环境(app)
 }

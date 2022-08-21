@@ -41,7 +41,7 @@ export function runAff<A, B>(x: A, a: Aff<A, B>, 回调: (a: B) => Effect<null>)
     return null
   })
 }
-export function call<A, B>(x: A, a: Aff<A, B>): Promise<B> {
+export function 异步调用<A, B>(x: A, a: Aff<A, B>): Promise<B> {
   return a[参数].函数(x)
 }
 export function 提升Effect到Aff<A, B>(a: Effect<B>): Aff<A, B> {
