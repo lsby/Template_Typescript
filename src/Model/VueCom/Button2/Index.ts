@@ -1,7 +1,6 @@
 import { Check } from '@lsby/ts_pattern'
 import * as Vue模板 from '../../../Package/Vue/Vue模板'
 import { IsVue模板 } from '../../../Package/Vue/Vue模板'
-import { Vue响应值 } from '../../../Package/Vue/Vue响应值'
 var Page = require('./Page.vue').default
 
 // 符号定义

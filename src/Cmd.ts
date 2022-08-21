@@ -1,4 +1,4 @@
-import { Effect, runEffect } from '@lsby/ts_pattern'
+import { runEffect } from '@lsby/ts_pattern'
 import { Kysely, MysqlDialect } from 'kysely'
 import Database from '../tools/types/Database'
 import { App, 运行 } from './Model/App/App'
