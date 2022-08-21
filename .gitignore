@@ -101,9 +101,3 @@ dist
 
 # parcel
 .parcel-cache
-
-# dump
-/dump
-
-# sessions
-/sessions
