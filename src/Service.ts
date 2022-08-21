@@ -4,19 +4,18 @@ import session from 'express-session'
 import path from 'path'
 import sessionFileStore from 'session-file-store'
 // import { knex_defConf } from './Middleware/Knex'
-import { Effect, runEffect } from '@lsby/ts_pattern'
 import cors from 'cors'
 import * as 测试接口_ED模式 from './Interface/测试接口_ED模式/Index'
 import * as 测试接口_底层模式 from './Interface/测试接口_底层模式/Index'
 import kysely from './Middleware/Kysely'
-import { App } from './Model/App/App'
-import { EnvApp, 附加环境 } from './Package/EnvApp/EnvApp'
+import { App, 运行 } from './Model/App/App'
+import { Aff, runAff_, 提升Effect到Aff } from './Package/Aff/Aff'
+import { Debug, log } from './Package/Debug/Debug'
 import { Express, 启动Express服务, 挂载接口, 添加静态路径, 设置监听端口 } from './Package/Express/Express'
 import { 中间件 } from './Package/Express/中间件'
 import { 接口_ED模式 } from './Package/Express/接口_ED模式'
 import { 接口_底层模式 } from './Package/Express/接口_底层模式'
 import { 静态路径 } from './Package/Express/静态路径'
-import { Debug, log } from './Package/Debug/Debug'
 
 declare module 'express-session' {
   interface SessionData {
@@ -24,7 +23,7 @@ declare module 'express-session' {
   }
 }
 
-function main(): Effect<null> {
+function main(): Aff<null, null> {
   var D = Debug('App:Service')
   log(D, '==============')
 
@@ -51,24 +50,8 @@ function main(): Effect<null> {
     express实例 = 挂载接口(接口_底层模式(常用中间件, '/api/测试接口_底层模式', 测试接口_底层模式.default), express实例)
     express实例 = 挂载接口(接口_ED模式(常用中间件, '/api/测试接口_ED模式', 测试接口_ED模式.default), express实例)
     express实例 = 设置监听端口(APP_PORT, express实例)
-    return 启动Express服务(express实例)
+    return 提升Effect到Aff(启动Express服务(express实例))
   })
-
-  switch (process.env['NODE_ENV']) {
-    case 'dev':
-      log(D, '使用环境', 'dev')
-      return 附加环境(EnvApp(path.resolve(__dirname, '../../.env/dev.env'), app))
-    case 're':
-      log(D, '使用环境', 're')
-      return 附加环境(EnvApp(path.resolve(__dirname, '../../.env/re.env'), app))
-    case 'prod':
-      log(D, '使用环境', 'prod')
-      return 附加环境(EnvApp(path.resolve(__dirname, '../../.env/prod.env'), app))
-    case 'fix':
-      log(D, '使用环境', 'fix')
-      return 附加环境(EnvApp(path.resolve(__dirname, '../../.env/fix.env'), app))
-    default:
-      throw new Error(`环境变量 ${process.env['NODE_ENV']} 未定义`)
-  }
+  return 运行(app)
 }
-runEffect(main())
+runAff_(null, main())
