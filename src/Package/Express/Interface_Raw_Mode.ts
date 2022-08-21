@@ -9,8 +9,8 @@
  */
 
 import { Request, Response } from 'express'
-import { 中间件 } from './中间件'
-import * as 接口类型类 from './Express接口'
+import { 中间件 } from './Middleware'
+import * as 接口类型类 from './Interface'
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
@@ -39,7 +39,7 @@ export function 接口_底层模式(
 
 // 实现类型类
 // 接口类型类
-declare module './Express接口' {
+declare module './Interface' {
   interface Express接口<A> {
     接口_底层模式_的实现: typeof 类型 extends keyof A ? (A[typeof 类型] extends '接口_底层模式' ? true : false) : false
   }

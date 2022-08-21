@@ -10,13 +10,13 @@ import { Check } from '@lsby/ts_pattern'
 import { Effect } from '@lsby/ts_pattern'
 import express from 'express'
 import os from 'os'
-import { IsExpress接口, 获得接口描述 } from './Express接口'
-import { 获得中间件实现 } from './中间件'
-import * as 静态路径F from './静态路径'
-import { 静态路径 } from './静态路径'
+import { 获得中间件实现 } from './Middleware'
+import * as 静态路径F from './StaticFile'
+import { 静态路径 } from './StaticFile'
 import { NextFunction, Request, Response } from 'express'
 import url from 'url'
 import { Debug, log } from '../Debug/Debug'
+import { IsExpress接口, 获得接口描述 } from './Interface'
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')

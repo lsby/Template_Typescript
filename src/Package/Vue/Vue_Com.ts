@@ -6,7 +6,7 @@
 import { Check } from '@lsby/ts_pattern'
 import { Effect } from '@lsby/ts_pattern'
 import { h, VNode } from 'vue'
-import { IsVue模板, 取参数, 取模板 } from './Vue模板'
+import { IsVue模板, 取参数, 取模板 } from './Vue_Tem'
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')

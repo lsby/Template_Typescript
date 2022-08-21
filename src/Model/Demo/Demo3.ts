@@ -2,8 +2,8 @@ import { Effect, runEffect } from '@lsby/ts_pattern'
 import { Button1 } from '../VueCom/Button1/Index'
 import { Button2 } from '../VueCom/Button2/Index'
 import { Vue, 渲染Vue } from '../../Package/Vue/Vue'
-import { Vue响应值, 修改响应值, 取响应值 } from '../../Package/Vue/Vue响应值'
-import { Vue组件 } from '../../Package/Vue/Vue组件'
+import { Vue响应值, 修改响应值, 取响应值 } from '../../Package/Vue/Vue_Ref'
+import { Vue组件 } from '../../Package/Vue/Vue_Com'
 import { DemoPage3 } from '../VueCom/DemoPage3/Index'
 
 export function main(): Effect<null> {

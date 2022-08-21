@@ -1,6 +1,6 @@
 import { Effect, runEffect } from '@lsby/ts_pattern'
 import { Vue, 渲染Vue } from '../../Package/Vue/Vue'
-import { Vue响应值, 修改响应值, 取响应值 } from '../../Package/Vue/Vue响应值'
+import { Vue响应值, 修改响应值, 取响应值 } from '../../Package/Vue/Vue_Ref'
 import { DemoPage2 } from '../VueCom/DemoPage2/Index'
 
 export function main(): Effect<null> {
