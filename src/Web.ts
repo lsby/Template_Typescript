@@ -4,7 +4,7 @@ import * as Demo2 from './Model/Demo/Demo2'
 import * as Demo3 from './Model/Demo/Demo3'
 import { Debug, log } from './Package/Debug/Debug'
 
-localStorage.debug = '*'
+localStorage.debug = 'App:*,Package:*'
 var D = Debug('App:Web')
 log(D, '==============')
 
