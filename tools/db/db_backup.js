@@ -12,7 +12,7 @@ async function main() {
       password: DB_PWD,
       database: DB_NAME,
     },
-    dumpToFile: path.resolve(__dirname, `../../dump/${new Date().getTime()}.sql`),
+    dumpToFile: path.resolve(__dirname, `../../dump/${new Date().getTime()}_${process.env['NODE_ENV']}.sql`),
   })
 }
 

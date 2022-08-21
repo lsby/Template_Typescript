@@ -2,6 +2,7 @@ var Importer_mysql = require('mysql-import')
 var path = require('path')
 var mysqldump = require('mysqldump')
 var { 删除所有表, 读取环境变量 } = require('./lib')
+var readlineSync = require('readline-sync')
 
 async function main() {
   var {
@@ -21,6 +22,15 @@ async function main() {
     DB_NAME: t_DB_NAME,
   } = 读取环境变量('dev')
   var 目标库 = { host: t_DB_HOST, port: t_DB_PORT, user: t_DB_USER, password: t_DB_PWD, database: t_DB_NAME }
+
+  process.stdout.write(
+    `本操作将清空数据库${t_DB_HOST}:${t_DB_NAME}, 并写入${o_DB_HOST}:${o_DB_NAME}的数据, 确定吗?[y/N]`,
+  )
+  var yes = readlineSync.question()
+  if (yes != 'y' && yes != 'Y') {
+    console.log('用户取消了操作')
+    return
+  }
 
   await mysqldump({
     connection: 来源库,
