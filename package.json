@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "",
   "author": "",
-  "private": true,
+  "main": "dist/src/Index.js",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "=====dev=====": "",
     "dev:cmd": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* node dist/src/Cmd.js",
@@ -19,6 +20,9 @@
     "=====test=====": "",
     "test": "cross-env NODE_ENV=dev mocha dist/test/index.test.js --bail --timeout 99999999",
     "coverage": "cross-env NODE_ENV=dev nyc --clean --reporter=html --reporter=text-summary npm run test && open-cli ./coverage/index.html",
+    "=====npm=====": "",
+    "prepub": "npm i && npm run build:all",
+    "pub": "npm publish --access=public",
     "=====其他=====": "",
     "format:all": "prettier --write .",
     "prepare": "husky install"

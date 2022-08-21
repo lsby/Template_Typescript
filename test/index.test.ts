@@ -1,5 +1,5 @@
 import 'mocha'
-import { add } from '../src/Model/App/Add'
+import { add } from '../src/Index'
 
 function 断言相等(a: any, b: any) {
   if (JSON.stringify(a) == JSON.stringify(b)) return
