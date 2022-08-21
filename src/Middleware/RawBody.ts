@@ -8,11 +8,8 @@ declare global {
   }
 }
 
-export default function (opt: { path: string[] }) {
+export default function () {
   return function (req: Request, res: Response, next: NextFunction) {
-    if (!opt.path.includes(req.path)) {
-      return next()
-    }
     req.rawBody = new Promise((resolve) => {
       var buf = ''
       req.on('data', (x) => (buf += x))
