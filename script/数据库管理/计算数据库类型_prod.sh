@@ -1,1 +1,2 @@
-cross-env NODE_ENV=prod node ../../tools/db/db_pull.js
+cur_dir=$(pwd)
+cross-env NODE_ENV=prod node $cur_dir/../../tools/db/db_pull.js
