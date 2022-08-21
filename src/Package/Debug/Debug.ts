@@ -1,7 +1,7 @@
 /**
  * 描述一个Debug模块
  * 需要输入:
- * - 模块的名称
+ * - 名称
  */
 
 import { debug } from 'debug'
