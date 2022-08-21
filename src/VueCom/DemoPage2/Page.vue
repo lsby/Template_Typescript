@@ -11,7 +11,7 @@
 <script lang="ts" setup>
   import { runEffect } from '@lsby/ts_pattern'
   import { ref } from 'vue'
-  import { Vue响应值, 取响应值 } from '../../../Package/Vue/Vue_Ref'
+  import { Vue响应值, 取响应值 } from '../../Package/Vue/Vue_Ref'
 
   const prop = defineProps<{
     列表: Vue响应值<string[]>
