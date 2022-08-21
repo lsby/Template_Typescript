@@ -1,6 +1,6 @@
 import { Check } from '@lsby/ts_pattern'
-import * as Vue模板 from '../../Package/Vue/Vue_Tem'
-import { IsVue模板 } from '../../Package/Vue/Vue_Tem'
+import * as Vue模板 from '../../Package/Vue/Vue_Template'
+import { IsVue模板 } from '../../Package/Vue/Vue_Template'
 var Page = require('./Page.vue').default
 
 // 符号定义
@@ -37,7 +37,7 @@ export function 取参数<A>(a: Button2<A>): Record<string, any> {
 
 // 实现类型类
 // Vue模板
-declare module '../../Package/Vue/Vue_Tem' {
+declare module '../../Package/Vue/Vue_Template' {
   interface Vue模板<A> {
     Button2的实现: typeof 类型 extends keyof A ? (A[typeof 类型] extends 'Button2' ? true : false) : false
   }

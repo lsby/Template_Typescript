@@ -1,7 +1,6 @@
+import { Vue组件 } from '../../Package/Vue/Vue_Component'
 import { Vue响应值 } from '../../Package/Vue/Vue_Ref'
-import * as Vue模板 from '../../Package/Vue/Vue_Tem'
-import { IsVue模板 } from '../../Package/Vue/Vue_Tem'
-import { Vue组件 } from '../../Package/Vue/Vue_Com'
+import * as Vue模板 from '../../Package/Vue/Vue_Template'
 var Page = require('./Page.vue').default
 
 // 符号定义
@@ -38,7 +37,7 @@ export function 取参数<A>(a: DemoPage3<A>): Record<string, any> {
 
 // 实现类型类
 // Vue模板
-declare module '../../Package/Vue/Vue_Tem' {
+declare module '../../Package/Vue/Vue_Template' {
   interface Vue模板<A> {
     DemoPage3的实现: typeof 类型 extends keyof A ? (A[typeof 类型] extends 'DemoPage3' ? true : false) : false
   }

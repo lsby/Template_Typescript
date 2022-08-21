@@ -1,7 +1,7 @@
 import { Effect, runEffect } from '@lsby/ts_pattern'
 import { Vue, 渲染Vue } from '../../Package/Vue/Vue'
 import { Vue响应值, 修改响应值 } from '../../Package/Vue/Vue_Ref'
-import { DemoPage1 } from '../../VueCom/DemoPage1/Index'
+import { DemoPage1 } from '../../Component/DemoPage1/Index'
 
 export function main(): Effect<null> {
   var name = Vue响应值('aaa')
