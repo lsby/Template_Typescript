@@ -20,7 +20,6 @@ var app = App(async ({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }) => {
       }),
     })
     await main(kysely)
-    return null
   } catch (e) {
     error(D, '出错了:', e)
   } finally {
