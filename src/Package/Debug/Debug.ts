@@ -20,9 +20,9 @@ export type Debug = {
 
 // 构造子
 export function Debug(名称: string) {
-  var _log = debug(`${名称}:log`)
+  var _log = debug(`${名称}`)
   _log.log = console.log.bind(console)
-  var _error = debug(`${名称}:error`)
+  var _error = debug(`${名称}`)
 
   return {
     [类型]: 'Debug' as 'Debug',

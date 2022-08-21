@@ -8,7 +8,7 @@
     "=====set=====": "",
     "set_prettier": "npm i -g prettier",
     "=====dev=====": "",
-    "dev:cmd": "cross-env NODE_ENV=dev node dist/src/Cmd.js",
+    "dev:cmd": "cross-env NODE_ENV=dev DEBUG=* node dist/src/Cmd.js",
     "dev:service": "cross-env NODE_ENV=dev DEBUG=* nodemon dist/src/Service.js",
     "=====fix=====": "",
     "fix:cmd": "cross-env NODE_ENV=fix nodemon dist/src/Cmd.js",

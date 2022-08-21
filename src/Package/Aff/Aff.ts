@@ -2,9 +2,6 @@
  * 描述一个异步函数
  * 需要输入:
  * - async函数
- * runAff_: 丢弃结果, 运行这个异步副作用
- * runAff: 多传入一个回调, 运行异步的结果会作为参数调用这个回调
- * call: 调用, 得到Promise包裹的结果
  */
 
 import { Effect, runEffect } from '@lsby/ts_pattern'

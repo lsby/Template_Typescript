@@ -1,4 +1,4 @@
-import { Effect } from '@lsby/ts_pattern'
+import { Effect, runEffect } from '@lsby/ts_pattern'
 import { Kysely, MysqlDialect } from 'kysely'
 import Database from '../tools/types/Database'
 import { App, 运行 } from './Model/App/App'
@@ -34,7 +34,7 @@ function _main(): Aff<null, null> {
   })
   return 运行(app)
 }
-runAff_(null, _main())
+runEffect(runAff_(null, _main()))
 
 function main(kysely: Kysely<Database>): Aff<null, null> {
   return Aff(async () => {
