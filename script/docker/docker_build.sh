@@ -1,1 +1,3 @@
-    "docker:build": "npm run build && docker build -t ql_service_ts .",
+source ../Lib/获取项目名称.sh
+
+docker build -t $ProName ../..

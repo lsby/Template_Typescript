@@ -1,1 +1,2 @@
-    "dockerCompose:run": "docker-compose up",
+cd ../..
+docker-compose up
