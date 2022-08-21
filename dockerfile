@@ -17,5 +17,5 @@ RUN npm config set registry https://registry.npm.taobao.org && npm i
 RUN npm i -g cross-env
 RUN npm run build:all
 
+# CMD cross-env DEBUG=App:*,Package:* node dist/src/Cmd.js
 CMD cross-env DEBUG=App:*,Package:* node dist/src/Service.js
-
