@@ -6,3 +6,5 @@ dist
 dump
 logs
 .env.*
+.parcel-cache
+sessions
