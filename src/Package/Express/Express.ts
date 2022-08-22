@@ -17,6 +17,7 @@ import { NextFunction, Request, Response } from 'express'
 import url from 'url'
 import { Debug, log } from '../Debug/Debug'
 import { IsExpress接口, 获得接口描述 } from './Interface'
+var D = Debug('Package:Express')
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
@@ -63,8 +64,6 @@ export function 设置监听端口(监听端口: number, a: Express): Express {
 }
 export function 启动Express服务(a: Express): Effect<null> {
   return Effect(() => {
-    var D = Debug('Package:Express')
-
     if (isNaN(a[参数].监听端口)) {
       throw new Error('监听端口为NaN')
     }

@@ -15,6 +15,7 @@ import { 中间件 } from './Middleware'
 import * as 接口类型类 from './Interface'
 import * as uuid from 'uuid'
 import { Debug, error, log } from '../Debug/Debug'
+var D = Debug('Package:Express:接口_ED模式')
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
@@ -57,7 +58,6 @@ declare module './Interface' {
   使用的中间件们: 中间件[]
   接口实现: (req: Request, res: Response) => Promise<null>
 } {
-  var D = Debug('Package:Express:接口_ED模式')
   if (a[类型] != '接口_ED模式') return 接口类型类.NEXT
   return {
     访问路径: a[参数].访问路径,

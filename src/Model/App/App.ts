@@ -6,11 +6,12 @@
  * 不需要传入环境变量名称, 这个模块会自动根据环境变量使用对应的环境文件.
  */
 
-import { Effect } from '@lsby/ts_pattern'
+import { Effect, runEffect } from '@lsby/ts_pattern'
 import path from 'path'
 import { Aff } from '../../Package/Aff/Aff'
 import { Debug, log } from '../../Package/Debug/Debug'
 import { EnvApp, 附加环境 } from '../../Package/EnvApp/EnvApp'
+var D = Debug('Package:App')
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
@@ -47,71 +48,71 @@ export function App(实现: (env: 环境变量类型) => Promise<null>) {
 
 // 函数
 export function 运行(a: App): Effect<null> {
-  var D = Debug('Package:App')
-  var 环境变量路径 = ''
-  switch (process.env['NODE_ENV']) {
-    case 'dev':
-      log(D, '使用环境', 'dev')
-      环境变量路径 = path.resolve(__dirname, '../../../../.env/dev.env')
-      break
-    case 're':
-      log(D, '使用环境', 're')
-      环境变量路径 = path.resolve(__dirname, '../../../../.env/re.env')
-      break
-    case 'prod':
-      log(D, '使用环境', 'prod')
-      环境变量路径 = path.resolve(__dirname, '../../../../.env/prod.env')
-      break
-    case 'fix':
-      log(D, '使用环境', 'fix')
-      环境变量路径 = path.resolve(__dirname, '../../../../.env/fix.env')
-      break
-    default:
-      throw new Error(`环境变量 ${process.env['NODE_ENV']} 未定义`)
-  }
+  return Effect(() => {
+    var 环境变量路径 = ''
+    switch (process.env['NODE_ENV']) {
+      case 'dev':
+        log(D, '使用环境', 'dev')
+        环境变量路径 = path.resolve(__dirname, '../../../../.env/dev.env')
+        break
+      case 're':
+        log(D, '使用环境', 're')
+        环境变量路径 = path.resolve(__dirname, '../../../../.env/re.env')
+        break
+      case 'prod':
+        log(D, '使用环境', 'prod')
+        环境变量路径 = path.resolve(__dirname, '../../../../.env/prod.env')
+        break
+      case 'fix':
+        log(D, '使用环境', 'fix')
+        环境变量路径 = path.resolve(__dirname, '../../../../.env/fix.env')
+        break
+      default:
+        throw new Error(`环境变量 ${process.env['NODE_ENV']} 未定义`)
+    }
+    var app = EnvApp(
+      环境变量路径,
+      Aff(async (env: Record<string, string | undefined>) => {
+        type isNumber = ['DB_PORT', 'APP_PORT']
+        var isNumber: isNumber = ['DB_PORT', 'APP_PORT']
 
-  var app = EnvApp(
-    环境变量路径,
-    Aff(async (env: Record<string, string | undefined>) => {
-      type isNumber = ['DB_PORT', 'APP_PORT']
-      var isNumber: isNumber = ['DB_PORT', 'APP_PORT']
+        type isString = ['NODE_ENV', 'DB_HOST', 'DB_USER', 'DB_PWD', 'DB_NAME', 'SESSION_SECRET']
+        var isString: isString = ['NODE_ENV', 'DB_HOST', 'DB_USER', 'DB_PWD', 'DB_NAME', 'SESSION_SECRET']
 
-      type isString = ['NODE_ENV', 'DB_HOST', 'DB_USER', 'DB_PWD', 'DB_NAME', 'SESSION_SECRET']
-      var isString: isString = ['NODE_ENV', 'DB_HOST', 'DB_USER', 'DB_PWD', 'DB_NAME', 'SESSION_SECRET']
-
-      type r_Number<arr> = arr extends []
-        ? []
-        : arr extends [infer a, ...infer as]
-        ? a extends string
-          ? Record<a, number> & r_Number<as>
+        type r_Number<arr> = arr extends []
+          ? []
+          : arr extends [infer a, ...infer as]
+          ? a extends string
+            ? Record<a, number> & r_Number<as>
+            : never
           : never
-        : never
-      type r_String<arr> = arr extends []
-        ? []
-        : arr extends [infer a, ...infer as]
-        ? a extends string
-          ? Record<a, string> & r_String<as>
+        type r_String<arr> = arr extends []
+          ? []
+          : arr extends [infer a, ...infer as]
+          ? a extends string
+            ? Record<a, string> & r_String<as>
+            : never
           : never
-        : never
-      type r = r_Number<isNumber> & r_String<isString>
+        type r = r_Number<isNumber> & r_String<isString>
 
-      var data_Number = isNumber.map((a) => ({ [a]: Number(env[a]) })).reduce((s, a) => Object.assign(s, a), {})
-      var data_String = isString.map((a) => ({ [a]: env[a] })).reduce((s, a) => Object.assign(s, a), {})
+        var data_Number = isNumber.map((a) => ({ [a]: Number(env[a]) })).reduce((s, a) => Object.assign(s, a), {})
+        var data_String = isString.map((a) => ({ [a]: env[a] })).reduce((s, a) => Object.assign(s, a), {})
 
-      var 存在判断_Number = Object.keys(data_Number).filter((a) => isNaN(data_Number[a]))
-      var 存在判断_String = Object.keys(data_String).filter((a) => data_String[a] == null)
-      if (存在判断_Number.length != 0 && 存在判断_String.length != 0) {
-        if (存在判断_Number.length != 0) {
-          throw new Error(`环境变量错误: ${存在判断_Number[0]}为${data_Number[存在判断_Number[0]]}`)
-        } else if (存在判断_String.length != 0) {
-          throw new Error(`环境变量错误: ${存在判断_String[0]}为${data_Number[存在判断_String[0]]}`)
+        var 存在判断_Number = Object.keys(data_Number).filter((a) => isNaN(data_Number[a]))
+        var 存在判断_String = Object.keys(data_String).filter((a) => data_String[a] == null)
+        if (存在判断_Number.length != 0 && 存在判断_String.length != 0) {
+          if (存在判断_Number.length != 0) {
+            throw new Error(`环境变量错误: ${存在判断_Number[0]}为${data_Number[存在判断_Number[0]]}`)
+          } else if (存在判断_String.length != 0) {
+            throw new Error(`环境变量错误: ${存在判断_String[0]}为${data_Number[存在判断_String[0]]}`)
+          }
         }
-      }
 
-      var data = { ...data_Number, ...data_String }
+        var data = { ...data_Number, ...data_String }
 
-      return await a[参数].实现(data as unknown as r)
-    }),
-  )
-  return 附加环境(app)
+        return await a[参数].实现(data as unknown as r)
+      }),
+    )
+    return runEffect(附加环境(app))
+  })
 }

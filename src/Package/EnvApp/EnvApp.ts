@@ -5,11 +5,12 @@
  * - 接收环境变量的程序: Aff<Record<string, string | undefined>, null>
  */
 
-import { Effect } from '@lsby/ts_pattern'
+import { Effect, runEffect } from '@lsby/ts_pattern'
 import dotenv from 'dotenv'
 import { Aff } from '../Aff/Aff'
 import { Debug, log } from '../Debug/Debug'
 import * as Aff_F from '../Aff/Aff'
+var D = Debug('Package:EnvApp')
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
@@ -34,8 +35,9 @@ export function EnvApp(环境文件: string, 程序: Aff<Record<string, string |
 
 // 函数
 export function 附加环境(a: EnvApp): Effect<null> {
-  var D = Debug('Package:EnvApp')
-  dotenv.config({ path: a[参数].环境文件 })
-  log(D, '使用的环境文件路径是:', a[参数].环境文件)
-  return Aff_F.runAff_(process.env, a[参数].程序)
+  return Effect(() => {
+    dotenv.config({ path: a[参数].环境文件 })
+    log(D, '使用的环境文件路径是:', a[参数].环境文件)
+    return runEffect(Aff_F.runAff_(process.env, a[参数].程序))
+  })
 }
