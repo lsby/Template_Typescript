@@ -24,7 +24,7 @@ export type AffRetry<A, B> = {
 }
 
 // 扩充推导定义
-declare module '@lsby/ts_pattern' {
+declare module '@lsby/ts_pattern/dist/src/Base/K2' {
   interface 二阶类型<A1, A2> {
     AffRetry: AffRetry<A1, A2>
   }

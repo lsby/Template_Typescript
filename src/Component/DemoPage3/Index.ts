@@ -21,7 +21,7 @@ export function DemoPage3(按钮组件: Vue组件, 列表: Vue响应值<string[]
 }
 
 // 扩充推导定义
-declare module '@lsby/ts_pattern' {
+declare module '@lsby/ts_pattern/dist/src/Base/K1' {
   interface 一阶类型<A1> {
     DemoPage3: DemoPage3<A1>
   }

@@ -21,7 +21,7 @@ export function Button2<B extends _Check, _Check = Check<[IsVue模板<B>], B>>()
 }
 
 // 扩充推导定义
-declare module '@lsby/ts_pattern' {
+declare module '@lsby/ts_pattern/dist/src/Base/K1' {
   interface 一阶类型<A1> {
     Button2: Button2<A1>
   }

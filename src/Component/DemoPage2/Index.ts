@@ -20,7 +20,7 @@ export function DemoPage2(列表: Vue响应值<string[]>, on添加列表: (a: st
 }
 
 // 扩充推导定义
-declare module '@lsby/ts_pattern' {
+declare module '@lsby/ts_pattern/dist/src/Base/K1' {
   interface 一阶类型<A1> {
     DemoPage2: DemoPage2<A1>
   }

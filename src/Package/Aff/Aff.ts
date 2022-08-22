@@ -19,7 +19,7 @@ export type Aff<A, B> = {
 }
 
 // 扩充推导定义
-declare module '@lsby/ts_pattern' {
+declare module '@lsby/ts_pattern/dist/src/Base/K2' {
   interface 二阶类型<A1, A2> {
     Aff: Aff<A1, A2>
   }
