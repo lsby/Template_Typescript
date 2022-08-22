@@ -15,7 +15,14 @@ const 参数: unique symbol = Symbol('参数')
 export type Aff<A, B> = {
   [类型]: 'Aff'
   [构造子]: 'Aff'
-  [参数]: { 函数: any }
+  [参数]: { 函数: (a: A) => Promise<B> }
+}
+
+// 扩充推导定义
+declare module '@lsby/ts_pattern' {
+  interface 二阶类型<A1, A2> {
+    Aff: Aff<A1, A2>
+  }
 }
 
 // 构造子
@@ -37,7 +44,7 @@ export function runAff_<A, B>(x: A, a: Aff<A, B>): Effect<null> {
 export function runAff<A, B>(x: A, a: Aff<A, B>, 回调: (a: B) => Effect<null>): Effect<null> {
   return Effect(() => {
     var c = a[参数].函数(x)
-    回调(c)
+    c.then((a) => 回调(a))
     return null
   })
 }

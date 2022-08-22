@@ -11,7 +11,7 @@ import path from 'path'
 import { Aff } from '../../Package/Aff/Aff'
 import { Debug, log } from '../../Package/Debug/Debug'
 import { EnvApp, 附加环境 } from '../../Package/EnvApp/EnvApp'
-var D = Debug('Package:App')
+var D = Debug('App:Model:App')
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
