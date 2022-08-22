@@ -2,6 +2,7 @@ import { runEffect } from '@lsby/ts_pattern'
 import { Kysely, MysqlDialect } from 'kysely'
 import Database from '../tools/types/Database'
 import { App, 运行 } from './Model/App/App'
+import { runAff_ } from './Package/Aff/Aff'
 import { Debug, error, log } from './Package/Debug/Debug'
 
 var D = Debug('App:Cmd')
@@ -27,7 +28,7 @@ var app = App(async ({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }) => {
     return null
   }
 })
-runEffect(运行(app))
+runEffect(runAff_(运行(app)))
 
 async function main(kysely: Kysely<Database>) {
   console.log('hello, world!')

@@ -36,5 +36,6 @@ export function log(a: Debug, ...args: any[]): void {
   a[参数].log(...args)
 }
 export function error(a: Debug, ...args: any[]): void {
-  a[参数].error(...args)
+  a[参数].log(...args)
+  // a[参数].error(...args)
 }

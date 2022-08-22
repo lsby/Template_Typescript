@@ -16,6 +16,7 @@ import { 中间件 } from './Package/Express/Middleware'
 import { 接口_ED模式 } from './Package/Express/Interface_ED_Mode'
 import { 接口_底层模式 } from './Package/Express/Interface_Raw_Mode'
 import { 静态路径 } from './Package/Express/StaticFile'
+import { runAff_ } from './Package/Aff/Aff'
 
 var D = Debug('App:Service')
 log(D, '==============')
@@ -51,4 +52,4 @@ var app = App(async ({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT, SES
   express实例 = 设置监听端口(APP_PORT, express实例)
   return runEffect(启动Express服务(express实例))
 })
-runEffect(运行(app))
+runEffect(runAff_(运行(app)))
