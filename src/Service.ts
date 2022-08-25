@@ -10,14 +10,13 @@ import 测试接口_ED模式 from './Interface/测试接口_ED模式/Index'
 import 测试接口_底层模式 from './Interface/测试接口_底层模式/Index'
 import kysely from './Middleware/Kysely'
 import { App, 运行 } from './Model/App/App'
+import { Aff, runAff_ } from './Package/Aff/Aff'
 import { Debug, log } from './Package/Debug/Debug'
-import { Express, 启动Express服务, 挂载接口, 添加静态路径 } from './Package/Express/Express'
+import { Express, 启动Express服务, 转换到接口 } from './Package/Express/Express'
 import { 中间件 } from './Package/Express/Middleware'
+import { 静态路径 } from './Package/Express/StaticFile'
 import { 接口_ED模式 } from './Package/Express/接口_ED模式'
 import { 接口_底层模式 } from './Package/Express/接口_原始模式'
-import { 静态路径 } from './Package/Express/StaticFile'
-import { Aff, runAff_ } from './Package/Aff/Aff'
-import { Request, Response } from 'express'
 
 var D = Debug('App:Service')
 log(D, '==============')
@@ -47,10 +46,14 @@ var app = App(({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT, SESSION_S
       ),
     ]
 
-    var express实例 = Express(APP_PORT)
-    express实例 = 添加静态路径(静态路径('/', path.resolve(__dirname, '../web')), express实例)
-    express实例 = 挂载接口(接口_底层模式(常用中间件, '/api/测试接口_底层模式', 测试接口_底层模式), express实例)
-    express实例 = 挂载接口(接口_ED模式(常用中间件, '/api/测试接口_ED模式', 测试接口_ED模式), express实例)
+    var express实例 = Express(
+      [静态路径('/', path.resolve(__dirname, '../web'))],
+      [
+        转换到接口(接口_底层模式(常用中间件, '/api/测试接口_底层模式', 测试接口_底层模式)),
+        转换到接口(接口_ED模式(常用中间件, '/api/测试接口_ED模式', 测试接口_ED模式)),
+      ],
+      APP_PORT,
+    )
     return runEffect(启动Express服务(express实例))
   }),
 )

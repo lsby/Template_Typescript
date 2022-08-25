@@ -29,28 +29,26 @@ const 参数: unique symbol = Symbol('参数')
 export type Express = {
   [类型]: 'Express'
   [构造子]: 'Express'
-  [参数]: { 接口们: any[]; 静态路径们: 静态路径[]; 监听端口: number }
+  [参数]: { 静态路径们: 静态路径[]; 接口们: any[]; 监听端口: number }
+}
+
+// 辅助构造
+const _接口: unique symbol = Symbol('接口')
+export type 接口 = { [_接口]: true }
+export function 转换到接口<A extends _Check, _Check = Check<[IsExpress接口<A>], A>>(a: A): 接口 {
+  return a as any
 }
 
 // 构造子
-function _不安全的创建Express(接口们: any, 静态路径们: any, 监听端口: any) {
+export function Express(静态路径们: 静态路径[], 接口们: 接口[], 监听端口: number): Express {
   return {
     [类型]: 'Express' as 'Express',
     [构造子]: 'Express' as 'Express',
-    [参数]: { 接口们, 静态路径们, 监听端口 },
+    [参数]: { 静态路径们, 接口们, 监听端口 },
   }
-}
-export function Express(监听端口: number): Express {
-  return _不安全的创建Express([], [], 监听端口)
 }
 
 // 函数
-export function 添加静态路径(静态路径: 静态路径, a: Express): Express {
-  return _不安全的创建Express(a[参数].接口们, [...a[参数].静态路径们, 静态路径], a[参数].监听端口)
-}
-export function 挂载接口<A extends _Check, _Check = Check<[IsExpress接口<A>], A>>(接口: A, a: Express): Express {
-  return _不安全的创建Express([...a[参数].接口们, 接口], a[参数].静态路径们, a[参数].监听端口)
-}
 export function 启动Express服务(a: Express): Effect<null> {
   return Effect(() => {
     if (isNaN(a[参数].监听端口)) {
