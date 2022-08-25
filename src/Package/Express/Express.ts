@@ -40,11 +40,14 @@ function _不安全的创建Express(接口们: any, 静态路径们: any, 监听
     [参数]: { 接口们, 静态路径们, 监听端口 },
   }
 }
-export function Express(静态路径们: 静态路径[], 监听端口: number): Express {
-  return _不安全的创建Express([], 静态路径们, 监听端口)
+export function Express(监听端口: number): Express {
+  return _不安全的创建Express([], [], 监听端口)
 }
 
 // 函数
+export function 添加静态路径(静态路径: 静态路径, a: Express): Express {
+  return _不安全的创建Express(a[参数].接口们, [...a[参数].静态路径们, 静态路径], a[参数].监听端口)
+}
 export function 挂载接口<A extends _Check, _Check = Check<[IsExpress接口<A>], A>>(接口: A, a: Express): Express {
   return _不安全的创建Express([...a[参数].接口们, 接口], a[参数].静态路径们, a[参数].监听端口)
 }
