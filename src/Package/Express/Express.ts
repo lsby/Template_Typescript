@@ -17,6 +17,7 @@ import { NextFunction, Request, Response } from 'express'
 import url from 'url'
 import { Debug, log } from '../Debug/Debug'
 import { IsExpress接口, 获得接口描述 } from './Interface'
+import { 转为Promise } from '../Aff/Aff'
 var D = Debug('Package:Express')
 
 // 符号定义
@@ -94,7 +95,7 @@ export function 启动Express服务(a: Express): Effect<null> {
               var 中间件实现 = 获得中间件实现(中间件)
               await new Promise((resP, rejP) => 中间件实现(req, res, resP))
             }
-            await 描述.接口实现(req, res)
+            await 转为Promise(描述.接口实现(req, res))
           })(描述),
       )
     }

@@ -1,7 +1,7 @@
 /**
  * 程序入口
  * 需要输入:
- * - 实现: (env) => Promise<null>
+ * - 实现: (env) => Aff<null>
  * 其中, '实现'的env已经做了检查和转换.
  * 不需要传入环境变量名称, 这个模块会自动根据环境变量使用对应的环境文件.
  */
@@ -34,11 +34,11 @@ type 环境变量类型 = {
 export type App = {
   [类型]: 'App'
   [构造子]: 'App'
-  [参数]: { 实现: (env: 环境变量类型) => Promise<null> }
+  [参数]: { 实现: (env: 环境变量类型) => Aff<null> }
 }
 
 // 构造子
-export function App(实现: (env: 环境变量类型) => Promise<null>) {
+export function App(实现: (env: 环境变量类型) => Aff<null>) {
   return {
     [类型]: 'App' as 'App',
     [构造子]: 'App' as 'App',
@@ -109,7 +109,7 @@ export function 运行(a: App): Aff<null> {
 
       var data = { ...data_Number, ...data_String }
 
-      return Aff(() => a[参数].实现(data as unknown as r))
+      return a[参数].实现(data as unknown as r)
     })
 
     return await 转为Promise(附加环境(e))

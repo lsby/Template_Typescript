@@ -3,7 +3,7 @@
  * 通过传入以下数据来创建:
  * - 这个接口依赖的中间件的数组
  * - 访问路径
- * - 实现, 形式是 (req: Request, res: Response) => Promise<null>
+ * - 实现, 形式是 (req: Request, res: Response) => Aff<null>
  * 实现中必须调用res.send来返回数据
  * 实现最后需要手动return null
  */
@@ -11,6 +11,7 @@
 import { Request, Response } from 'express'
 import { 中间件 } from './Middleware'
 import * as 接口类型类 from './Interface'
+import { Aff } from '../Aff/Aff'
 
 // 符号定义
 const 类型: unique symbol = Symbol('类型')
@@ -21,14 +22,14 @@ const 参数: unique symbol = Symbol('参数')
 export type 接口_底层模式 = {
   [类型]: '接口_底层模式'
   [构造子]: '接口_底层模式'
-  [参数]: { 中间件们: 中间件[]; 访问路径: string; 接口实现: (req: Request, res: Response) => Promise<null> }
+  [参数]: { 中间件们: 中间件[]; 访问路径: string; 接口实现: (req: Request, res: Response) => Aff<null> }
 }
 
 // 构造子
 export function 接口_底层模式(
   中间件们: 中间件[],
   访问路径: string,
-  接口实现: (req: Request, res: Response) => Promise<null>,
+  接口实现: (req: Request, res: Response) => Aff<null>,
 ) {
   return {
     [类型]: '接口_底层模式' as '接口_底层模式',
@@ -47,7 +48,7 @@ declare module './Interface' {
 接口类型类.增加实现(function (a: 接口_底层模式): {
   访问路径: string
   使用的中间件们: 中间件[]
-  接口实现: (req: Request, res: Response) => Promise<null>
+  接口实现: (req: Request, res: Response) => Aff<null>
 } {
   if (a[类型] != '接口_底层模式') return 接口类型类.NEXT
   return {

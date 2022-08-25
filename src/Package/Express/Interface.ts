@@ -3,12 +3,13 @@
  * Express接口的描述包括以下部分:
  * - 接口访问路径
  * - 接口使用的中间件们
- * - 接口实现: (req: Request, res: Response) => Promise<null>
+ * - 接口实现: (req: Request, res: Response) => Aff<null>
  */
 
 import { Check } from '@lsby/ts_pattern'
 import { error, 联合转元组 } from '@lsby/ts_type_fun'
 import { Request, Response } from 'express'
+import { Aff } from '../Aff/Aff'
 import { 中间件 } from './Middleware'
 
 export interface Express接口<A> {}
@@ -34,7 +35,7 @@ export function 获得接口描述<A extends _Check, _Check = Check<[IsExpress�
 ): {
   访问路径: string
   使用的中间件们: 中间件[]
-  接口实现: (req: Request, res: Response) => Promise<null>
+  接口实现: (req: Request, res: Response) => Aff<null>
 } {
   for (var 实现 of 实现们) {
     var r = 实现(...arguments)
