@@ -11,7 +11,7 @@ import 测试接口_底层模式 from './Interface/测试接口_底层模式/Ind
 import kysely from './Middleware/Kysely'
 import { App, 运行 } from './Model/App/App'
 import { Debug, log } from './Package/Debug/Debug'
-import { Express, 启动Express服务, 挂载接口, 添加静态路径, 设置监听端口 } from './Package/Express/Express'
+import { Express, 启动Express服务, 挂载接口 } from './Package/Express/Express'
 import { 中间件 } from './Package/Express/Middleware'
 import { 接口_ED模式 } from './Package/Express/接口_ED模式'
 import { 接口_底层模式 } from './Package/Express/接口_原始模式'
@@ -47,11 +47,9 @@ var app = App(({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, APP_PORT, SESSION_S
       ),
     ]
 
-    var express实例 = Express()
-    express实例 = 添加静态路径(静态路径('/', path.resolve(__dirname, '../web')), express实例)
+    var express实例 = Express([静态路径('/', path.resolve(__dirname, '../web'))], APP_PORT)
     express实例 = 挂载接口(接口_底层模式(常用中间件, '/api/测试接口_底层模式', 测试接口_底层模式), express实例)
     express实例 = 挂载接口(接口_ED模式(常用中间件, '/api/测试接口_ED模式', 测试接口_ED模式), express实例)
-    express实例 = 设置监听端口(APP_PORT, express实例)
     return runEffect(启动Express服务(express实例))
   }),
 )

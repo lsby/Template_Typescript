@@ -33,35 +33,20 @@ export type Express = {
 }
 
 // 构造子
-export function Express(): Express {
+function _不安全的创建Express(接口们: any, 静态路径们: any, 监听端口: any) {
   return {
     [类型]: 'Express' as 'Express',
     [构造子]: 'Express' as 'Express',
-    [参数]: { 接口们: [] as any[], 静态路径们: [] as 静态路径[], 监听端口: NaN },
+    [参数]: { 接口们, 静态路径们, 监听端口 },
   }
+}
+export function Express(静态路径们: 静态路径[], 监听端口: number): Express {
+  return _不安全的创建Express([], 静态路径们, 监听端口)
 }
 
 // 函数
 export function 挂载接口<A extends _Check, _Check = Check<[IsExpress接口<A>], A>>(接口: A, a: Express): Express {
-  return {
-    [类型]: 'Express' as 'Express',
-    [构造子]: 'Express' as 'Express',
-    [参数]: { 接口们: [...a[参数].接口们, 接口], 静态路径们: a[参数].静态路径们, 监听端口: a[参数].监听端口 },
-  }
-}
-export function 添加静态路径(静态路径: 静态路径, a: Express): Express {
-  return {
-    [类型]: 'Express' as 'Express',
-    [构造子]: 'Express' as 'Express',
-    [参数]: { 接口们: a[参数].接口们, 静态路径们: [...a[参数].静态路径们, 静态路径], 监听端口: a[参数].监听端口 },
-  }
-}
-export function 设置监听端口(监听端口: number, a: Express): Express {
-  return {
-    [类型]: 'Express' as 'Express',
-    [构造子]: 'Express' as 'Express',
-    [参数]: { 接口们: a[参数].接口们, 静态路径们: a[参数].静态路径们, 监听端口: 监听端口 },
-  }
+  return _不安全的创建Express([...a[参数].接口们, 接口], a[参数].静态路径们, a[参数].监听端口)
 }
 export function 启动Express服务(a: Express): Effect<null> {
   return Effect(() => {
@@ -80,6 +65,7 @@ export function 启动Express服务(a: Express): Effect<null> {
     })
 
     for (var 静态路径 of a[参数].静态路径们) {
+      console.log(静态路径)
       var 静态配置数据 = 静态路径F.解包(静态路径)
       app.use(静态配置数据.访问路径, express.static(静态配置数据.文件夹路径))
     }
