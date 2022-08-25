@@ -23,14 +23,14 @@
         {
           "pattern": {
             "kind": "file",
-            "regexp": "(🚨 Build failed.)",
+            "regexp": "^(ERROR in .*)$",
             "file": 1,
             "message": 1
           },
           "background": {
             "activeOnStart": true,
-            "beginsPattern": "^Server running at .*$",
-            "endsPattern": "^✨ Built in .*$|.*\\..*:.*:.*$"
+            "beginsPattern": "^=====start=====$",
+            "endsPattern": "^=====end=====$"
           }
         }
       ],

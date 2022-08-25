@@ -14,10 +14,8 @@
  * 然后判断循环条件, 循环.
  */
 
-import { Effect, runEffect } from '@lsby/ts_pattern'
-import dotenv from 'dotenv'
 import { Aff } from '../Aff/Aff'
-import { Debug, log } from '../Debug/Debug'
+import { Debug } from '../Debug/Debug'
 var D = Debug('Package:ForLoop')
 
 // 符号定义

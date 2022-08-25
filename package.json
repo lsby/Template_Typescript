@@ -15,11 +15,10 @@
     "=====build=====": "",
     "build:all": "rm -rf dist && npm run build:all:lazy",
     "build:all:lazy": "npm run build:web && npm run build:ts",
-    "// 暂时编译web时不要优化, 解决中文文件名问题, 之后换webpack": "",
-    "build:web": "parcel build ./index.html --no-cache --dist-dir dist/web --public-url ./ --no-optimize",
+    "build:web": "webpack --config ./webpack/webpack.config.prod.js",
     "build:ts": "tsc",
     "=====watch=====": "",
-    "watch:web": "rm -rf .parcel-cache dist/web && parcel --dist-dir dist/web ./index.html",
+    "watch:web": "webpack --config ./webpack/webpack.config.dev.js",
     "watch:ts": "tsc -w",
     "=====test=====": "",
     "test": "cross-env NODE_ENV=dev mocha dist/test/index.test.js --bail --timeout 99999999",
@@ -47,9 +46,7 @@
     "element-plus": "^2.2.11",
     "express": "^4.17.1",
     "express-session": "^1.17.3",
-    "jquery": "^3.6.0",
     "kysely": "^0.17.1",
-    "layer-src": "^3.5.1",
     "lodash": "^4.17.21",
     "make-dir": "^3.1.0",
     "mysql": "^2.18.1",
@@ -63,7 +60,6 @@
     "vue-router": "^4.1.3"
   },
   "devDependencies": {
-    "@parcel/transformer-vue": "^2.6.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.12",
     "@types/debug": "^4.1.7",
@@ -75,6 +71,10 @@
     "@types/ramda": "^0.28.14",
     "@types/session-file-store": "^1.2.2",
     "@types/uuid": "^8.3.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "event-hooks-webpack-plugin": "^2.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
     "knex": "^1.0.4",
     "mocha": "^9.2.2",
@@ -82,9 +82,12 @@
     "nodemon": "^2.0.7",
     "nyc": "^15.1.0",
     "open-cli": "^7.0.1",
-    "parcel": "^2.6.2",
-    "parcel-reporter-static-files-copy": "^1.3.4",
     "process": "^0.11.10",
-    "typescript": "^4.7.3"
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "vue-loader": "^17.0.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   }
 }
