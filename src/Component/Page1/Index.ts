@@ -1,4 +1,4 @@
-import { VNode, RendererNode, RendererElement } from 'vue'
+import { RendererElement, RendererNode, VNode } from 'vue'
 import { Effect } from '../../Package/Effect/Effect'
 import { Vue响应值 } from '../../Package/Vue/Vue响应值'
 import { Vue模板 } from '../../Package/Vue/Vue模板'
@@ -16,6 +16,11 @@ export class Page1 implements Vue模板 {
     return Page as any
   }
   获得参数(): Record<string, unknown> {
-    return this.参数
+    return {
+      ...this.参数,
+      on测试事件: () => {
+        this.参数.on测试事件().运行()
+      },
+    }
   }
 }

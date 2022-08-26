@@ -19,11 +19,11 @@ export class Aff<A> {
   bind<B>(f: Function<A, Aff<B>>): Aff<B> {
     return Aff.Aff(async () => await f(await this.值()).值())
   }
-  不带回调运行() {
+  不带回调运行(): Effect<null> {
     var 回调 = (a: any) => {
       return Effect.Effect(() => null)
     }
-    this.运行(回调)
+    return this.运行(回调)
   }
   运行(回调: Function<Either<Error, A>, Effect<null>>): Effect<null> {
     return Effect.Effect(() => {

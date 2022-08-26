@@ -4,13 +4,13 @@
 </template>
 
 <script lang="ts" setup>
-  import { Effect } from '@lsby/ts_pattern'
+  import { Effect } from '../../Package/Effect/Effect'
   import { Vue响应值 } from '../../Package/Vue/Vue响应值'
 
   const prop = defineProps<{
     name: Vue响应值<string>
   }>()
   const emit = defineEmits<{
-    (e: '测试事件'): Effect<null>
+    (e: '测试事件'): void
   }>()
 </script>

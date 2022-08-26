@@ -2,8 +2,10 @@ import { ref } from 'vue'
 import { Effect } from '../Effect/Effect'
 
 export class Vue响应值<A> {
-  static Vue响应值<A>(值: A) {
-    return new Vue响应值(值)
+  static Vue响应值<A>(值: A): Effect<Vue响应值<A>> {
+    return Effect.Effect(() => {
+      return new Vue响应值(值)
+    })
   }
   private 响应值
   private constructor(值: A) {

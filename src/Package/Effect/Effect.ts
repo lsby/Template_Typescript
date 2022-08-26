@@ -5,6 +5,7 @@ export class Effect<A> {
     return new Effect('Effect', 值)
   }
   private constructor(构造子: 'Effect', private 值: () => A) {}
+  static empty: Effect<null> = Effect.Effect(() => null)
   运行(): A {
     return this.值()
   }
