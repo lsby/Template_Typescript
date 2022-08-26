@@ -7,6 +7,25 @@ export class Aff<A> {
     return new Aff('Aff', 值)
   }
   private constructor(private 构造子: 'Aff', private 值: () => Promise<A>) {}
+  static do<ENV = {}>(st: any[] = []) {
+    return {
+      bind<S extends string, C>(name: S, x: (a: ENV) => Effect<C>) {
+        return Effect.do<ENV & Record<S, C>>([...st, { name, x }])
+      },
+      run<B>(fr: (env: ENV) => Effect<B>): Effect<B> {
+        var 总长度 = st.length
+        var env: any = {}
+        function f(i: number) {
+          return st[i].x(env).bind((a: any) => {
+            env[st[i].name] = a
+            if (i + 1 >= 总长度) return fr(env)
+            return f(i + 1)
+          })
+        }
+        return f(0)
+      },
+    }
+  }
   static 提升Effect<A>(a: Effect<A>): Aff<A> {
     return Aff.Aff(async () => a.运行())
   }
