@@ -35,7 +35,7 @@ export function EnvApp(环境文件: string, 程序: (a: Record<string, string |
 // 函数
 export function 附加环境(a: EnvApp): Aff<null> {
   return Aff(async () => {
-    dotenv.config({ path: a[参数].环境文件 })
+    dotenv.config({ path: a[参数].环境文件, override: true })
     log(D, '使用的环境文件路径是:', a[参数].环境文件)
     return await 转为Promise(a[参数].程序(process.env))
   })

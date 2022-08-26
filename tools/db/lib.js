@@ -6,16 +6,16 @@ var _knex = require('knex')
 exports.读取环境变量 = function 读取环境变量(环境名称) {
   switch (环境名称) {
     case 'dev':
-      dotenv.config({ path: path.resolve(__dirname, '../../.env/dev.env') })
+      dotenv.config({ path: path.resolve(__dirname, '../../.env/dev.env'), override: true })
       break
     case 're':
-      dotenv.config({ path: path.resolve(__dirname, '../../.env/re.env') })
+      dotenv.config({ path: path.resolve(__dirname, '../../.env/re.env'), override: true })
       break
     case 'prod':
-      dotenv.config({ path: path.resolve(__dirname, '../../.env/prod.env') })
+      dotenv.config({ path: path.resolve(__dirname, '../../.env/prod.env'), override: true })
       break
     case 'fix':
-      dotenv.config({ path: path.resolve(__dirname, '../../.env/fix.env') })
+      dotenv.config({ path: path.resolve(__dirname, '../../.env/fix.env'), override: true })
       break
     default:
       throw new Error(`环境名称 ${环境名称} 未定义`)
