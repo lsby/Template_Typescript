@@ -34,8 +34,6 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@lsby/ts_lambda_type": "^0.0.10",
-    "@lsby/ts_pattern": "^0.0.16",
     "@lsby/ts_type_check": "^0.0.10",
     "@lsby/ts_type_fun": "^0.0.9",
     "axios": "^0.27.2",
