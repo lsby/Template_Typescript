@@ -9,10 +9,10 @@ export class Aff<A> {
   private constructor(private 构造子: 'Aff', private 值: () => Promise<A>) {}
   static do<ENV = {}>(st: any[] = []) {
     return {
-      bind<S extends string, C>(name: S, x: (a: ENV) => Effect<C>) {
-        return Effect.do<ENV & Record<S, C>>([...st, { name, x }])
+      bind<S extends string, C>(name: S, x: (a: ENV) => Aff<C>) {
+        return Aff.do<ENV & Record<S, C>>([...st, { name, x }])
       },
-      run<B>(fr: (env: ENV) => Effect<B>): Effect<B> {
+      run<B>(fr: (env: ENV) => Aff<B>): Aff<B> {
         var 总长度 = st.length
         var env: any = {}
         function f(i: number) {
