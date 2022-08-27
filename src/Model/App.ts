@@ -15,9 +15,6 @@ type 环境变量类型 = {
 }
 
 export class App {
-  static App(实现: (env: 环境变量类型) => Aff<null>) {
-    return new App(实现)
-  }
   constructor(private 实现: (env: 环境变量类型) => Aff<null>) {}
   运行(): Aff<null> {
     return Aff.do()
