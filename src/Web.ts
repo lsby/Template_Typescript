@@ -10,7 +10,7 @@ var main = Effect.do()
     Effect.pure(
       Page1.Page1({
         name: env.v,
-        on测试事件: () => Effect.empty,
+        on测试事件: () => env.v.设置值('bbb'),
       }),
     ),
   )
