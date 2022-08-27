@@ -36,6 +36,11 @@ export class Aff<A> {
   static pure<A>(a: A): Aff<A> {
     return Aff.Aff(async () => a)
   }
+  static throw<B>(e: Error): Aff<B> {
+    return Aff.Aff(async () => {
+      throw e
+    })
+  }
   map<B>(f: Function<A, B>): Aff<B> {
     return Aff.Aff(async () => f(await this.值()))
   }
@@ -47,6 +52,20 @@ export class Aff<A> {
       var v = await this.值()
       var c = await f(v).值()
       return c
+    })
+  }
+  try(): Aff<Either<Error, A>> {
+    return Aff.Aff(async () => {
+      try {
+        var c = await this.值()
+        return Either.Right(c)
+      } catch (e: any) {
+        var _e = e
+        if (!(e instanceof Error)) {
+          _e = new Error(e)
+        }
+        return Either.Left(_e as any)
+      }
     })
   }
   不带回调运行(): Effect<null> {

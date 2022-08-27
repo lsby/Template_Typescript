@@ -27,9 +27,6 @@ export class Either<A, B> {
   isRight(): boolean {
     return this.构造子 == 'Right'
   }
-  不安全的获取值() {
-    return this.值
-  }
   getLeft(def: A) {
     if (this.isLeft()) return this.值
     return def
@@ -37,5 +34,10 @@ export class Either<A, B> {
   getRight(def: B) {
     if (this.isRight()) return this.值
     return def
+  }
+  case<C>(a: [['Left', Function<A, C>], ['Right', Function<B, C>]]): C {
+    if (this.构造子 == 'Left') return a[0][1](this.值 as any)
+    if (this.构造子 == 'Right') return a[1][1](this.值 as any)
+    throw new Error('模式不全')
   }
 }
