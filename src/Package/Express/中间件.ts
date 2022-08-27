@@ -1,5 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
-import { Aff } from '../Aff/Aff'
+import { NextFunction, Request, Response } from 'express'
 
 export class 中间件 {
   static 中间件(实现: (req: Request, res: Response, next: NextFunction) => void) {

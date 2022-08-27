@@ -3,8 +3,6 @@ import express from 'express'
 import session from 'express-session'
 import path from 'path'
 import sessionFileStore from 'session-file-store'
-// import { knex_defConf } from './Middleware/Knex'
-import { runEffect } from '@lsby/ts_pattern'
 import cors from 'cors'
 import { App } from './Model/App'
 import { Aff } from './Package/Aff/Aff'
@@ -31,7 +29,6 @@ var app = App.App(({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, SESSION_SECRET,
       中间件.中间件(express.urlencoded({ extended: true })),
       中间件.中间件(cookieParser()),
       中间件.中间件(kysely({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME })),
-      // 中间件.中间件(knex_defConf({ host: DB_HOST, port: DB_PORT, user: DB_USER, password: DB_PWD, database: DB_NAME })),
       中间件.中间件(
         session({
           secret: SESSION_SECRET,

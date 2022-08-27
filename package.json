@@ -14,7 +14,7 @@
     "dev:service": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true nodemon dist/src/Service.js",
     "=====build=====": "",
     "build:all": "rm -rf dist && npm run build:all:lazy",
-    "build:all:lazy": "npm run build:web && npm run build:ts",
+    "build:all:lazy": "npm run build:ts && npm run build:web",
     "build:web": "webpack --config ./webpack/webpack.config.prod.js",
     "build:ts": "tsc",
     "=====watch=====": "",
