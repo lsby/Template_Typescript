@@ -7,18 +7,10 @@ import { 接口 } from './接口'
 import { 静态路径 } from './静态路径'
 
 export class Express {
-  static Express(静态路径们: 静态路径[], 接口们: 接口[], 监听端口: number) {
-    return new Express('Express', 静态路径们, 接口们, 监听端口)
-  }
-  private constructor(
-    private 构造子: 'Express',
-    private 静态路径们: 静态路径[],
-    private 接口们: 接口[],
-    private 监听端口: number,
-  ) {}
+  constructor(private 静态路径们: 静态路径[], private 接口们: 接口[], private 监听端口: number) {}
   启动服务(): Aff<null> {
-    return Aff.Aff(async () => {
-      var D = Debug.Debug('Package:Express')
+    return new Aff(async () => {
+      var D = new Debug('Package:Express')
       var app = express()
 
       // 中文路径转换

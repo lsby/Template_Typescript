@@ -8,15 +8,7 @@ import { 中间件 } from './中间件'
 import { 接口 } from './接口'
 
 export class 接口_ED模式 implements 接口 {
-  static 接口_ED模式(
-    中间件们: 中间件[],
-    访问路径: string,
-    接口实现: (req: Request, 参数: any) => Aff<Record<string, any>>,
-  ) {
-    return new 接口_ED模式('接口_ED模式', 中间件们, 访问路径, 接口实现)
-  }
-  private constructor(
-    private 构造子: '接口_ED模式',
+  constructor(
     private 中间件们: 中间件[],
     private 访问路径: string,
     private 接口实现: (req: Request, 参数: any) => Aff<Record<string, any>>,
@@ -32,8 +24,8 @@ export class 接口_ED模式 implements 接口 {
     res: Response<any, Record<string, any>>,
   ) => Aff<null> {
     return (req, res) =>
-      Aff.Aff(async () => {
-        var D = Debug.Debug('Package:Express:接口_ED模式')
+      new Aff(async () => {
+        var D = new Debug('Package:Express:接口_ED模式')
         var 调用id = uuid.v4()
         var 调用时间 = new Date().getTime()
         try {

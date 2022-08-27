@@ -3,10 +3,7 @@ import { Either } from '../Either/Either'
 import { Function } from '../Function/Function'
 
 export class Aff<A> {
-  static Aff<A>(值: () => Promise<A>): Aff<A> {
-    return new Aff('Aff', 值)
-  }
-  private constructor(private 构造子: 'Aff', private 值: () => Promise<A>) {}
+  constructor(private 值: () => Promise<A>) {}
   static do<ENV = {}>(st: any[] = []) {
     return {
       bind<S extends string, C>(name: S, x: (a: ENV) => Aff<C>) {
@@ -28,34 +25,34 @@ export class Aff<A> {
     }
   }
   static 提升Effect<A>(a: Effect<A>): Aff<A> {
-    return Aff.Aff(async () => a.运行())
+    return new Aff(async () => a.运行())
   }
   static 提升副作用函数<A>(a: () => A): Aff<A> {
-    return Aff.Aff(async () => a())
+    return new Aff(async () => a())
   }
   static pure<A>(a: A): Aff<A> {
-    return Aff.Aff(async () => a)
+    return new Aff(async () => a)
   }
   static throw<B>(e: Error): Aff<B> {
-    return Aff.Aff(async () => {
+    return new Aff(async () => {
       throw e
     })
   }
   map<B>(f: Function<A, B>): Aff<B> {
-    return Aff.Aff(async () => f(await this.值()))
+    return new Aff(async () => f(await this.值()))
   }
   apply<B>(f: Aff<Function<A, B>>): Aff<B> {
-    return Aff.Aff(async () => (await f.值())(await this.值()))
+    return new Aff(async () => (await f.值())(await this.值()))
   }
   bind<B>(f: Function<A, Aff<B>>): Aff<B> {
-    return Aff.Aff(async () => {
+    return new Aff(async () => {
       var v = await this.值()
       var c = await f(v).值()
       return c
     })
   }
   try(): Aff<Either<Error, A>> {
-    return Aff.Aff(async () => {
+    return new Aff(async () => {
       try {
         var c = await this.值()
         return Either.Right(c)
@@ -72,13 +69,13 @@ export class Aff<A> {
     return this.运行(() => Effect.empty)
   }
   运行(回调: Function<A, Effect<null>>): Effect<null> {
-    return Effect.Effect(() => {
+    return new Effect(() => {
       this.值().then((a) => 回调(a).运行())
       return null
     })
   }
   尝试运行(回调: Function<Either<Error, A>, Effect<null>>): Effect<null> {
-    return Effect.Effect(() => {
+    return new Effect(() => {
       this.值()
         .then((a) => 回调(Either.Right(a)).运行())
         .catch((e) => {

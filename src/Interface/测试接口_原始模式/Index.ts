@@ -5,7 +5,7 @@ import { Aff } from '../../Package/Aff/Aff'
 
 var 验证器 = ts_type_check(path.resolve(__dirname, './Data.d.ts'))
 export default (req: Request, res: Response): Aff<null> => {
-  return Aff.Aff(async () => {
+  return new Aff(async () => {
     var 参数 = req.body
     var check = await 验证器.check('请求数据', 参数)
     if (!check.valid) {

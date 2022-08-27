@@ -18,12 +18,12 @@ export class App {
   static App(实现: (env: 环境变量类型) => Aff<null>) {
     return new App(实现)
   }
-  private constructor(private 实现: (env: 环境变量类型) => Aff<null>) {}
+  constructor(private 实现: (env: 环境变量类型) => Aff<null>) {}
   运行(): Aff<null> {
     return Aff.do()
       .bind('p', () => Aff.提升Effect(this.计算环境文件路径()))
       .run((env) =>
-        Env.Env(env.p, (e) =>
+        new Env(env.p, (e) =>
           Aff.do()
             .bind('arg', () => Aff.提升Effect(this.类型转换(e)))
             .run((env) => this.实现(env.arg)),
@@ -31,7 +31,7 @@ export class App {
       )
   }
   private 计算环境文件路径(): Effect<string> {
-    return Effect.Effect(() => {
+    return new Effect(() => {
       var 环境变量路径 = ''
       switch (process.env['NODE_ENV']) {
         case 'dev':
@@ -53,7 +53,7 @@ export class App {
     })
   }
   private 类型转换(env: Record<string, string | undefined>): Effect<环境变量类型> {
-    return Effect.Effect(() => {
+    return new Effect(() => {
       type isNumber = ['DB_PORT', 'APP_PORT']
       var isNumber: isNumber = ['DB_PORT', 'APP_PORT']
 

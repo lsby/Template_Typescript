@@ -5,14 +5,7 @@ import { Vue模板 } from '../../Package/Vue/Vue模板'
 import Page from './Page.vue'
 
 export class Page2 implements Vue模板 {
-  static Page2(列表: Vue响应值<string[]>, on添加列表: (a: string) => Aff<null>) {
-    return new Page2('Page2', 列表, on添加列表)
-  }
-  private constructor(
-    private 构造子: 'Page2',
-    private 列表: Vue响应值<string[]>,
-    private on添加列表: (a: string) => Aff<null>,
-  ) {}
+  constructor(private 列表: Vue响应值<string[]>, private on添加列表: (a: string) => Aff<null>) {}
   获得模板(): VNode<RendererNode, RendererElement, { [key: string]: any }> {
     return Page as any
   }

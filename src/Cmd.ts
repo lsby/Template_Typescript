@@ -5,7 +5,7 @@ import { Aff } from './Package/Aff/Aff'
 import { Debug } from './Package/Debug/Debug'
 
 var 创建kysely: (env: any) => Aff<Kysely<Database>> = ({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }) =>
-  Aff.Aff(async () => {
+  new Aff(async () => {
     return new Kysely<Database>({
       dialect: new MysqlDialect({
         host: DB_HOST,
@@ -17,9 +17,9 @@ var 创建kysely: (env: any) => Aff<Kysely<Database>> = ({ DB_HOST, DB_PORT, DB_
     })
   })
 
-var app = App.App(({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }) =>
+var app = new App(({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }) =>
   Aff.do()
-    .bind('d', () => Aff.pure(Debug.Debug('App:Cmd')))
+    .bind('d', () => Aff.pure(new Debug('App:Cmd')))
     .bind('kysely', () => 创建kysely({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }))
     .run((env) => Aff.提升Effect(env.d.log('hello'))),
 ).运行()
