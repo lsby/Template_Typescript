@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
 import { ParsedQs } from 'qs'
+import * as uuid from 'uuid'
 import { Aff } from '../Aff/Aff'
+import { Debug } from '../Debug/Debug'
 import { 中间件 } from './中间件'
 import { 接口 } from './接口'
-import * as uuid from 'uuid'
-import { Debug } from '../Debug/Debug'
 
 export class 接口_ED模式 implements 接口 {
   static 接口_ED模式(
@@ -57,7 +57,7 @@ export class 接口_ED模式 implements 接口 {
         } catch (e) {
           var err = e
           D.error('%o', {
-            行为: '接口调用结束',
+            行为: '调用结束',
             调用id,
             路径: req.path,
             结果: '失败',
