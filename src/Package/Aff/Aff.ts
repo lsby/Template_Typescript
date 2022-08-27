@@ -73,20 +73,20 @@ export class Aff<A> {
   }
   运行(回调: Function<A, Effect<null>>): Effect<null> {
     return Effect.Effect(() => {
-      this.值().then((a) => 回调(a))
+      this.值().then((a) => 回调(a).运行())
       return null
     })
   }
   尝试运行(回调: Function<Either<Error, A>, Effect<null>>): Effect<null> {
     return Effect.Effect(() => {
       this.值()
-        .then((a) => 回调(Either.Right(a)))
+        .then((a) => 回调(Either.Right(a)).运行())
         .catch((e) => {
           var _e = e
           if (!(e instanceof Error)) {
             _e = new Error(e)
           }
-          回调(Either.Left(_e))
+          回调(Either.Left(_e)).运行()
         })
       return null
     })
