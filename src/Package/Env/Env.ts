@@ -11,7 +11,7 @@ export class Env {
   ) {}
   应用环境(): Aff<null> {
     return Aff.do()
-      .bind('_', (env) => Aff.提升副作用函数(() => dotenv.config({ path: this.环境文件路径, override: true })))
-      .run((env) => this.程序(process.env))
+      .bind('_', () => Aff.提升副作用函数(() => dotenv.config({ path: this.环境文件路径, override: true })))
+      .run(() => this.程序(process.env))
   }
 }

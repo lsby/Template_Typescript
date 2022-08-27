@@ -21,11 +21,11 @@ export class App {
   private constructor(private 实现: (env: 环境变量类型) => Aff<null>) {}
   运行(): Aff<null> {
     return Aff.do()
-      .bind('p', (env) => Aff.提升Effect(this.计算环境文件路径()))
+      .bind('p', () => Aff.提升Effect(this.计算环境文件路径()))
       .run((env) =>
         Env.Env(env.p, (e) =>
           Aff.do()
-            .bind('arg', (env) => Aff.提升Effect(this.类型转换(e)))
+            .bind('arg', () => Aff.提升Effect(this.类型转换(e)))
             .run((env) => this.实现(env.arg)),
         ).应用环境(),
       )
