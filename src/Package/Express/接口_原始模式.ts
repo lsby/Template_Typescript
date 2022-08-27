@@ -54,7 +54,7 @@ export class 接口_原始模式 implements 接口 {
             调用消耗时间: new Date().getTime() - 调用时间,
             参数: req.body,
             异常: err,
-          })
+          }).运行()
         }
         return null
       })
