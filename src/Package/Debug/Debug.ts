@@ -1,4 +1,5 @@
 import { debug } from 'debug'
+import { Effect } from '../Effect/Effect'
 
 export class Debug {
   static Debug(名称: string): Debug {
@@ -11,10 +12,16 @@ export class Debug {
     this._log.log = console.log.bind(console)
     this._error = debug(`${名称}`)
   }
-  log(格式: string, ...参数: any[]) {
-    this._log(格式, 参数)
+  log(格式: string, ...参数: any[]): Effect<null> {
+    return Effect.Effect(() => {
+      this._log(格式, ...参数)
+      return null
+    })
   }
-  error(格式: string, ...参数: any[]) {
-    this._error(格式, 参数)
+  error(格式: string, ...参数: any[]): Effect<null> {
+    return Effect.Effect(() => {
+      this._error(格式, ...参数)
+      return null
+    })
   }
 }

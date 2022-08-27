@@ -14,6 +14,7 @@ export class Aff<A> {
       },
       run<B>(fr: (env: ENV) => Aff<B>): Aff<B> {
         var 总长度 = st.length
+        if (总长度 == 0) return fr(env)
         var env: any = {}
         function f(i: number) {
           return st[i].x(env).bind((a: any) => {
