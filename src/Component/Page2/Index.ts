@@ -1,6 +1,5 @@
 import { RendererElement, RendererNode, VNode } from 'vue'
 import { Aff } from '../../Package/Aff/Aff'
-import { Effect } from '../../Package/Effect/Effect'
 import { Vue响应值 } from '../../Package/Vue/Vue响应值'
 import { Vue模板 } from '../../Package/Vue/Vue模板'
 import Page from './Page.vue'
