@@ -21,7 +21,7 @@ declare module 'express-session' {
   }
 }
 
-var app = App.App(
+var app = new App(
   ({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, SESSION_SECRET, APP_PORT }) =>
     new Aff(async () => {
       var 常用中间件 = [

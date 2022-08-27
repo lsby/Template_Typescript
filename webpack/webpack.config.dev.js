@@ -1,5 +1,5 @@
 var base = require('./webpack.config.base.js')
-const { DefinePlugin } = require('webpack')
+var { DefinePlugin } = require('webpack')
 
 module.exports = {
   ...base,
