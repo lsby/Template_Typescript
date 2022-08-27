@@ -4,11 +4,11 @@ import { Effect } from '../Effect/Effect'
 export class Vue响应值<A> {
   static Vue响应值<A>(值: A): Effect<Vue响应值<A>> {
     return Effect.Effect(() => {
-      return new Vue响应值(值)
+      return new Vue响应值('Vue响应值', 值)
     })
   }
   private 响应值
-  private constructor(值: A) {
+  private constructor(private 构造子: 'Vue响应值', 值: A) {
     this.响应值 = ref(值)
   }
   取值(): Effect<A> {
