@@ -1,4 +1,4 @@
-import { h, ref, VNode } from 'vue'
+import { h, VNode } from 'vue'
 import { Effect } from '../Effect/Effect'
 import { Vue模板 } from './Vue模板'
 
