@@ -28,6 +28,9 @@ export class Effect<A> {
     }
   }
   static empty: Effect<null> = Effect.Effect(() => null)
+  static 提升副作用函数<A>(a: () => A): Effect<A> {
+    return Effect.Effect(() => a())
+  }
   运行(): A {
     return this.值()
   }

@@ -21,4 +21,21 @@ export class Either<A, B> {
     if (this.构造子 == 'Left') return this as any
     return Either.Right(f(this.值 as any))
   }
+  isLeft(): boolean {
+    return this.构造子 == 'Left'
+  }
+  isRight(): boolean {
+    return this.构造子 == 'Right'
+  }
+  不安全的获取值() {
+    return this.值
+  }
+  getLeft(def: A) {
+    if (this.isLeft()) return this.值
+    return def
+  }
+  getRight(def: B) {
+    if (this.isRight()) return this.值
+    return def
+  }
 }

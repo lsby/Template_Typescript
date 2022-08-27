@@ -29,6 +29,12 @@ export class Aff<A> {
   static 提升Effect<A>(a: Effect<A>): Aff<A> {
     return Aff.Aff(async () => a.运行())
   }
+  static 提升副作用函数<A>(a: () => A): Aff<A> {
+    return Aff.Aff(async () => a())
+  }
+  static pure<A>(a: A): Aff<A> {
+    return Aff.Aff(async () => a)
+  }
   map<B>(f: Function<A, B>): Aff<B> {
     return Aff.Aff(async () => f(await this.值()))
   }
@@ -36,10 +42,15 @@ export class Aff<A> {
     return Aff.Aff(async () => (await f.值())(await this.值()))
   }
   bind<B>(f: Function<A, Aff<B>>): Aff<B> {
-    return Aff.Aff(async () => await f(await this.值()).值())
+    return Aff.Aff(async () => {
+      var v = await this.值()
+      var c = await f(v).值()
+      return c
+    })
   }
   不带回调运行(): Effect<null> {
-    var 回调 = (a: any) => {
+    var 回调 = (e: Either<Error, A>) => {
+      if (e.isLeft()) throw e.不安全的获取值()
       return Effect.Effect(() => null)
     }
     return this.运行(回调)
