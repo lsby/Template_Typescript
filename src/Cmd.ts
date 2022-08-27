@@ -22,5 +22,5 @@ var app = App.App(({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }) =>
     .bind('d', () => Aff.pure(Debug.Debug('App:Cmd')))
     .bind('kysely', () => 创建kysely({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME }))
     .run((env) => Aff.提升Effect(env.d.log('hello'))),
-)
-app.运行().不带回调运行().运行()
+).运行()
+app.不带回调运行().运行()
