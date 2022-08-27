@@ -50,13 +50,15 @@ export class Aff<A> {
     })
   }
   不带回调运行(): Effect<null> {
-    var 回调 = (e: Either<Error, A>) => {
-      if (e.isLeft()) throw e.不安全的获取值()
-      return Effect.Effect(() => null)
-    }
-    return this.运行(回调)
+    return this.运行(() => Effect.empty)
   }
-  运行(回调: Function<Either<Error, A>, Effect<null>>): Effect<null> {
+  运行(回调: Function<A, Effect<null>>): Effect<null> {
+    return Effect.Effect(() => {
+      this.值().then((a) => 回调(a))
+      return null
+    })
+  }
+  尝试运行(回调: Function<Either<Error, A>, Effect<null>>): Effect<null> {
     return Effect.Effect(() => {
       this.值()
         .then((a) => 回调(Either.Right(a)))
