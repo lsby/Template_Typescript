@@ -6,5 +6,5 @@ import { Vue响应值 } from '../../Package/Vue/Vue响应值'
 var main = Effect.do()
   .bind('v', () => Effect.pure(new Vue响应值('aaa')))
   .bind('p', (env) => Effect.pure(new Page1(env.v, () => env.v.设置值('bbb'))))
-  .run((env) => new Vue(env.p, 'app').渲染())
+  .run((env) => new Vue([{ 路径: '/', 模板: env.p }], [], 'app').渲染())
 export var Demo1 = main

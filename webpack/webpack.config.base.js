@@ -3,8 +3,10 @@ var { VueLoaderPlugin } = require('vue-loader')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var EventHooksPlugin = require('event-hooks-webpack-plugin')
 var { PromiseTask } = require('event-hooks-webpack-plugin/lib/tasks')
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+var { merge } = require('webpack-merge')
 
-module.exports = {
+var 配置 = {
   entry: path.resolve(__dirname, '../src/Web.ts'),
   output: {
     filename: 'bundle.js',
@@ -16,7 +18,10 @@ module.exports = {
         test: /\.ts$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
-        options: { appendTsSuffixTo: [/\.vue$/] },
+        options: {
+          transpileOnly: true,
+          appendTsSuffixTo: [/\.vue$/],
+        },
       },
       {
         test: /\.vue$/,
@@ -55,3 +60,10 @@ module.exports = {
     }),
   ],
 }
+if (process.env.use_analyzer) {
+  console.log(111)
+  配置 = merge(配置, {
+    plugins: [new BundleAnalyzerPlugin()],
+  })
+}
+module.exports = 配置

@@ -9,5 +9,5 @@ var main = Effect.do()
   .bind('p', (env) =>
     Effect.pure(new Page2(env.列表, (a: string) => Aff.提升Effect(env.列表.设置值([...env.列表.取值().运行(), a])))),
   )
-  .run((env) => new Vue(env.p, 'app').渲染())
+  .run((env) => new Vue([{ 路径: '/', 模板: env.p }], [], 'app').渲染())
 export var Demo2 = main
