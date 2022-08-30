@@ -16,6 +16,7 @@
     "build:all": "rm -rf dist && npm run build:all:lazy",
     "build:all:lazy": "npm run build:ts && npm run build:web",
     "build:web": "webpack --config ./webpack/webpack.config.prod.js",
+    "build:web:analyzer": "cross-env use_analyzer=true npm run build:web",
     "build:ts": "tsc",
     "=====watch=====": "",
     "watch:web": "webpack --config ./webpack/webpack.config.dev.js",
