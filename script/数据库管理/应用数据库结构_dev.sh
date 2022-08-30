@@ -1,4 +1,4 @@
-cur_dir=$(pwd)
+cur_dir=`dirname $0`
 cross-env NODE_ENV=dev node $cur_dir/../../tools/db/db_mk.js
 cross-env NODE_ENV=dev node $cur_dir/../../tools/db/db_push.js
 cross-env NODE_ENV=dev node $cur_dir/../../tools/db/db_pull.js

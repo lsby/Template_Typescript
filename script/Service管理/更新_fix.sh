@@ -1,4 +1,4 @@
-cur_dir=$(pwd)
+cur_dir=`dirname $0`
 
 git pull
 cross-env NODE_ENV=fix node $cur_dir/../../tools/db/db_mk.js
