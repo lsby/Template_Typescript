@@ -12,6 +12,7 @@ export class Effect<A> {
       },
       run<B>(fr: (env: ENV) => Effect<B>): Effect<B> {
         var 总长度 = st.length
+        if (总长度 == 0) return fr(env)
         var env: any = {}
         function f(i: number) {
           return st[i].x(env).bind((a: any) => {
