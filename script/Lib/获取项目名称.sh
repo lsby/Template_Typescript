@@ -1,3 +1,4 @@
+cur_dir=`dirname $0`
 ProName='';
 re="\"(name)\": \"([^\"]*)\"";
 while read -r l; do
@@ -5,4 +6,4 @@ while read -r l; do
         value="${BASH_REMATCH[2]}";
         ProName="$value";
     fi
-done < ../../package.json;
+done < $cur_dir/../../package.json;
