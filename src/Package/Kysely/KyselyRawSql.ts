@@ -7,7 +7,7 @@ export class KyselyRawSql<A> {
   执行(): Aff<A[]> {
     return new Aff(async () => {
       var D = new Debug('Package:Data:KyselyRawSql')
-      D.log('运行的sql是 %s', sql)
+      D.log('运行的sql是 %s', sql).运行()
       var res = (await sql(this.sql as any).execute(this.kysely)).rows
       return res as A[]
     })
