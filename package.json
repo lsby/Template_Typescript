@@ -10,9 +10,9 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "=====dev=====": "",
-    "dev:app": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true electron ./dist/src/Electron.js",
-    "dev:cmd": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true node dist/src/Cmd.js",
-    "dev:service": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true nodemon dist/src/Service.js",
+    "dev:app": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true DEBUG_DEPTH=999 electron ./dist/src/Electron.js",
+    "dev:cmd": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true DEBUG_DEPTH=999 node dist/src/Cmd.js",
+    "dev:service": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true DEBUG_DEPTH=999 nodemon dist/src/Service.js",
     "=====build=====": "",
     "build:all": "rm -rf dist && npm run build:all:lazy",
     "build:all:lazy": "npm run build:ts && npm run build:web",
