@@ -10,6 +10,7 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "=====dev=====": "",
+    "dev:app": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true electron ./dist/src/Electron.js",
     "dev:cmd": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true node dist/src/Cmd.js",
     "dev:service": "cross-env NODE_ENV=dev DEBUG=App:*,Package:* DEBUG_HIDE_DATE=true nodemon dist/src/Service.js",
     "=====build=====": "",
@@ -28,11 +29,29 @@
     "prepub": "npm i && npm run build:all",
     "pub": "npm publish --access=public",
     "=====其他=====": "",
+    "pack": "npm run build:all && electron-builder",
     "format:all": "prettier --write .",
     "prepare": "husky install"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "build": {
+    "appId": "ql_ts.app",
+    "win": {
+      "target": "portable"
+    },
+    "files": [
+      "./.env/**/*",
+      "./dist/**/*",
+      "./node_modules/**/*"
+    ],
+    "directories": {
+      "output": "./pack"
+    },
+    "extraMetadata": {
+      "main": "dist/src/Electron.js"
+    }
   },
   "dependencies": {
     "@lsby/ts_type_check": "^0.0.10",
@@ -73,6 +92,8 @@
     "@types/uuid": "^8.3.1",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
+    "electron": "^20.1.1",
+    "electron-builder": "^23.3.3",
     "event-hooks-webpack-plugin": "^2.2.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
