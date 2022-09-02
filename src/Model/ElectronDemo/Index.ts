@@ -18,7 +18,7 @@ var main = Effect.do()
           new Aff(async () => {
             var r = await window.ipcRenderer.invoke('测试事件', 'ping')
             console.log(r)
-            return null
+            return {}
           }),
       ),
     ),

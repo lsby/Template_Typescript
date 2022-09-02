@@ -3,16 +3,18 @@ import { Aff } from '../../Package/Aff/Aff'
 import { Vue模板 } from '../../Package/Vue/Vue模板'
 import Page from './Page.vue'
 
-export class ElectronTestPage implements Vue模板 {
-  constructor(private on测试事件: () => Aff<null>) {}
+type T = {}
+export class ElectronTestPage implements Vue模板<T> {
+  constructor(private on测试事件: () => Aff<T>) {}
+  获得事件(): Record<string, (a: T, ...args: any[]) => Aff<T>> {
+    return {
+      on测试事件: this.on测试事件,
+    }
+  }
   获得模板(): VNode<RendererNode, RendererElement, { [key: string]: any }> {
     return Page as any
   }
-  获得参数(): Record<string, unknown> {
-    return {
-      on测试事件: () => {
-        this.on测试事件().不带回调运行().运行()
-      },
-    }
+  获得参数(): T {
+    return {}
   }
 }
