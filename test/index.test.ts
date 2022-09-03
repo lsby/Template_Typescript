@@ -6,6 +6,6 @@ function 断言相等(a: any, b: any) {
   throw new Error(`${JSON.stringify(a)} 不等于 ${JSON.stringify(b)}`)
 }
 
-describe('测试', function () {
+it('测试', function () {
   断言相等(add(1, 2), 3)
 })
