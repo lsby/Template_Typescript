@@ -15,7 +15,7 @@
 
   var prop = defineProps<{
     列表: Ref<string[]>
-    按钮组件: Ref<Vue组件>
+    按钮组件: Ref<Vue组件<{}>>
   }>()
   var emit = defineEmits<{
     (e: '添加列表', a: string): Promise<void>

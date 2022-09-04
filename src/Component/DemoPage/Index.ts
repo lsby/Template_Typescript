@@ -4,7 +4,7 @@ import { Vue模板 } from '../../Package/Vue/Vue模板'
 import { Vue组件 } from '../../Package/Vue/Vue组件'
 import Page from './Page.vue'
 
-type T = { 按钮组件: Vue组件; 列表: string[] }
+type T = { 按钮组件: Vue组件<{}>; 列表: string[] }
 export class DemoPage implements Vue模板<T> {
   constructor(
     private 参数: T,
