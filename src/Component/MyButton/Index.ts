@@ -4,8 +4,10 @@ import { Vue元素 } from '../../Package/Vue/Vue元素'
 import Page from './Page.vue'
 
 type T = {}
-export class MyButton implements Vue元素<T> {
-  constructor() {}
+export class MyButton extends Vue元素<T> {
+  constructor() {
+    super()
+  }
   获得事件(): Record<string, (a: T, ...args: any[]) => Aff<T>> {
     return {}
   }

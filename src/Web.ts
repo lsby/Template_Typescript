@@ -4,14 +4,13 @@ import { Electron上下文 } from './Model/Electron上下文'
 import { Aff } from './Package/Aff/Aff'
 import { Debug } from './Package/Debug/Debug'
 import { Vue } from './Package/Vue/Vue'
-import { Vue组件 } from './Package/Vue/Vue组件'
 
 localStorage.debug = '*'
 
 var app = new Electron上下文((ipcRenderer) =>
   Aff.do()
     .bind('D', () => Aff.pure(new Debug('App:Web')))
-    .bind('按钮', () => Aff.pure(new Vue组件(new MyButton())))
+    .bind('按钮', () => Aff.pure(new MyButton()))
     .bind('p', (env) =>
       Aff.pure(
         new DemoPage(
