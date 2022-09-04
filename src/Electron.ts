@@ -26,7 +26,7 @@ var app = new App((env) =>
               事件名: '测试事件',
               实现: (e, a) =>
                 new Aff(async () => {
-                  console.log(a)
+                  env.D.log(a).运行()
                   return 'pong'
                 }),
             },

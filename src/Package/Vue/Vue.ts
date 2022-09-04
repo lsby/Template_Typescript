@@ -36,9 +36,9 @@ export class Vue {
                   for (var nx of Object.keys(参数)) {
                     原始值[nx] = toRaw(实际参数[nx].value)
                   }
-                  var c = await 事件[n](原始值, ...args).运行为Promise()
-                  Object.keys(c).forEach((nn) => {
-                    实际参数[nn].value = c[nn]
+                  var 返回值 = await 事件[n](原始值, ...args).运行为Promise()
+                  Object.keys(返回值).forEach((nn) => {
+                    实际参数[nn].value = 返回值[nn]
                   })
                 }
               )(n)

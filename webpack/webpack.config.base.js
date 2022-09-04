@@ -61,7 +61,6 @@ var 配置 = {
   ],
 }
 if (process.env.use_analyzer) {
-  console.log(111)
   配置 = merge(配置, {
     plugins: [new BundleAnalyzerPlugin()],
   })

@@ -5,11 +5,16 @@ import { Vue组件 } from '../../Package/Vue/Vue组件'
 import Page from './Page.vue'
 
 type T = { 按钮组件: Vue组件; 列表: string[] }
-export class Page3 implements Vue模板<T> {
-  constructor(private 参数: T, private on添加列表: (old: T, a: string) => Aff<T>) {}
+export class DemoPage implements Vue模板<T> {
+  constructor(
+    private 参数: T,
+    private on添加列表: (old: T, a: string) => Aff<T>,
+    private onElectron测试: () => Aff<null>,
+  ) {}
   获得事件(): Record<string, (a: T, ...args: any[]) => Aff<T>> {
     return {
       on添加列表: this.on添加列表,
+      onElectron测试: (a) => this.onElectron测试().map((_) => a),
     }
   }
   获得模板(): VNode<RendererNode, RendererElement, { [key: string]: any }> {
