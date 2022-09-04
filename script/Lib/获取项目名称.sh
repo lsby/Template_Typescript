@@ -1,4 +1,4 @@
-cur_dir=`dirname $0`
+cur_dir=`dirname $BASH_SOURCE`
 ProName='';
 re="\"(name)\": \"([^\"]*)\"";
 while read -r l; do

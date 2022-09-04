@@ -1,4 +1,4 @@
-cur_dir=`dirname $0`
+cur_dir=`dirname $BASH_SOURCE`
 cross-env NODE_ENV=re node $cur_dir/../../tools/db/db_sync.js
 echo "操作完成, 按回车关闭."
 read a

@@ -1,4 +1,4 @@
-cur_dir=`dirname $0`
+cur_dir=`dirname $BASH_SOURCE`
 cross-env NODE_ENV=prod node $cur_dir/../../tools/db/db_mk.js
 cross-env NODE_ENV=prod node $cur_dir/../../tools/db/db_push.js
 cross-env NODE_ENV=prod node $cur_dir/../../tools/db/db_pull.js

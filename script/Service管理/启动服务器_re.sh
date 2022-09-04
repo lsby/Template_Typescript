@@ -1,4 +1,4 @@
-cur_dir=`dirname $0`
+cur_dir=`dirname $BASH_SOURCE`
 source $cur_dir/../Lib/获取项目名称.sh
 
 pm2 del "re_service_$ProName"
