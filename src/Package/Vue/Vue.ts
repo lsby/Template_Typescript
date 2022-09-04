@@ -1,12 +1,12 @@
 import { createApp, ref, toRaw } from 'vue'
 import * as VueRouter from 'vue-router'
 import { Effect } from '../Effect/Effect'
-import App from './App.vue'
-import { Vue模板 } from './Vue模板'
+import App from './Vue.vue'
+import { Vue元素 } from './Vue元素'
 
 export class Vue {
   constructor(
-    private 页面们: { 路径: string; 模板: Vue模板<any> }[],
+    private 页面们: { 路径: string; 元素: Vue元素<any> }[],
     private 插件们: { 插件: App.Plugin; 配置: any[] }[],
     private 挂载点: string,
   ) {}
@@ -20,9 +20,9 @@ export class Vue {
         VueRouter.createRouter({
           history: VueRouter.createWebHashHistory(),
           routes: this.页面们.map((a) => {
-            var 模板 = a.模板.获得模板()
-            var 参数 = a.模板.获得参数()
-            var 事件 = a.模板.获得事件()
+            var 模板 = a.元素.获得模板()
+            var 参数 = a.元素.获得参数()
+            var 事件 = a.元素.获得事件()
 
             var 实际参数: any = {}
             Object.keys(参数).forEach((n) => {

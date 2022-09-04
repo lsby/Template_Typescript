@@ -1,15 +1,15 @@
 import { h, VNode } from 'vue'
 import { Effect } from '../Effect/Effect'
-import { Vue模板 } from './Vue模板'
+import { Vue元素 } from './Vue元素'
 
 export class Vue组件<T extends Record<string, unknown>> {
-  constructor(private 模板: Vue模板<T>) {}
+  constructor(private 元素: Vue元素<T>) {}
   取组件(): Effect<VNode> {
     return new Effect(() => {
-      return h(this.模板.获得模板(), this.模板.获得参数())
+      return h(this.元素.获得模板(), this.元素.获得参数())
     })
   }
-  转换为模板(): Vue模板<T> {
-    return this.模板
+  转换为元素(): Vue元素<T> {
+    return this.元素
   }
 }

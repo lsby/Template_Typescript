@@ -1,41 +1,36 @@
-import { IpcRenderer } from 'electron'
 import { DemoPage } from './Component/DemoPage/Index'
 import { MyButton } from './Component/MyButton/Index'
+import { Electron上下文 } from './Model/Electron上下文'
 import { Aff } from './Package/Aff/Aff'
 import { Debug } from './Package/Debug/Debug'
-import { Effect } from './Package/Effect/Effect'
 import { Vue } from './Package/Vue/Vue'
 import { Vue组件 } from './Package/Vue/Vue组件'
 
 localStorage.debug = '*'
 
-declare global {
-  interface Window {
-    ipcRenderer: IpcRenderer
-  }
-}
-
-var app = Effect.do()
-  .bind('D', () => Effect.pure(new Debug('App:Web')))
-  .bind('按钮', () => Effect.pure(new Vue组件(new MyButton())))
-  .bind('p', (env) =>
-    Effect.pure(
-      new DemoPage(
-        { 列表: ['a', 'b', 'c'], 按钮组件: env.按钮 },
-        (old, a) =>
-          new Aff(async () => ({
-            ...old,
-            列表: [...old.列表, a],
-          })),
-        () =>
-          new Aff(async () => {
-            var r = await window.ipcRenderer.invoke('测试事件', 'ping')
-            env.D.log(r).运行()
-            return null
-          }),
+var app = new Electron上下文((ipcRenderer) =>
+  Aff.do()
+    .bind('D', () => Aff.pure(new Debug('App:Web')))
+    .bind('按钮', () => Aff.pure(new Vue组件(new MyButton())))
+    .bind('p', (env) =>
+      Aff.pure(
+        new DemoPage(
+          { 列表: ['a', 'b', 'c'], 按钮组件: env.按钮 },
+          (old, a) =>
+            new Aff(async () => ({
+              ...old,
+              列表: [...old.列表, a],
+            })),
+          () =>
+            new Aff(async () => {
+              var r = await ipcRenderer.invoke('测试事件', 'ping')
+              env.D.log(r).运行()
+              return null
+            }),
+        ),
       ),
-    ),
-  )
-  .run((env) => new Vue([{ 路径: '/', 模板: env.p }], [], 'app').渲染())
+    )
+    .run((env) => Aff.提升Effect(new Vue([{ 路径: '/', 元素: env.p }], [], 'app').渲染())),
+).运行()
 
-app.运行()
+app.不带回调运行().运行()

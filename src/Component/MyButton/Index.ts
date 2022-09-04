@@ -1,10 +1,10 @@
 import { RendererElement, RendererNode, VNode } from 'vue'
 import { Aff } from '../../Package/Aff/Aff'
-import { Vue模板 } from '../../Package/Vue/Vue模板'
+import { Vue元素 } from '../../Package/Vue/Vue元素'
 import Page from './Page.vue'
 
 type T = {}
-export class MyButton implements Vue模板<T> {
+export class MyButton implements Vue元素<T> {
   constructor() {}
   获得事件(): Record<string, (a: T, ...args: any[]) => Aff<T>> {
     return {}
