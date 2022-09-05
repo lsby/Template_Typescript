@@ -1,4 +1,5 @@
-import { createApp, ref, toRaw } from 'vue'
+// npm i vue@3.2.35
+import { createApp } from 'vue'
 import * as VueRouter from 'vue-router'
 import { Effect } from '../Effect/Effect'
 import App from './Vue.vue'

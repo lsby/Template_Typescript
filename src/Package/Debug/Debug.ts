@@ -1,3 +1,4 @@
+// npm i debug@3.2.7
 import { debug } from 'debug'
 import { Effect } from '../Effect/Effect'
 

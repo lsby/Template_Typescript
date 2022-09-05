@@ -1,3 +1,4 @@
+// npm i electron@20.1.1
 import { app, BrowserWindow, BrowserWindowConstructorOptions, ipcMain, IpcMainInvokeEvent } from 'electron'
 import { Effect } from '../Effect/Effect'
 import path from 'path'
