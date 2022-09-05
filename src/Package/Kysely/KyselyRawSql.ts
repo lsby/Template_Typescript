@@ -1,4 +1,4 @@
-// npm i kysely@0.17.1
+// npm i kysely@^0.17.1
 import { Kysely, sql } from 'kysely'
 import { Aff } from '../Aff/Aff'
 import { Debug } from '../Debug/Debug'

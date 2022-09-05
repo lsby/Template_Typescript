@@ -1,4 +1,4 @@
-// npm i moment@2.29.4
+// npm i moment@^2.29.4
 import moment from 'moment'
 moment.locale('zh-cn')
 

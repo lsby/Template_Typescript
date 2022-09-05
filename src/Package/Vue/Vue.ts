@@ -1,4 +1,4 @@
-// npm i vue@3.2.35
+// npm i vue@^3.2.35
 import { createApp } from 'vue'
 import * as VueRouter from 'vue-router'
 import { Effect } from '../Effect/Effect'
