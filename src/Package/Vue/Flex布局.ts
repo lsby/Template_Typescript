@@ -1,8 +1,7 @@
-import { VNode, RendererNode, RendererElement } from 'vue'
+import { h, RendererElement, RendererNode, VNode } from 'vue'
 import { Aff } from '../Aff/Aff'
-import { Vue元素 } from './Vue元素'
-import { h, Ref } from 'vue'
 import { 多值选择 } from '../Exp/多值选择'
+import { Vue元素 } from './Vue元素'
 
 export type Flex容器设置 = {
   区域?: '块' | '内联'
