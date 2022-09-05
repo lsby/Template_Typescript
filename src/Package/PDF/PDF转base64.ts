@@ -1,3 +1,4 @@
+// npm i pdf-img-convert@1.0.6
 import { Aff } from '../Aff/Aff'
 
 var pdf2img = require('pdf-img-convert')
