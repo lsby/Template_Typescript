@@ -12,6 +12,7 @@
 <script lang="ts" setup>
   import { Ref, ref } from 'vue'
   import { Vue元素 } from '../../Package/Vue/Vue元素'
+  import socketIO from 'socket.io-client'
 
   var prop = defineProps<{
     列表: Ref<string[]>
@@ -33,4 +34,6 @@
   async function Electron测试() {
     await emit('electron测试')
   }
+
+  var socket = socketIO()
 </script>

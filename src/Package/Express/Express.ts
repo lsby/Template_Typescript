@@ -1,6 +1,9 @@
 // npm i express@^4.17.3
 import express, { NextFunction, Request, Response } from 'express'
+import http from 'http'
 import os from 'os'
+import socketIO, { Socket } from 'socket.io'
+import { DefaultEventsMap } from 'socket.io/dist/typed-events'
 import url from 'url'
 import { Aff } from '../Aff/Aff'
 import { Debug } from '../Debug/Debug'
@@ -8,7 +11,23 @@ import { 接口 } from './接口'
 import { 静态路径 } from './静态路径'
 
 export class Express {
-  constructor(private 静态路径们: 静态路径[], private 接口们: 接口[], private 监听端口: number) {}
+  constructor(
+    private 静态路径们: 静态路径[],
+    private 接口们: 接口[],
+    /**
+     * SocketIO 默认事件: (https://socket.io/docs/v4/emit-cheatsheet/#reserved-events)
+     * - connect
+     * - connect_error
+     * - disconnect
+     * - disconnecting
+     * - newListener
+     * - removeListener
+     */
+    private SocketIO事件: {
+      [key: string]: (socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>) => void
+    },
+    private 监听端口: number,
+  ) {}
   启动服务(): Aff<null> {
     return new Aff(async () => {
       var D = new Debug('Package:Express')
@@ -45,8 +64,14 @@ export class Express {
         res.send('页面不存在')
       })
 
+      var server = http.createServer(app)
+      var io = new socketIO.Server(server)
+      for (var name of Object.keys(this.SocketIO事件)) {
+        io.on(name, this.SocketIO事件[name])
+      }
+
       var 监听端口 = this.监听端口
-      app.listen(监听端口, () => {
+      server.listen(监听端口, () => {
         D.log(
           '已启动: %O',
           Object.values(os.networkInterfaces())

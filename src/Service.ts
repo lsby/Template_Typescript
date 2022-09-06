@@ -45,6 +45,11 @@ var app = new App(
           new 接口_原始模式(常用中间件, '/api/测试接口_原始模式', 测试接口_原始模式),
           new 接口_ED模式(常用中间件, '/api/测试接口_ED模式', 测试接口_ED模式),
         ],
+        {
+          connection: () => {
+            console.log('connection')
+          },
+        },
         APP_PORT,
       )
       await express实例.启动服务().运行为Promise()
