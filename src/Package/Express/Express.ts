@@ -15,8 +15,9 @@ export class Express {
     private 静态路径们: 静态路径[],
     private 接口们: 接口[],
     private SocketIO事件: {
-      [key: string]: (socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>) => void
-    },
+      事件名称: string
+      事件函数: (socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>) => Aff<null>
+    }[],
     private 监听端口: number,
   ) {}
   启动服务(): Aff<null> {
@@ -57,8 +58,8 @@ export class Express {
 
       var server = http.createServer(app)
       var io = new socketIO.Server(server)
-      for (var name of Object.keys(this.SocketIO事件)) {
-        io.on(name, this.SocketIO事件[name])
+      for (var 事件 of this.SocketIO事件) {
+        io.on(事件.事件名称, (e) => 事件.事件函数(e).运行为Promise())
       }
 
       var 监听端口 = this.监听端口
