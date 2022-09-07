@@ -14,15 +14,6 @@ export class Express {
   constructor(
     private 静态路径们: 静态路径[],
     private 接口们: 接口[],
-    /**
-     * SocketIO 默认事件: (https://socket.io/docs/v4/emit-cheatsheet/#reserved-events)
-     * - connect
-     * - connect_error
-     * - disconnect
-     * - disconnecting
-     * - newListener
-     * - removeListener
-     */
     private SocketIO事件: {
       [key: string]: (socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>) => void
     },
