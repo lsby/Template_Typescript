@@ -1,6 +1,6 @@
 <template>
   <div>{{ 数据.这是数据 }}</div>
-  <button @click="接口调用('/api/测试接口1', {})">按钮1</button>
+  <button @click="接口调用('/api/测试接口1', {})">按钮</button>
   <button @click="测试事件()">接口测试</button>
 </template>
 
