@@ -1,4 +1,5 @@
-import { DemoPage } from './Component/DemoPage/Index'
+import DemoPage from './Component/DemoPage/Index'
+import DemoPage2 from './Component/DemoPage2/Index'
 import { MyButton } from './Component/MyButton/Index'
 import { Electron上下文 } from '../通用模型/Electron上下文'
 import { Aff } from '../../Package/Aff/Aff'
@@ -22,5 +23,17 @@ export default Aff.do()
       ),
     ),
   )
-  .run((env) => Aff.提升Effect(new Vue([{ 路径: '/', 元素: env.p }], [], 'app').渲染()))
+  .bind('page2', (env) => Aff.pure(new DemoPage2({})))
+  .run((env) =>
+    Aff.提升Effect(
+      new Vue(
+        [
+          { 路径: '/', 元素: env.p },
+          { 路径: '/page2', 元素: env.page2 },
+        ],
+        [],
+        'app',
+      ).渲染(),
+    ),
+  )
   .不带回调运行()

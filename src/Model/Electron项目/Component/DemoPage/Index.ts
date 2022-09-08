@@ -4,7 +4,7 @@ import { Vue元素 } from '../../../../Package/Vue/Vue元素'
 import Page from './Page.vue'
 
 type T = {}
-export class DemoPage extends Vue元素<T> {
+export default class extends Vue元素<T> {
   constructor(private 参数: T, private onElectron测试: () => Aff<null>) {
     super()
   }

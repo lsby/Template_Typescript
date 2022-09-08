@@ -4,7 +4,7 @@ import { Vue元素 } from '../../../../Package/Vue/Vue元素'
 import Page from './Page.vue'
 
 type T = { 按钮组件: Vue元素<{}>; 列表: string[] }
-export class DemoPage extends Vue元素<T> {
+export default class extends Vue元素<T> {
   constructor(private 参数: T, private on添加列表: (old: T, a: string) => Aff<T>) {
     super()
   }

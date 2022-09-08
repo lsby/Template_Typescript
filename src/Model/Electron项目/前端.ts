@@ -1,4 +1,4 @@
-import { DemoPage } from './Component/DemoPage/Index'
+import DemoPage from './Component/DemoPage/Index'
 import { Electron上下文 } from '../通用模型/Electron上下文'
 import { Aff } from '../../Package/Aff/Aff'
 import { Debug } from '../../Package/Debug/Debug'

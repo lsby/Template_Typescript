@@ -1,7 +1,7 @@
 import { Aff } from '../../Package/Aff/Aff'
 import { Debug } from '../../Package/Debug/Debug'
 import { Vue } from '../../Package/Vue/Vue'
-import { DemoPage } from './Component/DemoPage/Index'
+import DemoPage from './Component/DemoPage/Index'
 
 localStorage.debug = '*'
 
