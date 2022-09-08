@@ -13,6 +13,7 @@ import { 创建Kysely中间件 } from '../通用模型/创建Kysely中间件'
 import { 接口类型, 数据类型 } from './Types'
 import WebApp接口_测试1 from './WebApp接口_测试1/index'
 import WebApp接口_测试2 from './WebApp接口_测试2/index'
+import WebApp接口_测试3 from './WebApp接口_测试3/index'
 
 export default new AppEnv(
   ({ DB_HOST, DB_PORT, DB_USER, DB_PWD, DB_NAME, SESSION_SECRET, APP_PORT }) =>
@@ -41,6 +42,7 @@ export default new AppEnv(
         接口们: [
           { 路径: '/api/测试接口1', 中间件: 常用中间件, 实现: WebApp接口_测试1 },
           { 路径: '/api/测试接口2', 中间件: 常用中间件, 实现: WebApp接口_测试2 },
+          { 路径: '/api/测试接口3', 中间件: 常用中间件, 实现: WebApp接口_测试3 },
         ],
         SocketIO事件: [],
         监听端口: APP_PORT,
