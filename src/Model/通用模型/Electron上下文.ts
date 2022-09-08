@@ -1,12 +1,6 @@
 import { IpcRenderer } from 'electron'
-import { Aff } from '../Package/Aff/Aff'
-import { 延时 } from '../Package/Aff/延时'
-
-declare global {
-  interface Window {
-    ipcRenderer: IpcRenderer
-  }
-}
+import { Aff } from '../../Package/Aff/Aff'
+import { 延时 } from '../../Package/Aff/延时'
 
 export class Electron上下文 {
   constructor(private 函数: (a: IpcRenderer) => Aff<null>) {}

@@ -1,7 +1,7 @@
-import { Aff } from '../Package/Aff/Aff'
+import { Aff } from '../../Package/Aff/Aff'
 import path from 'path'
-import { Effect } from '../Package/Effect/Effect'
-import { Env } from '../Package/Env/Env'
+import { Effect } from '../../Package/Effect/Effect'
+import { Env } from '../../Package/Env/Env'
 
 type 环境变量类型 = {
   APP_PORT: number
@@ -14,7 +14,7 @@ type 环境变量类型 = {
   SESSION_SECRET: string
 }
 
-export class App {
+export class AppEnv {
   constructor(private 实现: (env: 环境变量类型) => Aff<null>) {}
   运行(): Aff<null> {
     return Aff.do()
@@ -32,16 +32,16 @@ export class App {
       var 环境变量路径 = ''
       switch (process.env['NODE_ENV']) {
         case 'dev':
-          环境变量路径 = path.resolve(__dirname, '../../../.env/dev.env')
+          环境变量路径 = path.resolve(__dirname, '../../../../.env/dev.env')
           break
         case 're':
-          环境变量路径 = path.resolve(__dirname, '../../../.env/re.env')
+          环境变量路径 = path.resolve(__dirname, '../../../../.env/re.env')
           break
         case 'prod':
-          环境变量路径 = path.resolve(__dirname, '../../../.env/prod.env')
+          环境变量路径 = path.resolve(__dirname, '../../../../.env/prod.env')
           break
         case 'fix':
-          环境变量路径 = path.resolve(__dirname, '../../../.env/fix.env')
+          环境变量路径 = path.resolve(__dirname, '../../../../.env/fix.env')
           break
         default:
           throw new Error(`环境变量 ${process.env['NODE_ENV']} 未定义`)

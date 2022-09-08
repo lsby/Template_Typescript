@@ -2,7 +2,6 @@
   <div>
     <input v-model="v" />
     <my_button @click="添加列表()">添加</my_button>
-    <button @click="Electron测试()">Electron测试</button>
   </div>
   <div>
     <li v-for="item in 列表.value">{{ item }}</li>
@@ -11,8 +10,7 @@
 
 <script lang="ts" setup>
   import { Ref, ref } from 'vue'
-  import { Vue元素 } from '../../Package/Vue/Vue元素'
-  import socketIO from 'socket.io-client'
+  import { Vue元素 } from '../../../../Package/Vue/Vue元素'
 
   var prop = defineProps<{
     列表: Ref<string[]>
@@ -20,7 +18,6 @@
   }>()
   var emit = defineEmits<{
     (e: '添加列表', a: string): Promise<void>
-    (e: 'electron测试'): Promise<void>
   }>()
 
   var v = ref('')
@@ -31,9 +28,4 @@
     await emit('添加列表', v.value)
     v.value = ''
   }
-  async function Electron测试() {
-    await emit('electron测试')
-  }
-
-  var socket = socketIO()
 </script>

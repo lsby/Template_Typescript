@@ -1,5 +1,6 @@
 // npm i vue@^3.2.35
 import { createApp } from 'vue'
+import { Plugin } from 'vue/dist/vue'
 import * as VueRouter from 'vue-router'
 import { Effect } from '../Effect/Effect'
 import App from './Vue.vue'
@@ -8,7 +9,7 @@ import { Vue元素 } from './Vue元素'
 export class Vue {
   constructor(
     private 页面们: { 路径: string; 元素: Vue元素<any> }[],
-    private 插件们: { 插件: App.Plugin; 配置: any[] }[],
+    private 插件们: { 插件: Plugin; 配置: any[] }[],
     private 挂载点: string,
   ) {}
   渲染(): Effect<null> {

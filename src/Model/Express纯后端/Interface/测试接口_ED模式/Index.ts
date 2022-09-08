@@ -1,7 +1,7 @@
 import ts_type_check from '@lsby/ts_type_check'
 import { Request } from 'express'
 import path from 'path'
-import { Aff } from '../../Package/Aff/Aff'
+import { Aff } from '../../../../Package/Aff/Aff'
 import { 请求数据, 返回数据 } from './Data'
 
 var 验证器 = ts_type_check(path.resolve(__dirname, './Data.d.ts'))
