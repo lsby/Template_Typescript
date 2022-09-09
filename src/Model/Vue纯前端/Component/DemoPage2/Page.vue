@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <button @click="返回()">返回</button>
-  </div>
+  <button style="width: 100px; height: 100px" @click="返回()">返回</button>
 </template>
 
 <script lang="ts" setup>

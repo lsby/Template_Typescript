@@ -4,12 +4,12 @@ import { 多值选择 } from '../Exp/多值选择'
 import { Vue元素 } from './Vue元素'
 
 export type Flex容器设置 = {
-  区域?: '块' | '内联'
+  元素等级?: '块' | '内联'
   方向?: '左右' | '右左' | '上下' | '下上'
   换行?: '否' | '正向' | '逆向'
   主轴对齐方式?: '起点' | '终点' | '居中' | '两端' | '间隔'
   交叉轴对齐方式?: '起点' | '终点' | '居中' | '基线' | '占满'
-  多轴对其方式?: '起点' | '终点' | '居中' | '两端' | '间隔' | '占满'
+  多轴对齐方式?: '起点' | '终点' | '居中' | '两端' | '间隔' | '占满'
 }
 
 export class Flex布局 extends Vue元素<{}> {
@@ -26,7 +26,7 @@ export class Flex布局 extends Vue元素<{}> {
           ...this.转换Flex容器设置(this.设置),
         },
       },
-      this.元素们.map((a) => h('div', { style: this.转换Flex元素设置(a.设置) }, [a.元素.转换为组件().运行()])),
+      this.元素们.map((a) => a.元素.转换为组件({ style: this.转换Flex元素设置(a.设置) }).运行()),
     )
   }
   获得参数(): {} {
@@ -53,41 +53,41 @@ export class Flex布局 extends Vue元素<{}> {
   private 转换Flex容器设置(a: Flex容器设置 | undefined) {
     return {
       display: new 多值选择(a, 'flex', [
-        [(a) => a?.区域 == '块', 'flex'],
-        [(a) => a?.区域 == '内联', 'inline-flex'],
+        [(a) => a?.元素等级 == '块', 'flex'],
+        [(a) => a?.元素等级 == '内联', 'inline-flex'],
       ]).运行(),
-      flexDirection: new 多值选择(a, 'row', [
+      flexDirection: new 多值选择(a, null, [
         [(a) => a?.方向 == '左右', 'row'],
         [(a) => a?.方向 == '右左', 'row-reverse'],
         [(a) => a?.方向 == '上下', 'column'],
         [(a) => a?.方向 == '下上', 'column-reverse'],
       ]).运行(),
-      flexWrap: new 多值选择(a, 'nowrap', [
+      flexWrap: new 多值选择(a, null, [
         [(a) => a?.换行 == '否', 'nowrap'],
         [(a) => a?.换行 == '正向', 'wrap'],
         [(a) => a?.换行 == '逆向', 'wrap-reverse'],
       ]).运行(),
-      justifyContent: new 多值选择(a, 'flex-start', [
+      justifyContent: new 多值选择(a, null, [
         [(a) => a?.主轴对齐方式 == '起点', 'flex-start'],
         [(a) => a?.主轴对齐方式 == '终点', 'flex-end'],
         [(a) => a?.主轴对齐方式 == '居中', 'center'],
         [(a) => a?.主轴对齐方式 == '两端', 'space-between'],
         [(a) => a?.主轴对齐方式 == '间隔', 'space-around'],
       ]).运行(),
-      alignItems: new 多值选择(a, 'stretch', [
+      alignItems: new 多值选择(a, null, [
         [(a) => a?.交叉轴对齐方式 == '起点', 'flex-start'],
         [(a) => a?.交叉轴对齐方式 == '终点', 'flex-end'],
         [(a) => a?.交叉轴对齐方式 == '居中', 'center'],
         [(a) => a?.交叉轴对齐方式 == '基线', 'baseline'],
         [(a) => a?.交叉轴对齐方式 == '占满', 'stretch'],
       ]).运行(),
-      alignContent: new 多值选择(a, 'stretch', [
-        [(a) => a?.多轴对其方式 == '起点', 'flex-start'],
-        [(a) => a?.多轴对其方式 == '终点', 'flex-end'],
-        [(a) => a?.多轴对其方式 == '居中', 'center'],
-        [(a) => a?.多轴对其方式 == '两端', 'space-between'],
-        [(a) => a?.多轴对其方式 == '间隔', 'space-around'],
-        [(a) => a?.多轴对其方式 == '占满', 'stretch'],
+      alignContent: new 多值选择(a, null, [
+        [(a) => a?.多轴对齐方式 == '起点', 'flex-start'],
+        [(a) => a?.多轴对齐方式 == '终点', 'flex-end'],
+        [(a) => a?.多轴对齐方式 == '居中', 'center'],
+        [(a) => a?.多轴对齐方式 == '两端', 'space-between'],
+        [(a) => a?.多轴对齐方式 == '间隔', 'space-around'],
+        [(a) => a?.多轴对齐方式 == '占满', 'stretch'],
       ]).运行(),
     }
   }

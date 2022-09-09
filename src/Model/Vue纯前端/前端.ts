@@ -1,12 +1,23 @@
+import { Aff } from '../../Package/Aff/Aff'
+import { Debug } from '../../Package/Debug/Debug'
+import { Flex元素, Flex布局 } from '../../Package/Vue/Flex布局'
+import { Vue } from '../../Package/Vue/Vue'
 import DemoPage from './Component/DemoPage/Index'
 import DemoPage2 from './Component/DemoPage2/Index'
 import { MyButton } from './Component/MyButton/Index'
-import { Electron上下文 } from '../通用模型/Electron上下文'
-import { Aff } from '../../Package/Aff/Aff'
-import { Debug } from '../../Package/Debug/Debug'
-import { Vue } from '../../Package/Vue/Vue'
 
 localStorage.debug = '*'
+
+var page2 = new Flex布局([
+  new Flex元素(
+    new Flex布局([new Flex元素(new DemoPage2({})), new Flex元素(new DemoPage2({}))], {
+      方向: '上下',
+      主轴对齐方式: '间隔',
+      交叉轴对齐方式: '居中',
+    }),
+  ),
+  new Flex元素(new Flex布局([new Flex元素(new DemoPage2({}))], { 主轴对齐方式: '居中', 交叉轴对齐方式: '居中' })),
+])
 
 export default Aff.do()
   .bind('D', () => Aff.pure(new Debug('App:Web')))
@@ -23,7 +34,7 @@ export default Aff.do()
       ),
     ),
   )
-  .bind('page2', (env) => Aff.pure(new DemoPage2({})))
+  .bind('page2', (env) => Aff.pure(page2))
   .run((env) =>
     Aff.提升Effect(
       new Vue(

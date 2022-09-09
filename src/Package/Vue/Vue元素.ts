@@ -34,7 +34,7 @@ export abstract class Vue元素<T extends Record<string, unknown>> {
       return { 模板, 实际参数 }
     })
   }
-  public 转换为组件(): Effect<VNode> {
-    return this._预处理().bind((a) => Effect.提升副作用函数(() => h(a.模板, a.实际参数)))
+  public 转换为组件(前置设置?: Record<string, unknown>): Effect<VNode> {
+    return this._预处理().bind((a) => Effect.提升副作用函数(() => h(a.模板, { ...前置设置, ...a.实际参数 })))
   }
 }
