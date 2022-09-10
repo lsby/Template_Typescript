@@ -18,7 +18,7 @@
   var 接口调用 = 接口调用者
 
   async function 测试事件() {
-    var r = await 接口调用('/api/测试接口3', { a: 1, b: 2 })
+    var r = await 接口调用('/api/测试接口2', { a: 1, b: 2 })
     console.log(r)
   }
 </script>
