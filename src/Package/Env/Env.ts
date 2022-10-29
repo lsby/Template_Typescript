@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import { Aff } from '../Aff/Aff'
 import { Either, Left, Right } from '../Either/Either'
-import { Err } from '../Error/Error'
+import { Err } from '../Err/Err'
 
 export type Env<A, E extends Record<string, any>> = {
   环境文件路径: string
