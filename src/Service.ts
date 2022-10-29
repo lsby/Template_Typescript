@@ -34,7 +34,7 @@ var 程序 = (env: 环境变量) => {
       Exp.包装原始中间件(cookieParser()),
       Kysely中间件<Database>(env.DB_HOST, env.DB_PORT, env.DB_USER, env.DB_PWD, env.DB_NAME),
     ],
-    [],
+    [Exp.静态路径('/', path.resolve(__dirname, '../web'))],
     [
       接口('/api/测试接口', (req, res) =>
         A.Aff(async () => {
