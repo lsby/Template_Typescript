@@ -4,7 +4,6 @@ import { Debug, log } from './Package/Debug/Debug'
 import { App, 环境对应表 } from './Package/Env/Env'
 import { Express, 接口 } from './Package/Express/Express'
 import * as Exp from './Package/Express/Express'
-import cors from 'cors'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 
