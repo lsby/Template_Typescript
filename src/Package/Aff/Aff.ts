@@ -1,3 +1,6 @@
+import { Eff } from '../Eff/Eff'
+import * as E from '../Eff/Eff'
+
 const _函数: unique symbol = Symbol()
 export type Aff<A> = {
   [_函数]: () => Promise<A>
@@ -27,6 +30,12 @@ export function bind<A, B>(a: Aff<A>, f: (a: A) => Aff<B>): Aff<B> {
   return Aff(async () => {
     var v = await a[_函数]()
     var c = await f(v)[_函数]()
+    return c
+  })
+}
+export function 提升到Aff<A>(a: Eff<A>): Aff<A> {
+  return Aff(async () => {
+    var c = E.run(a)
     return c
   })
 }

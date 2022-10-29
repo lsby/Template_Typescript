@@ -1,29 +1,19 @@
-import { 从ENV创建, run, 环境对应表 } from './Package/Env/Env'
 import path from 'path'
-import { Aff } from './Package/Aff/Aff'
 import * as A from './Package/Aff/Aff'
-import { 模式匹配 } from './Package/Either/Either'
+import { Debug, log } from './Package/Debug/Debug'
+import { App, 环境对应表 } from './Package/Env/Env'
+
+var D = Debug('App:Cmd')
 
 type 环境变量 = {}
+var 环境变量表 = 环境对应表({
+  dev: path.resolve(__dirname, '../.env/dev.env'),
+  re: path.resolve(__dirname, '../.env/re.env'),
+  prod: path.resolve(__dirname, '../.env/prod.env'),
+  fix: path.resolve(__dirname, '../.env/fix.env'),
+})
 
-function main() {
-  var 环境变量 = {
-    dev: path.resolve(__dirname, '../.env/dev.env'),
-    re: path.resolve(__dirname, '../.env/re.env'),
-    prod: path.resolve(__dirname, '../.env/prod.env'),
-    fix: path.resolve(__dirname, '../.env/fix.env'),
-  }
+var 程序 = (env: 环境变量) => A.提升到Aff(log(D, '你好世界'))
 
-  var 程序 = (env: 环境变量) =>
-    Aff(async () => {
-      console.log('你好世界')
-    })
-  var app = 模式匹配(
-    从ENV创建(环境对应表(环境变量), 程序),
-    (e) => Aff(async () => console.log(e)),
-    (app) => run(app),
-  )
-
-  A.run(app)
-}
-main()
+var app = App<环境变量>(环境变量表, 程序)
+A.run(app)

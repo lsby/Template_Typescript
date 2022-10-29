@@ -14,7 +14,7 @@ const _路径: unique symbol = Symbol()
 const _实现: unique symbol = Symbol()
 export type 接口 = {
   [_路径]: string
-  [_实现]: (req: Request, res: Response) => Aff<any>
+  [_实现]: (req: Request, res: Response) => Aff<void>
 }
 
 export function 接口<R extends { err: string } | { err: null; data: any }>(
@@ -46,11 +46,15 @@ export function 静态路径(访问路径: string, 本地路径: string): 静态
 // 中间件
 const _中间件实现: unique symbol = Symbol()
 export type 中间件 = {
-  [_中间件实现]: (req: Request, res: Response, next: NextFunction) => any
+  [_中间件实现]: (req: Request, res: Response, next: NextFunction) => Aff<void>
 }
 
-export function 中间件(实现: (req: Request, res: Response, next: NextFunction) => Aff<void>) {
+export function 中间件(实现: (req: Request, res: Response, next: NextFunction) => Aff<void>): 中间件 {
   return { [_中间件实现]: 实现 }
+}
+
+export function 包装原始中间件(a: (req: Request, res: Response, next: NextFunction) => void): 中间件 {
+  return 中间件((req, res, next) => Aff(async () => a(req, res, next)))
 }
 
 // Express
@@ -86,16 +90,16 @@ export function run(exp: Express): E.Eff<void> {
       next()
     })
 
-    for (var 中间件 of exp[_中间件们]) {
-      app.use((...a) => 中间件[_中间件实现](...a))
+    for (let 中间件 of exp[_中间件们]) {
+      app.use((...a) => A.run(中间件[_中间件实现](...a)))
     }
 
-    for (var 静态路径 of exp[_静态路径们]) {
+    for (let 静态路径 of exp[_静态路径们]) {
       app.use(静态路径[_访问路径], express.static(静态路径[_本地路径]))
     }
 
-    for (var 接口 of exp[_接口们]) {
-      app.post(接口[_路径], (req: Request, res: Response) => 接口[_实现](req, res))
+    for (let 接口 of exp[_接口们]) {
+      app.post(接口[_路径], (req: Request, res: Response) => A.run(接口[_实现](req, res)))
     }
 
     app.use(function (req, res) {
