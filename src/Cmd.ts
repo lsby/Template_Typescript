@@ -1,7 +1,10 @@
 import { 从ENV创建, run, 环境对应表 } from './Package/Env/Env'
 import path from 'path'
-import { Aff, Aff_run } from './Package/Aff/Aff'
+import { Aff } from './Package/Aff/Aff'
+import * as A from './Package/Aff/Aff'
 import { 模式匹配 } from './Package/Either/Either'
+
+type 环境变量 = {}
 
 function main() {
   var 环境变量 = {
@@ -11,7 +14,7 @@ function main() {
     fix: path.resolve(__dirname, '../.env/fix.env'),
   }
 
-  var 程序 = (env: {}) =>
+  var 程序 = (env: 环境变量) =>
     Aff(async () => {
       console.log('你好世界')
     })
@@ -21,6 +24,6 @@ function main() {
     (app) => run(app),
   )
 
-  Aff_run(app)
+  A.run(app)
 }
 main()

@@ -4,7 +4,8 @@ import url from 'url'
 import http from 'http'
 import os from 'os'
 import { Debug, log } from '../Debug/Debug'
-import * as Eff from '../Eff/Eff'
+import * as E from '../Eff/Eff'
+import * as A from '../Aff/Aff'
 
 var D = Debug('Package:Express')
 
@@ -13,14 +14,21 @@ const _路径: unique symbol = Symbol()
 const _实现: unique symbol = Symbol()
 export type 接口 = {
   [_路径]: string
-  [_实现]: (req: Request, res: Response) => void
+  [_实现]: (req: Request, res: Response) => Aff<any>
 }
 
 export function 接口<R extends { err: string } | { err: null; data: any }>(
   路径: string,
   实现: (req: Request, res: Response) => Aff<R>,
 ): 接口 {
-  return { [_路径]: 路径, [_实现]: 实现 }
+  return {
+    [_路径]: 路径,
+    [_实现]: (req: Request, res: Response) =>
+      Aff(async () => {
+        var c = await A.run(实现(req, res))
+        res.send(c)
+      }),
+  }
 }
 
 // 静态路径
@@ -41,7 +49,7 @@ export type 中间件 = {
   [_中间件实现]: (req: Request, res: Response, next: NextFunction) => any
 }
 
-export function 中间件(实现: (req: Request, res: Response, next: NextFunction) => any) {
+export function 中间件(实现: (req: Request, res: Response, next: NextFunction) => Aff<void>) {
   return { [_中间件实现]: 实现 }
 }
 
@@ -66,8 +74,8 @@ export function Express<A extends 中间件, B extends 静态路径, C extends �
   return { [_中间件们]: 中间件们, [_静态路径们]: 静态路径们, [_接口们]: 接口们, [_监听端口]: 监听端口 }
 }
 
-export function run(exp: Express): Eff.Eff<void> {
-  return Eff.Eff(() => {
+export function run(exp: Express): E.Eff<void> {
+  return E.Eff(() => {
     var app = express()
 
     // 中文路径转换
@@ -79,7 +87,7 @@ export function run(exp: Express): Eff.Eff<void> {
     })
 
     for (var 中间件 of exp[_中间件们]) {
-      app.use(中间件[_中间件实现])
+      app.use((...a) => 中间件[_中间件实现](...a))
     }
 
     for (var 静态路径 of exp[_静态路径们]) {
@@ -87,7 +95,7 @@ export function run(exp: Express): Eff.Eff<void> {
     }
 
     for (var 接口 of exp[_接口们]) {
-      app.post(接口[_路径], 接口[_实现])
+      app.post(接口[_路径], (req: Request, res: Response) => 接口[_实现](req, res))
     }
 
     app.use(function (req, res) {
@@ -96,7 +104,7 @@ export function run(exp: Express): Eff.Eff<void> {
 
     var server = http.createServer(app)
     server.listen(exp[_监听端口], () => {
-      Eff.run(
+      E.run(
         log(
           D,
           '已启动: %O',
