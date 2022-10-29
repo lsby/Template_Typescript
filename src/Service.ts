@@ -8,6 +8,8 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import { Kysely中间件 } from './Package/Express/Kysely中间件'
 import Database from '../tools/types/Database'
+import { 事务 } from './Package/Kysely/事务'
+import { Transaction } from 'kysely'
 
 var D = Debug('App:Cmd')
 
