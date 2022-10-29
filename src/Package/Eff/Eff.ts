@@ -1,29 +1,32 @@
-export type Eff<A> = () => A
+const _函数: unique symbol = Symbol()
+export type Eff<A> = {
+  [_函数]: () => A
+}
 
 export function Eff<A>(a: () => A): Eff<A> {
-  return a
+  return { [_函数]: a }
 }
 
-export function Eff_计算<A>(a: Eff<A>): A {
-  return a()
+export function run<A>(a: Eff<A>): A {
+  return a[_函数]()
 }
-export function Eff_map<A, B>(f: (a: A) => B, a: Eff<A>): Eff<B> {
+export function map<A, B>(f: (a: A) => B, a: Eff<A>): Eff<B> {
   return Eff(() => {
-    var v = a()
+    var v = a[_函数]()
     return f(v)
   })
 }
-export function Eff_apply<A, B>(f: Eff<(a: A) => B>, a: Eff<A>): Eff<B> {
+export function apply<A, B>(f: Eff<(a: A) => B>, a: Eff<A>): Eff<B> {
   return Eff(() => {
-    var vv = a()
-    var ff = f()
+    var vv = a[_函数]()
+    var ff = f[_函数]()
     return ff(vv)
   })
 }
-export function Eff_bind<A, B>(a: Eff<A>, f: (a: A) => Eff<B>): Eff<B> {
+export function bind<A, B>(a: Eff<A>, f: (a: A) => Eff<B>): Eff<B> {
   return Eff(() => {
-    var v = a()
-    var c = f(v)()
+    var v = a[_函数]()
+    var c = f(v)[_函数]()
     return c
   })
 }
