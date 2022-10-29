@@ -23,7 +23,6 @@ var 环境变量表 = 环境对应表({
 var 程序 = (env: 环境变量) => {
   var exp = Express(
     [
-      Exp.包装原始中间件(cors()),
       Exp.包装原始中间件(express.json()),
       Exp.包装原始中间件(express.urlencoded({ extended: true })),
       Exp.包装原始中间件(cookieParser()),

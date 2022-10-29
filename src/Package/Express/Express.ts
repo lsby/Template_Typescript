@@ -3,9 +3,10 @@ import { Aff } from '../Aff/Aff'
 import url from 'url'
 import http from 'http'
 import os from 'os'
-import { Debug, log } from '../Debug/Debug'
+import { Debug, log, err } from '../Debug/Debug'
 import * as E from '../Eff/Eff'
 import * as A from '../Aff/Aff'
+import * as uuid from 'uuid'
 
 var D = Debug('Package:Express')
 
@@ -25,8 +26,45 @@ export function 接口<R extends { err: string } | { err: null; data: any }>(
     [_路径]: 路径,
     [_实现]: (req: Request, res: Response) =>
       Aff(async () => {
-        var c = await A.run(实现(req, res))
-        res.send(c)
+        var 调用id = uuid.v4()
+        var 调用时间 = new Date().getTime()
+        try {
+          E.run(
+            log(D, '%o', {
+              行为: '调用开始',
+              调用id,
+              路径: req.path,
+              参数: req.body,
+            }),
+          )
+          var c = await A.run(实现(req, res))
+          E.run(
+            log(D, '%o', {
+              行为: '调用结束',
+              调用id,
+              路径: req.path,
+              结果: '成功',
+              调用消耗时间: new Date().getTime() - 调用时间,
+              参数: req.body,
+              返回值: c,
+            }),
+          )
+          res.send(c)
+        } catch (e) {
+          var errObj = e
+          E.run(
+            err(D, '%o', {
+              行为: '调用结束',
+              调用id,
+              路径: req.path,
+              结果: '失败',
+              调用消耗时间: new Date().getTime() - 调用时间,
+              参数: req.body,
+              异常: errObj,
+            }),
+          )
+          res.send({ err: errObj, data: null })
+        }
       }),
   }
 }
