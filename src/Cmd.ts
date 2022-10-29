@@ -7,10 +7,10 @@ var D = Debug('App:Cmd')
 
 type 环境变量 = {}
 var 环境变量表 = 环境对应表({
-  dev: path.resolve(__dirname, '../.env/dev.env'),
-  re: path.resolve(__dirname, '../.env/re.env'),
-  prod: path.resolve(__dirname, '../.env/prod.env'),
-  fix: path.resolve(__dirname, '../.env/fix.env'),
+  dev: path.resolve(__dirname, '../../.env/dev.env'),
+  re: path.resolve(__dirname, '../../.env/re.env'),
+  prod: path.resolve(__dirname, '../../.env/prod.env'),
+  fix: path.resolve(__dirname, '../../.env/fix.env'),
 })
 
 var 程序 = (env: 环境变量) => A.提升到Aff(log(D, '你好世界'))

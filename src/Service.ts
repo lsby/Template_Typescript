@@ -1,6 +1,6 @@
 import path from 'path'
 import * as A from './Package/Aff/Aff'
-import { Debug, log } from './Package/Debug/Debug'
+import { Debug } from './Package/Debug/Debug'
 import { App, 环境对应表 } from './Package/Env/Env'
 import { Express, 接口 } from './Package/Express/Express'
 import * as Exp from './Package/Express/Express'
