@@ -6,6 +6,9 @@
   <div>
     <li v-for="(item, i) in 列表.value" :key="item + i">{{ item }}</li>
   </div>
+  <div>
+    <button @click="Electron事件()">测试 Electron 事件</button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -30,5 +33,9 @@
     if (!v.value) return
     await emit('添加列表', v.value)
     v.value = ''
+  }
+  async function Electron事件() {
+    var r = await window.ipcRenderer.invoke('测试事件', 'ping')
+    console.log(r)
   }
 </script>

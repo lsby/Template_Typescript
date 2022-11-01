@@ -94,7 +94,7 @@
     "@types/uuid": "^8.3.1",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
-    "electron": "^20.1.1",
+    "electron": "^20.3.3",
     "electron-builder": "^23.3.3",
     "event-hooks-webpack-plugin": "^2.2.0",
     "html-webpack-plugin": "^5.5.0",

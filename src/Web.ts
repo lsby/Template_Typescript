@@ -2,7 +2,7 @@ import { Aff, run } from './Package/Aff/Aff'
 import { Vue, 运行 } from './Package/Vue/Vue'
 import { Vue组件 } from './Package/Vue/Vue组件'
 import 按钮 from './Page/Button.vue'
-import Page from './Page/Demo1.vue'
+import Page from './Page/Demo.vue'
 
 // app.运行()
 var web = Vue(
