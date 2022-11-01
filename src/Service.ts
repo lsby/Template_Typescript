@@ -43,6 +43,29 @@ var 程序 = (env: 环境变量) => {
         }),
       ),
     ],
+    [
+      {
+        事件名称: 'connection',
+        事件函数: (socket) =>
+          A.Aff(async () => {
+            console.log(`${socket.id} 连接到了socket服务器`)
+            socket.emit('connection_back', '欢迎连接')
+
+            socket.on('disconnect', () => {
+              console.log(`${socket.id} 断开了连接`)
+            })
+
+            socket.on('回调式事件', (a, back) => {
+              console.log(`(回调式事件) ${socket.id}: ${a}`)
+              back('pong')
+            })
+            socket.on('异步式事件', (a) => {
+              console.log(`(异步式事件) ${socket.id}: ${a}`)
+              socket.emit('异步事件_回复', 'pong')
+            })
+          }),
+      },
+    ],
     env.APP_PORT,
   )
   return A.提升到Aff(Exp.run(exp))

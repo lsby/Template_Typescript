@@ -1,12 +1,14 @@
 import express, { NextFunction, Request, Response } from 'express'
-import { Aff } from '../Aff/Aff'
-import url from 'url'
 import http from 'http'
 import os from 'os'
-import { Debug, log, err } from '../Debug/Debug'
-import * as E from '../Eff/Eff'
-import * as A from '../Aff/Aff'
+import socketIO, { Socket } from 'socket.io'
+import { DefaultEventsMap } from 'socket.io/dist/typed-events'
+import url from 'url'
 import * as uuid from 'uuid'
+import * as A from '../Aff/Aff'
+import { Aff } from '../Aff/Aff'
+import { Debug, err, log } from '../Debug/Debug'
+import * as E from '../Eff/Eff'
 
 var D = Debug('Package:Express')
 
@@ -100,20 +102,35 @@ const _中间件们: unique symbol = Symbol()
 const _静态路径们: unique symbol = Symbol()
 const _接口们: unique symbol = Symbol()
 const _监听端口: unique symbol = Symbol()
+const _SocketIO事件们: unique symbol = Symbol()
+
+export type SocketIO事件 = {
+  事件名称: string
+  事件函数: (socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>) => Aff<void>
+}
+
 export type Express = {
   [_中间件们]: 中间件[]
   [_静态路径们]: 静态路径[]
   [_接口们]: 接口[]
   [_监听端口]: number
+  [_SocketIO事件们]: SocketIO事件[]
 }
 
 export function Express<A extends 中间件, B extends 静态路径, C extends 接口>(
   中间件们: A[],
   静态路径们: B[],
   接口们: C[],
+  SocketIO事件们: SocketIO事件[],
   监听端口: number,
 ): Express {
-  return { [_中间件们]: 中间件们, [_静态路径们]: 静态路径们, [_接口们]: 接口们, [_监听端口]: 监听端口 }
+  return {
+    [_中间件们]: 中间件们,
+    [_静态路径们]: 静态路径们,
+    [_接口们]: 接口们,
+    [_监听端口]: 监听端口,
+    [_SocketIO事件们]: SocketIO事件们,
+  }
 }
 
 export function run(exp: Express): E.Eff<void> {
@@ -145,6 +162,12 @@ export function run(exp: Express): E.Eff<void> {
     })
 
     var server = http.createServer(app)
+
+    var io = new socketIO.Server(server)
+    for (var 事件 of exp[_SocketIO事件们]) {
+      io.on(事件.事件名称, (e) => A.run(事件.事件函数(e)))
+    }
+
     server.listen(exp[_监听端口], () => {
       E.run(
         log(
