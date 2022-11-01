@@ -10,8 +10,8 @@ var web = Vue(
     {
       路径: '/',
       组件: Vue组件<{ 列表: string[]; 按钮组件: Vue组件<{}> }>(
-        Page as any,
-        { 列表: [], 按钮组件: Vue组件(按钮 as any, {}, {}) },
+        Page,
+        { 列表: [], 按钮组件: Vue组件(按钮, {}, {}) },
         {
           on添加列表: (a, arg) =>
             Aff(async () => {
