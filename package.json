@@ -4,9 +4,6 @@
   "description": "",
   "author": "",
   "main": "dist/src/Index.js",
-  "targets": {
-    "main": false
-  },
   "license": "GPL-3.0-or-later",
   "scripts": {
     "=====dev=====": "",
